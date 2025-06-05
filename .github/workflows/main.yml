@@ -1,0 +1,47 @@
+name: Deploy Angular App to Tomcat
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Update packages
+        run: npm update
+      - name: Add Package Lock JSON
+        run: npm install --package-lock-only
+      - name: Fix Version Auditing
+        run: npm audit fix
+        continue-on-error: true
+      - name: Install dependencies
+        run: npm install --save --force 
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@latest
+      - name: Build and package application
+        run: ng build --configuration production --aot --build-optimizer --vendor-chunk=true --base-href=./ --source-map=false
+
+      - name: Deploy to Tomcat
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 22
+          source: "dist/Eway/*"
+          target: /opt/tomcat/webapps
+          strip_components: 1
+
+      - name: Restart Tomcat
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 22
+          script: |
+            sudo systemctl restart tomcat

@@ -1,0 +1,44 @@
+<app-topbar (selectedBranch)="onGetBranch($event)"></app-topbar>
+<div class="m-5 customMarginTop">
+    <ng-container *ngIf="quoteSection">
+        <!-- <h1 class="text-center mb-6">{{ 'PRODUCT.SelecttheBranch' | translate }}</h1> -->
+        <div class="flex justify-content-center">
+            <!-- <ng-container *ngIf="userType==='Issuer'">
+                <button pButton pRipple class="p-button p-button-outlined p-3 mr-2" (click)="selectBranch(branch)"
+                    *ngFor="let branch of branches"
+                    [style.background-color]="branch.BranchCode === selectedBranch ? '#042181':''"
+                    [style.color]="branch.BranchCode === selectedBranch ? '#ffffff':''">{{branch.BranchName}}</button>
+            </ng-container>
+            <ng-container *ngIf="userType!=='Issuer'">
+                <ng-container *ngFor="let branch of branches">
+                    <button pButton pRipple class="p-button p-button-outlined p-3 mr-2" (click)="selectBranch(branch)"
+                        [style.background-color]="checkBranchBg(branch)"
+                        [style.color]="branch.BrokerBranchCode === selectedBranch ? '#ffffff':''">{{branch.BranchName}}</button>
+                </ng-container>
+            </ng-container> -->
+        </div>
+        <ng-container *ngIf="selectedBranch">
+            <h3 class="text-center mb-4 mt-4">{{ 'PRODUCT.ProductYouWishtobuy' | translate }}</h3>
+            <div class="flex-center">
+                <div class="product-container">
+                    <div *ngFor="let product of products" class="card" (click)="selectProduct(product)">
+                        <img [src]="getProductUrl(product?.ProductId)" alt="Product Image" title="Product Image" />
+                        <p class="m-0">{{ product.ProductName | titlecase }}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="approverSection">
+        <h3 class="text-center mb-4 pt-5">{{ 'PRODUCT.LookingFor' | translate }}</h3>
+        <div class="flex-center">
+            <div class="product-container">
+                <div *ngFor="let product of imageMappings?.userTypes" class="card" (click)="onSelectUserType(product)">
+                    <img [src]="getUserTypeImage(product?.code)" alt="Card" title="Card" />
+                    <p class="m-0"><b>{{ 'PRODUCT.' + product.description | translate }}</b></p>
+                </div>
+            </div>
+        </div>
+        
+    </ng-container>
+</div>

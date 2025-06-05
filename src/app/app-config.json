@@ -1,0 +1,12 @@
+{
+    "ApiUrl1": "http://192.168.1.181:8084/",
+      "MotorApiUrl": "http://192.168.1.181:8083/",
+      "CommonApiUrl": "http://192.168.1.181:8086/",
+      "CustomCommonApiUrl": "http://192.168.1.181:8086/",
+      "ExcelUrl": "http://192.168.1.181:8084/",
+      "PreExceptionUrl":"http://193.203.162.152:8085/WhatsAppApiLive/",
+      "CustomApiUrl1": "http://192.168.1.181:8084/",
+      "ReInsurance":"http://192.168.1.181:8084/",
+      "CRMApiUrl": "http://192.168.1.181:3000/"
+}
+ 
