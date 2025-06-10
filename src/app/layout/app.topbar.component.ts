@@ -355,11 +355,11 @@ export class AppTopBarComponent implements OnInit {
         sessionStorage.removeItem('quoteNo');
         const token = sessionStorage.getItem('UserToken');
         if(token && localStorage.getItem('TokenExpired') != 'Expired'){
-        const apiUrl = "http://192.168.1.248:3000/";
+        // const apiUrl = "http://192.168.1.248:3000/";
         let userData = JSON.parse(sessionStorage.getItem('Userdetails'));
         const brokerBranchCode = userData?.Result?.BrokerBranchCode;
         const branchCode = userData?.Result?.BranchCode;
-        const url = `${apiUrl}navigationPage?token=${token}&path=${this.router.url}&productId=${this.productId}&branchCode=${branchCode}&brokerBranchCode=${brokerBranchCode}`;
+        const url = `${this.CRMApiUrl}navigationPage?token=${token}&path=${this.router.url}&productId=${this.productId}&branchCode=${branchCode}&brokerBranchCode=${brokerBranchCode}`;
         window.open(url, '_self');
         }
     }
