@@ -351,6 +351,8 @@ export class AppTopBarComponent implements OnInit {
     }
    CRM(){
         sessionStorage.removeItem('reloadDone');
+        sessionStorage.removeItem('quoteReferenceNo');
+        sessionStorage.removeItem('quoteNo');
         const token = sessionStorage.getItem('UserToken');
         if(token && localStorage.getItem('TokenExpired') != 'Expired'){
         // const apiUrl = "http://192.168.1.248:3000/";

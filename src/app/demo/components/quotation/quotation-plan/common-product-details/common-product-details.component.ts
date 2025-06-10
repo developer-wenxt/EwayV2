@@ -357,6 +357,13 @@ export class CommonProductDetailsComponent implements AfterViewInit{
       this.isSearchFormVisible = false;
       this.cd.markForCheck();
   }
+
+  ngAfterViewChecked(){
+       const leadId = sessionStorage.getItem('LeadId');
+       if(leadId)
+          this.isSearchFormVisible = false;
+          this.cd.markForCheck();
+  }
   async ngOnInit() {
     //Online quote from 
     if (this.router.url.includes('CustomerReferenceNo')) {
@@ -6296,6 +6303,8 @@ export class CommonProductDetailsComponent implements AfterViewInit{
 
   }
   onSubmit(type) {
+    if(sessionStorage.getItem('LeadId') && type == null) 
+      type = 'proceedNext';
     let valid = this.checkValidation();
     // if(this.productId=="25" && this.TableRowEE.length!=0 || (this.productId=="16" && this.TableRowMoney.length!=0)){
     //   valid=true;
@@ -6554,7 +6563,6 @@ export class CommonProductDetailsComponent implements AfterViewInit{
     }
   }
   onSaveCommonNonMotor(type) {
-    if(sessionStorage.getItem('LeadId') && type == 'proceedNext') window.location.reload();
     let sourcecode: any;
     let endorsementDate = null, EndorsementEffectiveDate = null, EndorsementRemarks = null,
       EndorsementType = null, EndorsementTypeDesc = null, EndtCategoryDesc = null, EndtCount = null,
