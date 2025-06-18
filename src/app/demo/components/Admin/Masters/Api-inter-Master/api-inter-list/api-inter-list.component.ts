@@ -53,7 +53,10 @@ export class ApiInterListComponent implements OnInit {
     ] 
     this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
     this.ApiIntegrationCode = JSON.parse(sessionStorage.getItem('ApiIntegrationCode')) || null;
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    else{
+      this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+    }
     const user = this.userDetails?.Result;
     this.activeMenu = 'API Integration Master';
     this.loginId = user?.LoginId;

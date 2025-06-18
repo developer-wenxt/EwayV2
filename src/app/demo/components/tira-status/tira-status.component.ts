@@ -331,6 +331,7 @@ export class TiraStatusComponent implements OnInit {
         sessionStorage.setItem('customerReferenceNo',rowData?.CustomerReferenceNo);
         sessionStorage.setItem('quoteReferenceNo',rowData?.RequestReferenceNo);
         sessionStorage.setItem('quoteNo',rowData?.QuoteNo);
-        this.router.navigate(['/tirastatus/vehicle-info'])
+        if(this.productId=='5') this.router.navigate(['/tirastatus/vehicle-info'])
+        else if(this.productId=='46') this.router.navigate(['/tirastatus/vehicle-info'])
     }
 }

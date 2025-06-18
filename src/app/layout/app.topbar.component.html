@@ -83,8 +83,8 @@
         [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
 
         <ng-container>
-            <button class="CRMbtn" *ngIf="(userDetails.Result.SubUserType == 'both' || userDetails.Result.SubUserType == 'high' || userDetails.Result.SubUserType == 'Sales') && productId != null" (click)="CRM()"
-              severity="warning">CRM</button>&nbsp;
+           <!-- <button class="CRMbtn" *ngIf="(userDetails.Result.SubUserType == 'both' || userDetails.Result.SubUserType == 'high' || userDetails.Result.SubUserType == 'Sales') && productId != null" (click)="CRM()"
+              severity="warning">CRM</button>&nbsp; -->
             <p-button *ngIf="showUserDetails()" [label]="productname" icon="pi pi-home" class="productBtn" (click)="onProductRedirect()"
                 severity="warning"></p-button>&nbsp;
             <ng-container *ngIf="showUserDetails() && typeList.length!==0 && typeValue!=='B2C Broker'">
@@ -100,7 +100,6 @@
                 </p-dropdown>&nbsp;&nbsp;
             </ng-container>
         </ng-container>
-    
         <div class="flex justify-content-center align-items-center username-section">
             <p-overlayPanel #op>
                 <p-button *ngFor="let userOption of userOptions" [icon]="userOption.icon" [label]="userOption.label"

@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class ElectronicEquipmentApiNamibia {
+export class ElectronicEquipmentCommercialApiNamibia {
     customerDetails: any;
     commonDetails: any[] = [];
     endorsementSection: boolean = false; subuserType: any = null;
@@ -29,7 +29,7 @@ export class ElectronicEquipmentApiNamibia {
             return obj
         }
     }
-    getSaveDetails(entry, industryTypeList,claimCostList, obj) {
+    getSaveDetails(entry,claimCostList,IndustryId, industryTypeList, obj) {
         if(entry.ElectronicEquipment!='0' && entry.ElectronicEquipment!=null && entry.ElectronicEquipment!=''){
           let subEntry= {
             "SectionId": "76",
@@ -38,7 +38,7 @@ export class ElectronicEquipmentApiNamibia {
             "SumInsured": entry.ElectronicEquipment,
             "DescriptionOfRisk":entry.ElectronicEquipmentDesc
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
           
@@ -51,7 +51,7 @@ export class ElectronicEquipmentApiNamibia {
               "DescriptionOfRisk":entry.VariousPortableEquipmentDesc
               
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if(entry.IncreasedCostofWorking!='0' && entry.IncreasedCostofWorking!=null && entry.IncreasedCostofWorking!=''){
@@ -62,7 +62,7 @@ export class ElectronicEquipmentApiNamibia {
               "SumInsured": entry.IncreasedCostofWorking,
               "DescriptionOfRisk":entry.IncreasedCostofWorkingDesc
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if(entry.IncompatibilityCover!='0' && entry.IncompatibilityCover!=null && entry.IncompatibilityCover!=''){
@@ -73,7 +73,7 @@ export class ElectronicEquipmentApiNamibia {
               "SumInsured": entry.IncompatibilityCover,
               "DescriptionOfRisk":entry.IncompatibilityCoverDesc
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if(entry.EEclaimsPreparationCosts!='0' && entry.EEclaimsPreparationCosts!=null && entry.EEclaimsPreparationCosts!=''){
@@ -85,7 +85,7 @@ export class ElectronicEquipmentApiNamibia {
               "DescriptionOfRisk":entry.EEclaimsPreparationCostsDesc,
               "CategoryId":entry.EEclaimsPreparationCosts
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           return obj;

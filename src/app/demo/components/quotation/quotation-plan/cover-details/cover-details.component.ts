@@ -444,7 +444,7 @@ export class CoverDetailsComponent {
     }
 
 
-    else if(this.productId=='1' || this.productId=='14' || this.productId=='32' || this.productId=='61' || this.productId=='39' ||  this.productId=='25' || this.productId=='16' || this.productId=='6' || this.productId=='69' || this.productId=='68' || this.productId=='70'  || this.productId=='67' || this.productId=='66'
+    else if(this.productId=='1' || this.productId=='14' || this.productId=='32' || this.productId=='61' || this.productId=='39' ||  this.productId=='25' || this.productId=='16' || this.productId=='6' || this.productId=='69' || this.productId=='68' || this.productId=='70'  || this.productId=='67' || this.productId=='66' || this.productId=='93'
     || this.productId=='71' || this.productId=='57' || this.productId=='72' || this.productId=='75' || this.productId=='49' || this.productId=='73' || this.productId=='74' || this.productId=='26' || this.productId=='27' || this.productId=='48' || this.productId=='78' || this.productId=='76'  || this.productId=='77') return menu.LocationName;
     else if(this.productId!='59' && this.productId!='19' && this.productId!='4' && this.productId!='5' && this.productId!='6' && this.productId!='19' && this.productId!='14' && this.productId!='32') return this.productName;
     else if(this.productId=='59' || this.productId=='19' || this.productId=='14' || this.productId=='32'){
@@ -502,9 +502,8 @@ export class CoverDetailsComponent {
       this.discountDetailModal = false;
     }
   }
-ngOnInit(): void {
-       if (this.router.url.includes('quoteNo')) {
-      console.log(this.router.url, 'ifsda');
+  ngOnInit() {
+     if (this.router.url.includes('quoteNo')) {
       this.route.queryParams.subscribe(async params => {
         const CustomerReferenceNo = params['CustomerReferenceNo'];
         const QuoteNo = params['quoteNo'];
@@ -610,7 +609,7 @@ ngOnInit(): void {
     else{
       QuoteNo=null;
     }
-    let ReqObj: any = {
+    let ReqObj = {
       InsuranceId:this.insuranceId,
       BranchCode:this.branchCode,
       ProductId:this.productId,
@@ -694,7 +693,7 @@ ngOnInit(): void {
     this.selectedSectionId = rowData.SectionId;
     this.scroll(el);
   }
-  async getCustomerDetails(referenceNo): Promise<any> {
+async getCustomerDetails(referenceNo): Promise<any> {
     let ReqObj = {
       "CustomerReferenceNo": referenceNo
     }
@@ -850,7 +849,7 @@ ngOnInit(): void {
                   //   veh['ReferralList']= veh.ReferalRemarks.split('~');
                   // }
 
-                  if(this.productId=='63' || this.productId=='66' || this.productId=='69' || this.productId=='70' || this.productId=='71' || this.productId=='72' || this.productId=='67' || this.productId=='75' || this.productId=='57' || this.productId=='49' || this.productId=='73' || this.productId=='19' 
+                  if(this.productId=='63' || this.productId=='66' || this.productId=='69' || this.productId=='70' || this.productId=='71' || this.productId=='72' || this.productId=='67' || this.productId=='75' || this.productId=='57' || this.productId=='49' || this.productId=='73' || this.productId=='19' || this.productId=='93'
                     || this.productId=='26' || this.productId=='27' || this.productId=='48' || this.productId=='78' || this.productId=='76' || this.productId=='77') veh.VehicleId = veh.LocationId;
 
                   if(veh.VehicleId) veh['Vehicleid'] = veh.LocationId;
@@ -915,18 +914,40 @@ ngOnInit(): void {
     }
   }
   checkExcessData(rowData){
+    
     if(this.selectedCoverList.length!=0){
-        if(this.selectedCoverList.some(ele=>ele.SectionId==rowData.sectionId)){
+        if(this.selectedCoverList.some(ele=>ele.SectionId==rowData.SectionId)){
+          console.log("Cover List",this.selectedCoverList)
           for(let veh of this.selectedCoverList){
-            if(veh.SectionId==rowData.sectionId){
+            if(veh.SectionId==rowData.SectionId){
               let coverList = veh.Covers;
-              return coverList.some(ele=>ele.CoverId==rowData.coverId);
+              return coverList.some(ele=>ele.CoverId==rowData.CoverId);
             }
           }
         }
         else return false;
     }
     else return false
+  }
+  checkOverAllExcess(){
+    if(this.excessList.length!=0){
+        if(this.selectedCoverList.length!=0){
+            let i=0,j=0;
+            for(let cover of this.excessList){
+              let sectionList = this.selectedCoverList.find(ele=>ele.SectionId==cover.SectionId);
+              if(sectionList){
+                  if(sectionList.Covers.some(ele=>ele.CoverId==cover.CoverId)){j+=1;}
+                  i+=1;
+                  if(i==this.excessList.length) return j!=0;
+              }
+              else{ i+=1;
+                 if(i==this.excessList.length) return j!=0;
+              }
+            }
+        }
+        else return false;
+    }  
+    else return false;
   }
   getSectionName(rowData){
     let entry = this.vehicleDetailsList.filter(ele=>ele.LocationId=='1');
@@ -1045,7 +1066,7 @@ ngOnInit(): void {
           else{
               let row = sectionList.find(ele=>ele.SectionName==entry.SectionName);
               if(row){
-                if(!row.CoverList.some(ele=>ele.CoverId==entry.CoverId)) row.CoverList.push(entry);
+                if(!row.CoverList.some(ele=>ele.CoverId==entry.CoverId && ele.RiskDetails?.RiskId==entry.RiskDetails?.RiskId)) row.CoverList.push(entry);
               }
               else{
                 let Obj = {"SectionName":entry.SectionName,"CoverList":[entry]}
@@ -1059,7 +1080,12 @@ ngOnInit(): void {
     else return [];
   }
   filterVehicleList(){
-    let vehicleList = this.vehicleData.filter(ele=>ele.SectionId=='1');
+    console.log("Step 1 Vehicle List",this.vehicleData);
+    
+    let vehicleList = [];
+     vehicleList =this.vehicleData.filter(ele=>ele.SectionId=='1' && (ele.RiskId=='1' || ele.RiskDetails.RiskId =='1'));
+    console.log("Step 2 Filter",vehicleList)
+     if(vehicleList.length==0 && this.productId=='19') vehicleList=[this.vehicleData[0]]
       if(this.vehicleData.length!=0){
           let i=0;
           this.vehicleDetailsList = [];
@@ -1067,19 +1093,28 @@ ngOnInit(): void {
           for(let vehicle of this.vehicleData){
             let entry =null;
             console.log("Filter Details",vehicleList,this.vehicleData)
-            if(this.productId!='5' && this.productId!='46') entry = vehicleList.find(ele=>ele.LocationId==vehicle.LocationId);
-            else  entry = vehicleList.find(ele=>ele.VehicleId==vehicle.VehicleId || ele.RiskDetails.RiskId==vehicle.RiskDetails.RiskId);
-            if(entry && (vehicle.SectionId!='1'  || this.productId=='66' || this.productId=='67')){
+            if(this.productId!='5' && this.productId!='46'){
+              entry = vehicleList.find(ele=>ele.LocationId==vehicle.LocationId);
+            }
+            else  entry = vehicleList.find(ele=>ele.LocationId==vehicle.LocationId || ele.RiskDetails.RiskId==vehicle.RiskDetails.RiskId);
+            console.log("Entry",entry);
+            
+            if(entry && ((vehicle.SectionId!='1' || (vehicle.SectionId=='1' && vehicle.RiskDetails.RiskId!=entry.RiskDetails.RiskId))  || this.productId=='66' || this.productId=='67' || this.productId=='19')){
               //if(entry.SectionId==vehicle.SectionId){
               let j=0;
+              let coverList=[]
               for(let cover of vehicle.CoverList){
-                // cover['SectionId'] = vehicle.SectionId;
-                // cover['SectionName'] = vehicle.SectionName;
                 cover['VehicleId'] = vehicle.VehicleId;
                 cover['RiskId'] = vehicle?.RiskDetails?.RiskId;
                 cover['RiskDetails'] = vehicle.RiskDetails;
+                if(entry.CoverList){
+                  if(cover.SectionId=='1' || cover.SectionId=='243' || cover.SectionId=='198'){
+                      if(!entry.CoverList.some(ele=>ele.CoverId==cover.CoverId && ele.SectionId==cover.SectionId && entry?.RiskDetails?.RiskId==vehicle?.RiskDetails?.RiskId)){coverList.push(cover) }
+                  }
+                  else coverList.push(cover)
+                }
                 j+=1;
-                if(j==vehicle.CoverList.length){ entry.CoverList = entry.CoverList.concat(vehicle.CoverList);
+                if(j==vehicle.CoverList.length){ entry.CoverList = entry.CoverList.concat(coverList);
                   // let finalList = [],k=0;
                   // for(let obj of entry.CoverList){
                   //   if(!finalList.some(ele=>ele.CoverId==obj.CoverId && ele.SectionId==obj.SectionId)){
@@ -1096,17 +1131,15 @@ ngOnInit(): void {
               //   vehicleList.push(vehicle);
               // }
             }
-            else if(vehicle.SectionId!='1'){
+            else if(vehicle.SectionId!='1' || (vehicle.SectionId=='1' && vehicle.RiskDetails.RiskId!=entry.RiskDetails.RiskId)){
               let j=0;
               for(let cover of vehicle.CoverList){
-                // cover['SectionId'] = vehicle.SectionId;
-                // cover['SectionName'] = vehicle.SectionName;
+                
                 cover['VehicleId'] = vehicle.VehicleId;
                 cover['RiskId'] = vehicle?.RiskDetails?.RiskId;
                 cover['RiskDetails'] = vehicle.RiskDetails;
                 j+=1;
                 if(j==vehicle.CoverList.length){
-                  console.log("Vehicle Covers L",vehicle)
                   vehicleList.push(vehicle);
                   // let finalList = [],k=0;
                   // for(let obj of vehicle.CoverList){
@@ -1126,7 +1159,7 @@ ngOnInit(): void {
                 let list = [],i=0;
                 console.log("Vehicles",vehicleList)
                 for(let veh of vehicleList){
-                  if(!list.some(ele=>ele.LocationId==veh.LocationId)) list.push(veh);
+                  if(!list.some(ele=>ele.LocationId==veh.LocationId )) list.push(veh);
                   i+=1;
                   if(i==vehicleList.length){
                     console.log("Vehicles 2",list)
@@ -1136,7 +1169,7 @@ ngOnInit(): void {
               }
               else{
                 this.vehicleDetailsList = vehicleList;
-              this.checkSelectedCovers();
+                this.checkSelectedCovers();
               }
             }
           }
@@ -2222,7 +2255,7 @@ ngOnInit(): void {
                           this.nineMonthSection = true;this.nineValue=entry?.EmiDetails?.InstallmentTypeId;
                           this.nineMonthName = entry?.EmiDetails?.InstallmentTypeDesc;
                         }
-                        else if(emiDetails.length==6 && emiAllDetails?.InstallmentTypeId=='2'){
+                        else if(emiDetails.length==6 && (emiAllDetails?.InstallmentTypeId=='2' || emiAllDetails?.InstallmentTypeId=='1')){
                           sixList = entry.EmiPremium;
                           this.sixMonthSection = true;this.sixValue=entry?.EmiDetails?.InstallmentTypeId;
                           this.sixMonthName = entry?.EmiDetails?.InstallmentTypeDesc;
@@ -3448,9 +3481,6 @@ ngOnInit(): void {
       let coverList:any[]=[];
       let loginType = this.userDetails.Result.LoginType;
       let i=0;
-
-
-      
       this.onProceed(this.selectedCoverList);
       // if(loginType){
       //   if(loginType=='B2CFlow' && this.sampleloginId =='guest'){
@@ -3733,34 +3763,34 @@ ngOnInit(): void {
     else this.router.navigate(['quotation/plan/premium-details']);
   }
   onUpdateFactor(type,modal){
-          console.log(type, 'omprocees');
-
-    if(this.excessList.length!=0){
-        let l=0,finalExcessList = []
-          for(let rowData of this.excessList){
-            if(this.selectedCoverList.length!=0){
-            if(this.selectedCoverList.some(ele=>ele.SectionId==rowData.SectionId)){
-              for(let veh of this.selectedCoverList){
-                if(veh.SectionId==rowData.SectionId){
-                  let coverList = veh.Covers;
-                  if(coverList.some(ele=>ele.CoverId==rowData.CoverId)){
-                      finalExcessList.push(rowData);
-                  }
-                }
-              }
-                l+=1;
-              if(l==this.excessList.length && finalExcessList.length!=0){this.onSaveExcessDetails(finalExcessList,type,modal)}
-              else{this.updateFactorRateAlt(type,modal)}
-            }
-            else{
-              l+=1;
-              if(l==this.excessList.length && finalExcessList.length!=0){this.onSaveExcessDetails(finalExcessList,type,modal)}
-              else{this.updateFactorRateAlt(type,modal)}
-            }
-          }
-          }
-      }
-      else{this.updateFactorRateAlt(type,modal)}
+    // if(this.excessList.length!=0){
+    //     let l=0,finalExcessList = []
+    //       for(let rowData of this.excessList){
+    //         if(this.selectedCoverList.length!=0){
+    //         if(this.selectedCoverList.some(ele=>ele.SectionId==rowData.SectionId)){
+    //           for(let veh of this.selectedCoverList){
+    //             if(veh.SectionId==rowData.SectionId){
+    //               let coverList = veh.Covers;
+    //               if(coverList.some(ele=>ele.CoverId==rowData.CoverId)){
+    //                   finalExcessList.push(rowData);
+    //               }
+    //             }
+    //           }
+    //             l+=1;
+    //           if(l==this.excessList.length && finalExcessList.length!=0){this.onSaveExcessDetails(finalExcessList,type,modal)}
+    //           else{this.updateFactorRateAlt(type,modal)}
+    //         }
+    //         else{
+    //           l+=1;
+    //           if(l==this.excessList.length && finalExcessList.length!=0){this.onSaveExcessDetails(finalExcessList,type,modal)}
+    //           else{this.updateFactorRateAlt(type,modal)}
+    //         }
+    //       }
+    //       }
+    //   }
+    //   else{
+        this.updateFactorRateAlt(type,modal)
+      //}
     
 
   }
@@ -3792,12 +3822,14 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
               let entry = List.find(ele=>ele.LocationId==vehEntry[0].LocationId)
               if(entry){
                 console.log("Filter Sp",entry)
-                let coverList = [];
+                let coverList = [],riskId=null;
                 //coverList = vehicle.CoverList.filter(ele=>ele.SectionId==vehicle.SectionId)
                 if(this.productId!='5' && this.productId!='46') coverList = vehicle.CoverList.filter(ele=>ele.SectionId==vehicle.SectionId && ele.LocationId==vehicle.LocationId)
                 else coverList = vehicle.CoverList.filter(ele=>ele.SectionId==vehicle.SectionId)
                 console.log("Filtered Cover1",coverList,vehicle)
-                let obj = {"SectionId": vehicle.SectionId,"RiskId": vehicle.RiskDetails?.RiskId,"Covers":coverList}
+                if(this.productId!='4') riskId = vehicle.RiskDetails?.RiskId
+                else riskId = vehicle.Vehicleid
+                let obj = {"SectionId": vehicle.SectionId,"RiskId":riskId,"Covers":coverList}
                 if(!entry.SectionDetails.some(ele=>ele.SectionId==vehicle.SectionId && ele.RiskId==vehicle.RiskDetails?.RiskId)){
                   console.log("Covers At Part1",coverList);
                   entry.SectionDetails.push(obj);}
@@ -3826,14 +3858,16 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
               }
               else{
                 console.log("Non Filter Sp",vehicle)
-                let coverList = [];
+                let coverList = [],riskId=null;
                 console.log("Previous CoverList",vehicle.CoverList)
                 if(this.productId!='5' && this.productId!='46') coverList = vehicle.CoverList.filter(ele=>ele.SectionId==vehicle.SectionId && ele.LocationId==vehicle.LocationId)
                 else coverList = vehicle.CoverList.filter(ele=>ele.SectionId==vehicle.SectionId)
                 console.log("Filtered Cover2",coverList)
+                if(this.productId!='4') riskId = vehicle.RiskDetails?.RiskId
+                else riskId = vehicle.Vehicleid
                 let obj = {
                     "LocationId": vehicle.LocationId,
-                    "SectionDetails": [{"SectionId": vehicle.SectionId,"RiskId": vehicle.RiskDetails?.RiskId,"Covers":coverList}]
+                    "SectionDetails": [{"SectionId": vehicle.SectionId,"RiskId": riskId,"Covers":coverList}]
                   }
                   List.push(obj);
                   i+=1;
@@ -4341,7 +4375,7 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
     // else{
       sessionStorage.setItem('BackType','Back');
       if(this.productId=='5') this.router.navigate(['/policyDetails']);
-       else if(this.productId=='59' || this.productId=='66' || this.productId=='67' || this.productId=='68' || this.productId=='19' || this.productId=='69' || this.productId=='70' || this.productId=='57' || this.productId=='71' || this.productId=='72' || this.productId=='75' || this.productId=='49' || this.productId=='73' || this.productId=='74' || this.productId=='48' || this.productId=='78' || this.productId=='76'  || this.productId=='77'
+       else if(this.productId=='59' || this.productId=='66' || this.productId=='67' || this.productId=='68' || this.productId=='19' || this.productId=='69' || this.productId=='70' || (this.productId=='57' && this.insuranceId !='100002') || this.productId=='71' || this.productId=='72' || this.productId=='75' || this.productId=='49' || this.productId=='73' || this.productId=='74' || this.productId=='48' || this.productId=='78' || this.productId=='76'  || this.productId=='77' || this.productId=='93'
         || this.productId=='26' || this.productId=='27' || ((this.productId=='14' || this.productId=='15' || this.productId=='25' || this.productId=='16' || this.productId=='39') && (this.insuranceId=='100046' || this.insuranceId=='100047' || this.insuranceId=='100048' || this.insuranceId=='100049' || this.insuranceId=='100050'))){
         if(this.statusValue=='RA' && !this.adminSection) this.router.navigate(['/referral']); 
         else if(sessionStorage.getItem('coversRequired')) this.router.navigate(['/quotation/plan/risk-page']);
@@ -4354,9 +4388,9 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
           this.router.navigate(['/quotation/plan/risk-page']);
         }
       }
-      else if(this.insuranceId =='100002' && (this.productId =='25' || this.productId=='14' || this.productId=='32')) this.router.navigate(['/quotation/plan/quote-details']); 
-      else if(this.productId=='63' || this.productId=='59' || this.productId=='66' || this.productId=='67' || this.productId=='68' || this.productId=='19' || this.productId=='69' || this.productId=='70' || this.productId=='57' || this.productId=='71' || this.productId=='72' || this.productId=='75' || this.productId=='49' || this.productId=='73' || this.productId=='74' || this.productId=='48' || this.productId=='78' || this.productId=='76'  || this.productId=='77'
-        || this.productId=='26' || this.productId=='27' || ((this.productId=='14' || this.productId=='15' || this.productId=='25' || this.productId=='16' || this.productId =='32' || this.productId =='80' || this.productId =='79' || this.productId=='84') || this.productId =='81'))this.router.navigate(['/quotation/plan/risk-page']);
+      else if(this.insuranceId =='100002' && (this.productId =='25' || this.productId=='14' || this.productId=='32' || this.productId=='57' || this.productId=='16')) this.router.navigate(['/quotation/plan/quote-details']); 
+      else if(this.productId=='63' || this.productId=='59' || this.productId=='66' || this.productId=='67' || this.productId=='68' || this.productId=='19' || this.productId=='69' || this.productId=='70' || this.productId=='57' || this.productId=='71' || this.productId=='72' || this.productId=='75' || this.productId=='49' || this.productId=='73' || this.productId=='74' || this.productId=='48' || this.productId=='78' || this.productId=='76'  || this.productId=='77' || this.productId=='93' || this.productId=='92' || this.productId=='85'
+        || this.productId=='26' || this.productId=='27' || ((this.productId=='14' || this.productId=='15' || this.productId=='25' || this.productId=='16' || this.productId =='32' || this.productId =='80' || this.productId =='79' || this.productId=='84') || this.productId =='81' || this.productId=='86' || this.productId=='87' || this.productId=='88' || this.productId=='89' || this.productId=='90' || this.productId=='91' || this.productId=='82' || this.productId=='83'))this.router.navigate(['/quotation/plan/risk-page']);
       else this.router.navigate(['/quotation/plan/quote-details']);
     //}
   }
@@ -4465,44 +4499,7 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
               else if(this.productId == '4'){
                 this.router.navigate(['/Home/existingQuotes/customerSelection/customerDetails/travel-quote-details']);
               }*/
-            
-              //CRM Quote status update
-              const LeadId = sessionStorage.getItem('LeadId');
-
-              if(LeadId != null){
-                
-              const EnqData = {
-                "QuoteNo": this.quoteNo,
-                "LeadId": LeadId,
-                "QuoteStatus": 'quoteGen',
-                "InsuranceId": this.insuranceId
-              }
-              let urlLink = `${this.CommonApiUrl}crm/updateEnquiryQuotestatus`;
-              this.sharedService.onPostMethodSync(urlLink, EnqData).subscribe(
-                (data: any) => {
-                  console.log(data);
-                  
-                },
-                (err) => {
-                  
-                });
-              
-              //Update enquiry status in CRM
-              const url = `${this.CommonApiUrl}crm/updateCRMEnquiryQuotestatus`;
-              const UpdateEnqData = {
-                "enqStatus": 'quoteGen',
-                "enqSeqNo": parseInt(sessionStorage.getItem('EnqId')),
-                "leadSeqNo": parseInt(sessionStorage.getItem('LeadId'))
-              }
-              
-              this.sharedService.onPostMethodSync(url, UpdateEnqData).subscribe(
-                (data: any) => {
-                  console.log(data);
-                },
-                (err) => { },
-              )
             }
-          }
             else if(data?.Result?.Status=='RP'){
                 // let type: NbComponentStatus = 'danger';
                 // const config = {
@@ -4522,8 +4519,44 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
                 //this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Your Quote Move To Referral' });
                 this.router.navigate(['/referral']);
             }
-
           }
+          //CRM Quote status update
+              const LeadId = sessionStorage.getItem('LeadId') || parseInt('60');
+
+              if(LeadId != null){
+                
+              const EnqData = {
+                "QuoteNo": this.quoteNo,
+                "LeadId": LeadId,
+                "QuoteStatus": 'quoteGen',
+                "InsuranceId": this.insuranceId
+              }
+               sessionStorage.setItem('quoteNo', this.quoteNo);
+              let urlLink = `${this.CommonApiUrl}crm/updateEnquiryQuotestatus`;
+              this.sharedService.onPostMethodSync(urlLink, EnqData).subscribe(
+                (data: any) => {
+                  console.log(data);
+                  
+                },
+                (err) => {
+                  
+                });
+                //Update enquiry status in CRM
+                const url = `${this.CommonApiUrl}crm/updateCRMEnquiryQuotestatus`;
+                const UpdateEnqData = {
+                  "enqStatus": 'quoteGen',
+                  "enqSeqNo": parseInt(sessionStorage.getItem('EnqId')),
+                  "leadSeqNo": parseInt(sessionStorage.getItem('LeadId')),
+                  "onlineQuoteRefId": this.quoteNo
+                }
+
+                this.sharedService.onPostMethodSync(url, UpdateEnqData).subscribe(
+                  (data: any) => {
+                    console.log(data);
+                  },
+                  (err) => { },
+                )
+              }
         },
         (err) => {
           this.sharedService.fnToastMoveHover("Quote Moved to Referral Pending");
@@ -4744,7 +4777,9 @@ if((this.statusValue!='' && this.statusValue!=null) || (this.endorsementSection 
         let urlLink = `${this.CommonApiUrl}api/insertemitransactiondetails`
         this.sharedService.onPostMethodSync(urlLink, ReqObj).subscribe(
           (data: any) => {
-                  
+              if(data.Result){
+                  this.finalRedirection();
+              } 
             },
             (err) => { },
           );

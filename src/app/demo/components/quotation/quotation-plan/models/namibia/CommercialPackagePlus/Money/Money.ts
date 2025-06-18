@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class MoneyNamibia{
+export class MoneyCommercialNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;

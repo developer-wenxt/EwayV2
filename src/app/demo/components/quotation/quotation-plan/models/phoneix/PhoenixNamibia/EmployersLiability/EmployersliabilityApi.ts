@@ -16,6 +16,7 @@ export class EmployersLiabilityApiNamibia{
       let EmployeeLiabilitySection = subDetails.filter(ele => ele['SectionId'] == '37');
       if (EmployeeLiabilitySection.length != 0) {
           obj['employers'] = []; 
+          obj['EmployersLiabilityList'] = [];
           for (let ele of EmployeeLiabilitySection) {
               let employerData = {
                   OccupationType: ele.CoverId == 293 ? ele.CategoryId : null,
@@ -24,6 +25,7 @@ export class EmployersLiabilityApiNamibia{
                   IndustryType: ele.IndustryType && ele.IndustryType != '0' ? ele.IndustryType : null
               };
               obj['employers'].push(employerData);
+              obj['EmployersLiabilityList'].push(employerData)
           }
           if(EmployeeLiabilitySection[0]?.IndustryType!='0')obj['IndustryType']=EmployeeLiabilitySection[0].IndustryType;
           return obj;
@@ -40,7 +42,7 @@ export class EmployersLiabilityApiNamibia{
             "CoverId": "293",
             "SectionName": "Employers Liability",
             "Count": list[index]?.NoEmployees,
-            "SumInsured": list[index]?.EmpSumInsured,
+            "SumInsured": String(list[index]?.EmpSumInsured).replaceAll(',', '') ,
             "CategoryId":list[index]?.OccupationType,
             "Status": "Y",
           }

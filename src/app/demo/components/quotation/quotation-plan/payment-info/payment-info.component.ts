@@ -51,6 +51,9 @@ export class PaymentInfoComponent {
   MobileNo: any=null;MobileCodeDesc:any=null;mobilePaymentPending: boolean=false;checkStatusSection: boolean=false;loadingCount: any=0;
   paramSection: boolean=false;
   totallistselected: any[]=[];
+  utilisedAmount: any=null;
+  totalDepositAmount: any=null;
+  cbcNo: any=null;
   constructor(private messageService: MessageService,private quoteComponent:QuotationPlanComponent,
     private router:Router,private sharedService: SharedService,private route:ActivatedRoute,private appComp:AppComponent,
     private translate: TranslateService,
@@ -649,7 +652,7 @@ export class PaymentInfoComponent {
     else if(this.Menu=='1'){ this.Third=true; }
     else if(this.Menu == '2'){ this.Fourth = true;}
     else if(this.Menu == 'Bank'){ this.Fifth = true;}
-    else if(this.Menu == '3'){ this.seven = true;}
+    else if(this.Menu == '3'){ this.seven = true;this.getCreditBalance()}
     else if(this.Menu == '4' || this.Menu == '5'){
       if(this.Menu == '4')this.Sixth = true;
       else{this.Seventh = true;this.mpaisaCode=this.MobileCode;this.mpaisaNumber=this.MobileNo;}
@@ -670,6 +673,15 @@ export class PaymentInfoComponent {
     //   if(this.totalPremium!=null && this.totalPremium!=undefined){this.payAmount = String(this.totalPremium);this.CommaFormatted();}
     // }
 
+  }
+  getCreditBalance(){
+    let urlLink=`${this.CommonApiUrl}credit/details/${this.quoteDetails?.AgencyCode}`;
+        this.sharedService.onGetMethod(urlLink).subscribe(
+          (data: any) => {
+              this.totalDepositAmount = data?.DepositAmount;
+              this.utilisedAmount = data?.DepositUtilized;
+              this.cbcNo = data?.CbcNo;
+          });
   }
   onUploadDocuments(target:any,fileType:any,type:any,uploadType:any){
     console.log("Event ",target);
@@ -830,6 +842,65 @@ export class PaymentInfoComponent {
      this.sharedService.onPostMethodSync(urlLink, ReqObj).subscribe(
       (data: any) => {
         if(data.Result){
+         
+          if(this.Menu=='4' && data.Result.paymentUrl ){
+            if(data.Result.paymentUrl!='url not available'){
+              this.redirectUrl = data.Result.paymentUrl;
+              const absoluteURL = new URL(this.redirectUrl, window.location.href);
+              // let newTab = window.open();
+              // newTab.location.href = atob(this.redirectUrl);
+             window.location.href =  absoluteURL.href;
+              // setTimeout(() =>{
+              //       this.checkStatus();
+              // },(90 * 1000));
+            }
+           
+          }
+          else if(this.Menu=='5'){
+            this.mobilePaymentPending = true;
+            this.Seventh = false;
+            this.setMobilePayment(data.Result);
+          }
+          else {
+
+            if(!this.seven){
+                this.router.navigate(['/quotation/plan/main/policy-info']);
+              // this.paymentDetails = data.Result;
+              // this.policyNo = data?.Result?.PolicyNo;
+              // this.updateTiraDetails();
+              // this.policySection = true;
+              // this.draftSection=false;
+            }
+            else{
+              if(this.cbcNo && this.seven) sessionStorage.setItem('CBCNo',this.cbcNo)
+              else sessionStorage.removeItem('CBCNo')
+              if(data.Result?.DepositResponse!='Y' && data.Result?.DepositResponse!=null){
+                let Result = data.Result?.DepositResponse;
+                console.log('HHHHHHHHHH',Result);
+                Swal.fire({
+                  title: '<strong>Error</strong>',
+                  icon: 'info',
+                  html: `<ul class="list-group errorlist">
+                     <li>${Result}</li>
+                 </ul>`,
+                  showCloseButton: false,
+                 cancelButtonColor: '#d33',
+                 cancelButtonText: 'Ok',
+                })
+              }
+              else{
+
+                this.router.navigate(['/quotation/plan/main/policy-info']);
+                // this.paymentDetails = data.Result;
+                // this.policyNo = data?.Result?.PolicyNo;
+                // this.updateTiraDetails();
+                // this.policySection = true;
+                // this.draftSection=false;
+                
+              }
+             
+            }
+          }
           
           //CRM Quote status update
           const LeadId = sessionStorage.getItem('LeadId');
@@ -865,68 +936,6 @@ export class PaymentInfoComponent {
               },
               (err) => { },
             )
-          }
-          if(this.Menu=='4' && data.Result.paymentUrl ){
-            if(data.Result.paymentUrl!='url not available'){
-              this.redirectUrl = data.Result.paymentUrl;
-              const absoluteURL = 
-              new URL(this.redirectUrl, window.location.href);
-              // let newTab = window.open();
-              // newTab.location.href = atob(this.redirectUrl);
-             window.location.href =  absoluteURL.href;
-              // setTimeout(() =>{
-              //       this.checkStatus();
-              // },(90 * 1000));
-            }
-           
-          }
-          else if(this.Menu=='5'){
-            this.mobilePaymentPending = true;
-            this.Seventh = false;
-            this.setMobilePayment(data.Result);
-          }
-          else {
-            if(!this.seven){
-                this.router.navigate(['/quotation/plan/main/policy-info']);
-              // this.paymentDetails = data.Result;
-              // this.policyNo = data?.Result?.PolicyNo;
-              // this.updateTiraDetails();
-              // this.policySection = true;
-              // this.draftSection=false;
-            }
-            else{
-              if(data.Result?.DepositResponse!='Y'){
-                let Result = data.Result?.DepositResponse;
-                console.log('HHHHHHHHHH',Result);
-                Swal.fire({
-                  title: '<strong>Error</strong>',
-                  icon: 'info',
-                  html: `<ul class="list-group errorlist">
-                     <li>${Result}</li>
-                 </ul>`,
-                  showCloseButton: false,
-                 cancelButtonColor: '#d33',
-                 cancelButtonText: 'Ok',
-                })
-              }
-              else{
-
-                if(this.EmiYn!='Y'){
-
-                  this.router.navigate(['/quotation/plan/main/policy-info']);
-                }
-                else{
-                  this.router.navigate(['/quotation/plan/main/Paymet']);
-                }
-                // this.paymentDetails = data.Result;
-                // this.policyNo = data?.Result?.PolicyNo;
-                // this.updateTiraDetails();
-                // this.policySection = true;
-                // this.draftSection=false;
-                
-              }
-             
-            }
           }
         } 
       },

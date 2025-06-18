@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class FireNamibiaApi{
+export class FireNamibiaCommercialApi{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;
@@ -359,7 +359,7 @@ export class FireNamibiaApi{
     //                   if(IndustryId){subEntry['IndustryType'] = IndustryId;subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==IndustryId)?.CodeDesc}
     // obj.SectionList.push(subEntry);
     //                 }
-                    if(entry.GrossRentals!=null && entry.GrossRentals!='0'){
+                    if(entry.GrossRentals!=null && entry.GrossRentals!='0' && entry.GrossRentals != ''){
                       let subEntry={
                         "SectionId":"1","SectionName":"Building",
                         "Status":"Y","SumInsured":entry.GrossRentals,

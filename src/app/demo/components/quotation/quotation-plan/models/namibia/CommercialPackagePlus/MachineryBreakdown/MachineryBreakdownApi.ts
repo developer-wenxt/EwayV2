@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class MachineryBreakdownApiNamibia {
+export class MachineryBreakdownCommercialApiNamibia {
     customerDetails: any;
     commonDetails: any[] = [];
     endorsementSection: boolean = false; subuserType: any = null;
@@ -25,7 +25,7 @@ export class MachineryBreakdownApiNamibia {
         }
        
     }
-    getSaveDetails(entry,ClaimCostList, industryTypeList, obj) {
+    getSaveDetails(entry,ClaimCostList,IndustryId, industryTypeList, obj) {
         if (entry.GrossProfit != null && entry.GrossProfit != 0 && entry.GrossProfit != '0') {
            let subEntry = {
                "SectionId": "41",
@@ -34,7 +34,7 @@ export class MachineryBreakdownApiNamibia {
                "SumInsured": entry.GrossProfit,
                "Status": "Y",
            }
-           if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+           if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
            obj.SectionList.push(subEntry);
            }
            if (entry.IncreasedCostOfWorking != null && entry.IncreasedCostOfWorking != 0 && entry.IncreasedCostOfWorking != '0') {
@@ -45,7 +45,7 @@ export class MachineryBreakdownApiNamibia {
                "SumInsured": entry.IncreasedCostOfWorking,
                "Status": "Y",
            }
-           if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+           if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
            obj.SectionList.push(subEntry);
            }
            if (entry.ClaimsPreparationCosts != null && entry.ClaimsPreparationCosts != 0 && entry.ClaimsPreparationCosts != '0') {
@@ -58,7 +58,7 @@ export class MachineryBreakdownApiNamibia {
                "CategoryId": entry.ClaimsPreparationCosts,
                "Status": "Y",
            }
-           if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+           if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
            obj.SectionList.push(subEntry);
            }
            return obj;

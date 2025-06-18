@@ -962,10 +962,10 @@
                                                                 </div>
                                                             </ng-container>
                                                         </ng-container> -->
-                                                         <ng-container *ngIf="excessList.length!=0">
+                                                         <ng-container *ngIf="excessList.length!=0 && checkOverAllExcess()">
                                                             <h3 style="margin-left: 15px;">Excess Details</h3><br>
                                                         </ng-container>
-                                                        <div class="grid mt-2" *ngIf="excessList.length!=0">
+                                                        <div class="grid mt-2" *ngIf="excessList.length!=0  && checkOverAllExcess()">
                                                             <div class="col-12 md:col-1 md:col-1 lg:col-1 xl:col-1"></div>
                                                             <div class="col-12 md:col-10 md:col-10 lg:col-10 xl:col-10">
                                                                  <table class="table table-bordered p-1" style="overflow-x:clip !important;width:100%;">

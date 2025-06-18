@@ -2,7 +2,7 @@ import { FormlyFieldConfig, FormlyFormOptions } from "@ngx-formly/core";
 import * as Mydatas from '../../../../../../../../app-config.json';
 import { SharedService } from "@app/_services/shared.service";
 import { ForceLengthValidators } from "@app/demo/components/common-quote-details/common-quote-details.component";
-export class HouseHoldersNamibia {
+export class HouseHoldersCommercialNamibia {
   customerDetails: any;
   commonDetails: any[] = [];userDetails:any;insuranceId:any;
   endorsementSection: boolean = false; subuserType: any = null;

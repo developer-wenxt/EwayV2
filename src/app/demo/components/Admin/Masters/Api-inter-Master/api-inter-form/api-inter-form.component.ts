@@ -43,7 +43,10 @@ export class ApiInterFormComponent implements OnInit {
     this.ApiIntegrationDetails = new apiInter();
     this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
     this.ApiData = JSON.parse(sessionStorage.getItem('ApiIntegrationCode'));
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+     if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+     else{
+      this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+    }
     this.activeMenu = 'API Integration Master';
     if (this.ApiData.apiType) {
       this.ApiType = this.ApiData.apiType;

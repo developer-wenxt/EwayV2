@@ -11,6 +11,7 @@
 
             </ng-container> -->
             <div class="container p-3" *ngIf="!endorsementSection">
+                
                 <div class="flex flex-wrap">
                     <div class="lg:col-4 md:col-4 col-4" *ngIf="quoteRefNo">
                         <span class="customFont">{{'PolicyInfo.ReferenceNumber' | translate}}</span><br>
@@ -42,6 +43,13 @@
                    
                 </div>
                 <hr class="m-0 p-0">
+                <div class="flex flex-wrap" *ngIf="creditBalance">
+                    <div class="lg:col-4 md:col-4 col-4" *ngIf="creditBalance">
+                        <span class="customFont"><b>Credit Balance Amount</b></span><br>
+                        <span class="customFont2"><b>{{creditBalance}}</b></span>
+                    </div>
+                </div>
+                <hr class="m-0 p-0" *ngIf="creditBalance">
                 <div class="inline-flex align-items-center justify-content-center gap-2 w-full mt-2">
                     <p-button [label]="'PolicyInfo.DebitNotePDF' | translate" styleClass="p-button-outlined" (click)="onDebitdownload(paymentDetails)" *ngIf="insuranceId!='100028' && paymentDetails?.DebitNoteNo"></p-button>
                     <p-button [label]="'PolicyInfo.CreditNotePDF' | translate" styleClass="p-button-outlined" (click)="onCreditdownload(paymentDetails)" *ngIf="insuranceId!='100028' && paymentDetails?.CreditNoteNo"></p-button>

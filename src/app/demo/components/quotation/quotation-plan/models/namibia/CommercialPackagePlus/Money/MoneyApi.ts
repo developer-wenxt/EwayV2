@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class MoneyApiNamibia {
+export class MoneyApiCommercialNamibia {
     customerDetails: any;
     commonDetails: any[] = [];
     endorsementSection: boolean = false; subuserType: any = null;
@@ -27,7 +27,7 @@ export class MoneyApiNamibia {
             return obj
         }
     }
-    getSaveDetails(entry, industryTypeList, obj) {
+    getSaveDetails(entry, IndustryId,industryTypeList, obj) {
       if(entry.SafeLockerGrade!=null && entry.SafeLockerGrade!='' && entry.MajorMoneyLimit!='0' && entry.MajorMoneyLimit!=null && entry.MajorMoneyLimit!=''){
           let subEntry= {
             "SectionId": "42",
@@ -37,7 +37,7 @@ export class MoneyApiNamibia {
             "CategoryId": entry.SafeLockerGrade,
             "Status": "Y"
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
         if(entry.SafeLockerGrade!=null && entry.SafeLockerGrade!='' && entry.SeasonalIncrease!='0' && entry.SeasonalIncrease!=null && entry.SeasonalIncrease!=''){
@@ -49,7 +49,7 @@ export class MoneyApiNamibia {
             "Status": "Y",
             "CategoryId": entry.SafeLockerGrade
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
         if(entry.Receptaclesinexcessofpolicylimit!='0' && entry.Receptaclesinexcessofpolicylimit!=null && entry.Receptaclesinexcessofpolicylimit!=''){
@@ -60,7 +60,7 @@ export class MoneyApiNamibia {
             "SumInsured": entry.Receptaclesinexcessofpolicylimit,
             "Status": "Y"
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
         if(entry.ClothingPersonalEffectsofEmployees!='0' && entry.ClothingPersonalEffectsofEmployees!=null && entry.ClothingPersonalEffectsofEmployees!=''){
@@ -71,7 +71,7 @@ export class MoneyApiNamibia {
             "SumInsured": entry.ClothingPersonalEffectsofEmployees,
             "Status": "Y"
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
         if(entry.LocksKeysofReceptacle!='0' && entry.LocksKeysofReceptacle!=null && entry.LocksKeysofReceptacle!=''){
@@ -82,7 +82,7 @@ export class MoneyApiNamibia {
             "SumInsured": entry.LocksKeysofReceptacle,
             "Status": "Y"
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
           return obj;

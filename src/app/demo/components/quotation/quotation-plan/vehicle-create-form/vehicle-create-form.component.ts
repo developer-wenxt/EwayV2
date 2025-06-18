@@ -638,6 +638,7 @@ export class VehicleCreateFormComponent implements OnInit {
         if(this.insuranceId=='100028') bodyTypeDesc = this.bodyTypeValue;
         else bodyTypeDesc = this.bodyTypeId;
         if(this.insuranceId=='100027'){this.vehicleDetails['MotorCategory']='1';this.vehicleDetails['NumberOfAxels']='1';this.axelDistance="100";tareweight='100'}
+        
        let ReqObj = {
         "BrokerBranchCode": brokerbranchCode,
         "AcExecutiveId": null,
@@ -668,7 +669,7 @@ export class VehicleCreateFormComponent implements OnInit {
         "CityLimit": this.vehicleDetails?.CityLimit  ? this.vehicleDetails?.CityLimit : null,
         "CoverNoteNo": this.vehicleDetails?.CoverNoteNo  ? this.vehicleDetails?.CoverNoteNo : null,
         "OwnerCategory": this.vehicleDetails?.OwnerCategory  ? this.vehicleDetails?.OwnerCategory : null,
-        "CubicCapacity": grossweight,
+        "CubicCapacity": this.engineCapacity,
         "CreatedBy": createdBy,
         "DrivenByDesc": 'D',
         "MobileCode": this.vehicleDetails?.MobileCode ?  this.vehicleDetails?.MobileCode : null,
@@ -965,7 +966,6 @@ export class VehicleCreateFormComponent implements OnInit {
         this.makeValue=null;this.modelValue=null;this.horsePower=0,this.grossWeight=0}
       if(type=='direct' && this.insuranceId!='100028') this.bodyTypeId = this.bodyTypeList.find(ele=>ele.CodeDesc==this.bodyTypeValue)?.Code;this.getGrossWeight();this.getEngineCapacity();this.getSeatingCapacity();
       if(this.bodyTypeId && this.insuranceId!='100020'){ this.getMakeList(); }
-
     }
   }
   getBack(){
@@ -1366,6 +1366,11 @@ export class VehicleCreateFormComponent implements OnInit {
     if(this.insuranceId=='100027'){this.motorCategory='1';this.noOfAxels='1';this.axelDistance="100";tareweight='100'}
     let type = sessionStorage.getItem('QuoteType');
     if(type=='Renewal') this.ownerCategory = this.vehicleDetails?.OwnerCategory;
+    if(this.insuranceId=='100046' || this.insuranceId=='100047' || this.insuranceId=='100048' || this.insuranceId=='100049' || this.insuranceId=='100050'){
+        if(this.bodyType=='P'){this.grossWeight=null;}
+        else{this.engineCapacity=null;}
+    }
+    
     let ReqObj = {
       "Insuranceid": this.insuranceId,
       "BranchCode": this.branchCode,

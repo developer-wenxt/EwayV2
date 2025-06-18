@@ -39,6 +39,7 @@ export class PolicyInfoComponent {
   docTypes: any[]=[];cancelEndorse:boolean=false;
   documentSection: boolean;
   columns: any[]=[];
+  creditBalance: any=null;
   constructor(private router: Router,private datePipe:DatePipe,private quoteComponent:QuotationPlanComponent,
     private sharedService: SharedService,public http: HttpClient) {
    let homeObj = JSON.parse(sessionStorage.getItem('homeCommonDetails'));
@@ -131,6 +132,7 @@ export class PolicyInfoComponent {
             this.policySection = true;
             this.successSection = false;
             this.loadingSection = false;
+            if(sessionStorage.getItem('CBCNo')){this.getCreditBalance()}
             if(this.orgPolicyNo!=undefined && this.endorsementSection && (this.endtPremium==null || this.endtPremium=='' || this.endtPremium==0 || this.endtPremium==undefined) && !this.cancelEndorse){
               this.updateEndorseStatus();
             }
@@ -149,6 +151,13 @@ export class PolicyInfoComponent {
       },
       (err) => { },
       );
+  }
+  getCreditBalance(){
+    let urlLink=`${this.CommonApiUrl}credit/balance/${this.quoteNo}`;
+        this.sharedService.onGetMethod(urlLink).subscribe(
+          (data: any) => {
+              this.creditBalance = data?.BalanceAmount;
+          });
   }
   updateEndorseStatus(){
     let ReqObj = {

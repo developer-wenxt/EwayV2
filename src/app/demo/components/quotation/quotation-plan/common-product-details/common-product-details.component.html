@@ -485,27 +485,6 @@
         </div>-->
         
 
-        <div *ngIf="productId=='57' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050'">
-            <div class="grid pl-5 pr-5 pb-0">
-                <div class="md:col-6 lg:col-6 col-12">
-                    <h4 class="m-0 p-0">Group Personal Accident Details</h4>
-                </div>
-            </div>
-            
-            <div class="grid pl-5 pr-2 pb-0">
-                <div class="lg:col-10 xl:col-10 md:col-10 col-10 m-0 p-0">
-                    <div class="flex flex-wrap justify-content-end">
-                        <div>
-                            <p-button  styleClass="p-button-outlined"
-                                size="small" (click)="createCover2(null,myModal4)" > <i class="fas fa-plus"></i>&nbsp;Add New Employee
-                            </p-button>&nbsp;
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-                
-        </div>
         <!-- <div *ngIf="productId=='32'">
             <div class="grid pl-5 pr-5 pb-0">
                 <div class="md:col-6 lg:col-6 col-12">
@@ -525,7 +504,7 @@
             
 
         </div> -->
-        <div *ngIf="productId=='61' || ((productId=='25' || productId=='39' || productId=='49' || productId=='26') && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050') || (productId=='16' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050') || productId=='1' || ((productId=='14' || productId=='32') && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050')  || productId=='15' || productId=='13' ||  this.productId=='6'">            
+        <div *ngIf="productId=='61' || ((productId=='25' || productId=='39' || productId=='49' || productId=='26') && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050') || (productId=='16' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050') || productId=='1' || ((productId=='14' || productId=='32') && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050')  || productId=='15' || productId=='13' ||  this.productId=='6' || productId=='57'">            
             <div class="grid pl-5 pr-5 pb-0">
                 <div class="md:col-6 lg:col-6 col-12">
                     <h4 class="m-0 p-0" *ngIf="productId=='61'">Bond Details</h4>
@@ -539,6 +518,7 @@
                     <h4 class="m-0 p-0" *ngIf="productId=='39'">Machinery Details </h4>
                     <h4 class="m-0 p-0" *ngIf="productId=='49'">Goods in Transit </h4>
                     <h4 class="m-0 p-0" *ngIf="productId=='26'">Business All Risk </h4>
+                    <h4 class="m-0 p-0" *ngIf="productId=='57'">Group Personal Accident </h4>
                 </div>
             </div>
             <div class="body mt-1">
@@ -618,7 +598,40 @@
                     <p-tabView *ngIf="LocationListAlt.length!=0 && checkLocationDetail()" [(activeIndex)]="tabIndex" (onChange)='onChangeTab($event.index)'>
                         <ng-container *ngFor="let item of LocationListAlt">
                             <p-tabPanel [header]="item.LocationName" disabled="true">
-                                <ng-container *ngIf="item.SectionList.length!=0 && checkRowExist(item)">
+                                <ng-container *ngIf="productId == '13'; else notPersonalAccident" >
+                                    <p-table [value]="individualList" [tableStyle]="{'min-width':'100rem'}" [paginator]="true" [rows]="5">
+                                        <ng-template pTemplate="header">
+                                            <tr>                                                                                                   
+                                                    <th>Occupation</th>
+                                                    <th>Death Cover</th> 
+                                                    <th>Permanent Disablement</th>
+                                                    <th>Temporary Total Disability</th> 
+                                                    <th>Medical Expenses</th> 
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+                                            <tr>                                                                                                                              
+                                                    <td>{{getOccupationDesc(rowData)}}</td>
+                                                    <td>{{rowData?.DeathCover}}</td>
+                                                    <td>{{rowData?.PermanentDisablement}}</td>
+                                                    <td>{{rowData?.TemporaryTotalDisability}}</td>
+                                                    <td>{{rowData?.MedicalExpenses}}</td>
+                                            
+                                               
+                                            <td>
+                                                <button pButton pRipple icon="pi pi-pencil" class="p-button-outlined" (click)="onEditCommonDetails(rowData,item,i)" ></button>  
+                                            </td>
+                                            <td>
+                                                <button pButton pRipple icon="pi pi-trash" class="p-button-outlined" (click)="onDeleteCommonDetails(rowData,item,i)"></button>  
+                                            </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </ng-container>
+                                <ng-template #notPersonalAccident>
+                                    <ng-container *ngIf="item.SectionList.length!=0 && checkRowExist(item)">
                                     <p-table [value]="item.SectionList" [tableStyle]="{'min-width':'100rem'}" [paginator]="true" [rows]="5">
                                         <ng-template pTemplate="header">
                                             <tr>
@@ -650,9 +663,10 @@
                                                 </ng-container>
                                                 <ng-container *ngIf="productId=='13'">
                                                     <th>Occupation</th>
-                                                    <!-- <th>Name</th> 
-                                                    <th>DOB</th>  -->
-                                                    <th>SumInsured</th>
+                                                    <th>Death Cover</th> 
+                                                    <th>Permanent Disablement</th>
+                                                    <th>Temporary Total Disability</th> 
+                                                    <th>Medical Expenses</th>
                                                 </ng-container>
                                                 <ng-container *ngIf="productId=='32'">
                                                     <th>Occupation</th>
@@ -700,12 +714,19 @@
                                                     <td>{{money.FidEmpCount}}</td>
                                                     <td>{{money.SumInsured}}</td>
                                                 </ng-container>
-                                                <ng-container *ngIf="productId=='13'">
+                                                <!-- <ng-container *ngIf="productId=='13'">
                                                     <td>{{getOccupationDesc(money)}}</td>
-                                                    <!-- <td>{{money.NickName}}</td>
-                                                    <td>{{money.Dob}}</td> -->
                                                     <td>{{money.SumInsured}}</td>
+                                                </ng-container> -->
+                                                <ng-container *ngIf="productId=='13'">
+                                                    
+                                                    <td>{{individualList[0].OccupationId}}</td>
+                                                    <td>{{individualList[0].DeathCover}}</td>
+                                                    <td>{{individualList[0].PermanentDisablement}}</td>
+                                                    <td>{{individualList[0].TemporaryTotalDisability}}</td>
+                                                    <td>{{individualList[0].MedicalExpenses}}</td>
                                                 </ng-container>
+                                               
                                             <td>
                                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-outlined" (click)="onEditCommonDetails(money,item,i)" ></button>  
                                             </td>
@@ -716,6 +737,8 @@
                                         </ng-template>
                                     </p-table>
                                 </ng-container>
+                                </ng-template>
+                                
                                 <ng-container *ngIf="productId!='6' && productId!='39'">
                                     <div class="grid p-2 mt-3">
                                         <div class="col-12 lg:col-3 xl:col-3"></div>
@@ -829,8 +852,9 @@
                                                         </ng-template>
                                                     </p-table>
                                                 </div>
-                                                <div class="flex flex-warp justify-content-center" *ngIf="productId!='6' && productId!='39' && productId!='1'">
+                                                <div class="flex flex-warp justify-content-center" *ngIf="productId!='6' && productId!='1'">
                                                     
+                                                    <!-- <p-button  label="Save & Add New" size="small" (click)="addMoneyCommon(item)"></p-button> -->
                                                     <p-button  label="Save & Add New" size="small" (click)="addMoneyCommon(item)"></p-button>
                                                 </div>
                                             </ng-container>
@@ -847,12 +871,34 @@
                                     </div>
                                 </ng-container>
                                 <ng-container *ngIf="productId=='6' || (this.productId=='39' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050')">
+                                    <!-- <div class="grid p-2 mt-3">
+                                        <div class="col-12 lg:col-10 xl:col-10">
+                                                <p-table [value]="machineryDetails" [tableStyle]="{'min-width':'100%'}" [paginator]="true" [rows]="5">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>                                                                                                   
+                                                                <th>Machinery</th>
+                                                                <th>SumInsured</th> 
+                                                                <th>Business Interruption</th>
+                                                                <th>Business SumInsured</th> 
+                                                                <th>Edit</th>
+                                                                <th>Delete</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+                                                        <tr>                                                   
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                        </div>
+                                    </div> -->
+                                    
                                     <div class="grid p-2 mt-3">
                                         <div class="col-12 lg:col-3 xl:col-3"></div>
                                         <div class="col-12 lg:col-5 xl:col-5">
                                             <form [formGroup]="form" (ngSubmit)="onSubmit(productItem)" [appendTo]="body">
                                                 <formly-form [form]="form" [fields]="fields" [model]="productItem" ></formly-form>
                                             </form>
+                                             
                                             <div class="input-form-error" *ngIf="firstSIError || coveringDetailsError || descriptionRiskError || coveringDetailsBIError || DescriptionOfRiskBIError || sumInsuredError || OccupationError || sectionError || fireSIError || businessNameError || businessSIError" style="position: relative;">
                                                 <div class="error-text text-danger">
                                                     <span class="spancommon span_font_size" *ngIf="OccupationError">Please Select Valid Occupation<br></span>
@@ -870,6 +916,9 @@
                                                     <span class="spancommon span_font_size" *ngIf="districtError">Please Select Valid District<br></span>
                                                 </div>
                                             </div>
+                                            <!-- <div class="flex flex-warp justify-content-center" *ngIf="productId=='39'">
+                                               <p-button  label="Save & Add New" size="small" (click)="addMoneyCommon(item)"></p-button>
+                                            </div> -->
                                             <div *ngIf="firstLossSection">
                                                 <div class="flex flex-warp justify-content-end" >
                                                     <p-button  label="Add New" size="small" (click)="addFirstLossPayee()"></p-button>
@@ -902,6 +951,92 @@
                                             </div>
                                         </div>
                                     </div>
+                                </ng-container>
+                                <ng-container *ngIf="productId=='57'">
+                                    <div class="row">
+                                                            <div class="text-right">
+
+                                                                <p-button label="Add New"
+                                                                    styleClass="mr-3 p-button-outlined"
+                                                                    (click)="addGPA()"></p-button>
+                                                            </div>
+                                                            <div class="col-10 mx-auto">
+                                                                <form [formGroup]="GPAForm"
+                                                                    (ngSubmit)="onSubmit(productItem)">
+                                                                    <div formArrayName="gpa">
+                                                                        <div *ngFor="let user of GPAArray.controls; let i = index"
+                                                                            [formGroupName]="i">
+                                                                            <div class="grid ">
+                                                                                <div class="col-10 lg:col-2 xl:col-2">
+                                                                                    <label for="Address">Occupation</label>
+                                                                                    <p-dropdown class="w-full" styleClass="w-full"
+                                                                                        placeholder="Select Wall Type"
+                                                                                        [options]="occupationList"
+                                                                                        appendTo="body"
+                                                                                        optionLabel="CodeDesc"
+                                                                                        optionValue="Code"
+                                                                                        [filter]="true"
+                                                                                        filterBy="CodeDesc"
+                                                                                        formControlName="Occupation" />
+                                                                                </div>
+                                                                                  <div class="col-10 lg:col-2 xl:col-2">
+                                                                                    <label for="Address">Memebers Count</label>
+                                                                                    <input
+                                                                                        class="w-full p-button-outlined"
+                                                                                        formControlName="Members"
+                                                                                        placeholder="SumInsured"
+                                                                                        styleClass="w-full" pInputText
+                                                                                        type="number"
+                                                                                         />
+                                                                                </div>
+                                                                                  <div class="col-10 lg:col-2 xl:col-2">
+                                                                                    <label for="Address">Period</label>
+                                                                                    <p-dropdown class="w-full" styleClass="w-full"
+                                                                                        placeholder="Select Wall Type"
+                                                                                        [options]="groupPeriodList"
+                                                                                        appendTo="body"
+                                                                                        optionLabel="CodeDesc"
+                                                                                        optionValue="Code"
+                                                                                        [filter]="true"
+                                                                                        filterBy="CodeDesc"
+                                                                                        formControlName="Period" />
+                                                                                </div>
+                                                                                  <div class="col-10 lg:col-2 xl:col-2">
+                                                                                    <label for="Address">Sum Insured</label>
+                                                                                    <input
+                                                                                        class="w-full p-button-outlined"
+                                                                                        formControlName="GPASumInsured"
+                                                                                        placeholder="SumInsured"
+                                                                                        styleClass="w-full" pInputText
+                                                                                        type="commaSeparator"
+                                                                                        (keydown)="onKeyDown($event,user)"
+                                                                                        (keyup)="CommaFormattedDynamic($event,'AdditionalClaimsPreparationCosts')" />
+                                                                                </div>
+                                                                                <div class="col-2 lg:col-2 xl:col-2" *ngIf="i !=0">
+                                                                                    <br>
+                                                                                    <button pButton type="button"
+                                                                                        icon="pi pi-trash"
+                                                                                        (click)="removeGPA(i)"
+                                                                                        styleClass="p-button-outlined">
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- <button mat-icon-button color="warn" (click)="removeUser(i)">
+                                                                      <mat-icon>delete</mat-icon>
+                                                                    </button> -->
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- <button mat-raised-button color="primary" (click)="addUser()">Add User</button> -->
+                                                                    <!-- <button mat-raised-button color="accent" (click)="saveForm()">Save</button> -->
+                                                                </form>
+                                                                <!-- <form [formGroup]="form" (ngSubmit)="onSubmit(productItem)">
+                                                                <formly-form [form]="form"  [fields]="fieldFidelityPhoenix" [model]="productItem"></formly-form>
+                                                            </form> -->
+                                                            </div>
+                                </div>
                                 </ng-container>
                                 <div class="grid" *ngIf="uwQuestionList.length!=0">
                                     <div class="grid justify-content-start">

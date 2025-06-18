@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class BusinessAllRiskApiNamibia{
+export class BusinessAllRiskCommercialApiNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;
@@ -39,7 +39,7 @@ export class BusinessAllRiskApiNamibia{
           return obj
         }
     }
-    getSaveDetails(entry,ClaimCostList,industryTypeList,obj){
+    getSaveDetails(entry,IndustryId,industryTypeList,obj){
         
 
         if (entry.ClothingAndPersonalEffectsPhoenix != null && entry.ClothingAndPersonalEffectsPhoenix != '' && entry.ClothingAndPersonalEffectsPhoenix != '0') {
@@ -53,7 +53,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.ClothingAndPersonalEffectsPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
             console.log(obj);
             
@@ -68,7 +68,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.ArticlesKeptOnPremisesPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
   
@@ -81,7 +81,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.ElectronicEquipmentPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if (entry.CellularPhonesPhoenix != null && entry.CellularPhonesPhoenix != 0 && entry.CellularPhonesPhoenix != '0') {
@@ -93,7 +93,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.CellularPhonesPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if (entry.CampingEquipmentPhoenix != null && entry.CampingEquipmentPhoenix != 0 && entry.CampingEquipmentPhoenix != '0') {
@@ -105,7 +105,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.CampingEquipmentPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if (entry.SportingEquipmentPhoenix != null && entry.SportingEquipmentPhoenix != 0 && entry.SportingEquipmentPhoenix != '0') {
@@ -116,7 +116,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.SportingEquipmentPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           if (entry.JewelleryPhoenix != null && entry.JewelleryPhoenix != 0 && entry.JewelleryPhoenix != '0') {
@@ -127,7 +127,7 @@ export class BusinessAllRiskApiNamibia{
               "SumInsured": entry.JewelleryPhoenix,
               "Status": "Y",
             }
-            if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+            if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
             obj.SectionList.push(subEntry);
           }
           console.log(obj);

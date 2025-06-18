@@ -123,12 +123,12 @@ export class AccountsRecievableCommercialNamibia{
                 {
                   type: 'ngselect',
                   className: ' col-12 lg:col-4 md:col-4 xl:col-4 rightAlign',
-                  key: 'ClaimsPreparationCosts',
+                  key: 'ARClaimsPreparationCosts',
                   defaultValue: '0',
                   templateOptions: {
                     label: '',
                     maxLength: 15,
-                    disabled: this.checkDisable('ClaimsPreparationCosts'),
+                    disabled: this.checkDisable('ARClaimsPreparationCosts'),
                     required:false,
                     options: [
                     ],

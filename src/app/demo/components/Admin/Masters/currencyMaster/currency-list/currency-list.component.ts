@@ -28,7 +28,10 @@ export class CurrencyListComponent implements OnInit {
     this.activeMenu = "Currency Master";
     let userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
     
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    else{
+      this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+    }
     if(userDetails){
       this.loginId = userDetails?.Result?.LoginId;
       this.UserType = userDetails?.Result?.UserType;
@@ -51,7 +54,10 @@ export class CurrencyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+      else{
+        this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+      }
   }
   getCompanyList(){
     let ReqObj = {

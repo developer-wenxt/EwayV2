@@ -22,7 +22,7 @@ export class AccidentalDamageNamibiaApi{
           let accMaximum = AccDamageSection.filter(ele=>ele.CoverId==416 || ele.CoverId=='416')
           if(accMaximum.length!=0){obj['MaximumLimitperOccurrence']=accMaximum[0].SumInsured;obj['IndustryType']=null;if(accMaximum[0]?.IndustryType!='0')obj['IndustryType']=accMaximum[0].IndustryType;}
           let accAdditional = AccDamageSection.filter(ele=>ele.CoverId==367 || ele.CoverId=='367')
-          if(accAdditional.length!=0){obj['AdditionalclaimsPreparationCosts']=accAdditional[0].CategoryId;alert(obj['AdditionalclaimsPreparationCosts']);obj['IndustryType']=null;if(accAdditional[0]?.IndustryType!='0')obj['IndustryType']=accAdditional[0].IndustryType;}
+          if(accAdditional.length!=0){obj['AdditionalclaimsPreparationCosts']=accAdditional[0].CategoryId;obj['IndustryType']=null;if(accAdditional[0]?.IndustryType!='0')obj['IndustryType']=accAdditional[0].IndustryType;}
           let accAccidental = AccDamageSection.filter(ele=>ele.CoverId==491 || ele.CoverId=='491')
           if(accAccidental.length!=0){obj['Accidentaloilandchemical']=accAccidental[0].SumInsured;obj['IndustryType']=null;if(accAccidental[0]?.IndustryType!='0')obj['IndustryType']=accAccidental[0].IndustryType;}
         return obj

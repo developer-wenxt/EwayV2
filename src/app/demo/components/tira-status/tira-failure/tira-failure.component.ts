@@ -91,6 +91,7 @@ export class TiraFailureComponent implements OnInit {
             'Tira ResponseId',
             'ReHit',
             'View',
+            'Update'
         ];
         this.tiraHeader = [
             'Request Id',
@@ -313,5 +314,16 @@ export class TiraFailureComponent implements OnInit {
                     }
                 }
             });
+    }
+    onCheckCustomerInfo(rowData){
+        sessionStorage.setItem('customerReferenceNo',rowData?.CustomerReferenceNo);
+        this.router.navigate(['/tirastatus/customer-info'])
+    }
+    onCheckVehicleInfo(rowData){
+        sessionStorage.setItem('customerReferenceNo',rowData?.CustomerReferenceNo);
+        sessionStorage.setItem('quoteReferenceNo',rowData?.RequestReferenceNo);
+        sessionStorage.setItem('quoteNo',rowData?.QuoteNo);
+        if(this.productId=='5') this.router.navigate(['/tirastatus/vehicle-info'])
+        else if(this.productId=='46') this.router.navigate(['/tirastatus/vehicle-info'])
     }
 }

@@ -29,7 +29,10 @@ export class ExisitingDropdownsComponent implements OnInit {
   constructor(private router:Router ,private sharedService:SharedService,private layoutService:LayoutService ) {
     this.insuranceName = sessionStorage.getItem('insuranceName');
     this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    else{
+      this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+    }
 
     const user = this.userDetails?.Result;
     this.loginId = user?.LoginId;

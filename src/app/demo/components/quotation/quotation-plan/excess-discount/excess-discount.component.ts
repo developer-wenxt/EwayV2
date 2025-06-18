@@ -255,9 +255,6 @@ emiyn="N";
   fromWorkFlow: any=null;excessList:any[]=[];
   workFlowStatusList: any[]=[];
   ProposalId: any;
-  expandedElement: any = null;
-  PreviousPremium: string;
-
   constructor(public sharedService: SharedService,private authService: AuthService,private router:Router,private modalService: NgbModal,
     private appComp:AppComponent,private translate:TranslateService,
     private datePipe:DatePipe,public dialog: MatDialog) {
@@ -286,7 +283,7 @@ emiyn="N";
       else  this.router.navigate(['/quotation/plan/main/document-info']);
     }
    
-    // console.log("Received Session",this.userDetails)
+    console.log("Received Session",this.userDetails)
     this.localCurrency = this.userDetails.Result.CurrencyId;
     this.loginId = this.userDetails.Result.LoginId;
     this.sampleloginId = this.loginId;
@@ -295,7 +292,7 @@ emiyn="N";
       let endorseObj = JSON.parse(sessionStorage.getItem('endorseTypeId'))
       if(endorseObj){
         this.endorsementSection = true;
-        // console.log("Endorse obj",endorseObj)
+        console.log("Endorse obj",endorseObj)
         this.endorsementCategory = endorseObj.Category;
         this.endorsementId = endorseObj.EndtTypeId;
         this.endorseShortCode = endorseObj?.EndtShortCode;
@@ -2664,13 +2661,13 @@ emiyn="N";
             }
             if((((cover.isSelected=='D' || cover.isSelected=='O' || cover.isSelected=='Y' || cover?.UserOpt=='Y') && !this.endorsementSection) || 
             (this.endorsementSection && (cover.UserOpt=='Y' || cover.isSelected=='D' || cover.isSelected=='O'))) && cover.SubCovers==null ){
-              // if(this.endorsementId == 846 && veh.Status=='D'){
-              //   cover['selected']= false;
-              //   this.onSelectCover(cover,false,veh.Vehicleid,veh,'coverList','change');
-              // }
-              // else{
-                //this.onSelectCover(cover,true,cover.VehicleId,veh,'coverList','direct');
-              //}
+              if(this.endorsementId == 846 && veh.Status=='D'){
+                // cover['selected']= false;
+                // this.onSelectCover(cover,false,veh.Vehicleid,veh,'coverList','change');
+              }
+              else{
+                this.onSelectCover(cover,true,cover.VehicleId,veh,'coverList','direct');
+              }
               
             }
             else{
@@ -3080,7 +3077,6 @@ emiyn="N";
                       //{ key: 'MinimumPremium', display: 'Minimum' },
                       { key: 'PremiumAfterDiscount', display: 'AfterDiscount' },
                       { key: 'PremiumIncludedTax', display: 'IncludedTax' },
-                      { key: 'CoverToolTip', display: 'More' },
               
                     ]
               
@@ -3101,10 +3097,6 @@ emiyn="N";
     }
     getTotalCost(rowData){
       //console.log('rowData entry',rowData);
-      if(!localStorage.getItem('PreviousPremium')){
-      localStorage.setItem('PreviousPremium', rowData?.totalPremium)
-      }
-      this.PreviousPremium = localStorage.getItem('PreviousPremium');
       if(rowData?.totalPremium) return rowData?.totalPremium;
       else return 0;
   
@@ -3139,7 +3131,7 @@ emiyn="N";
           let coverList = vehicle?.CoverList;
           if(event){
             rowData.selected= true;
-            if(rowData.DifferenceYN==undefined && this.coverModificationYN=='Y'){
+            if(this.coverModificationYN=='Y'){
               if(vehicle.Status=='D') rowData.DifferenceYN = 'N';
               else rowData.DifferenceYN = 'Y'
             }
@@ -3148,7 +3140,7 @@ emiyn="N";
             let entry = this.selectedCoverList.filter(ele=>(ele.Id==vehicleId && (this.productId=='5' || this.productId=='46')) || (ele.Id==rowData.RiskId && (this.productId!='5' && this.productId!='46')) );
               if(entry.length==0){
                 let id=null;
-                if(rowData.RiskDetails?.RiskId) id= rowData.RiskDetails?.RiskId; else id=vehicleId
+                if(rowData?.RiskId) id= rowData?.RiskId; else id=vehicleId
                 if(rowData.SubCovers==null){
                   console.log("Error Vehicle",vehicle)
                   let element = {
@@ -3251,7 +3243,7 @@ emiyn="N";
                if(sectionEntry == undefined){
                 if(rowData.SubCovers==null){
                   let id=null;
-                  if(rowData.RiskDetails?.RiskId) id= rowData.RiskDetails?.RiskId; else id=vehicleId
+                  if(rowData?.RiskId) id= rowData?.RiskId; else id=vehicleId
                   let element = {
                     "Covers": [
                       {
@@ -3278,7 +3270,6 @@ emiyn="N";
                   if((this.endorseAddOnCovers || this.endorseCovers) && (rowData.Modifiable==undefined || rowData.Modifiable!='N')){
                     rowData['ModifiedYN'] = 'Y';
                   }
-                  
                   if(this.coverModificationYN=='Y' && this.endorsementSection && vehicle?.totalPremium && rowData.Endorsements!=null){
                     if(rowData.Endorsements[rowData.Endorsements.length-1].PremiumIncludedTax<0){
                       vehicle['totalLcPremium'] = vehicle['totalLcPremium'] - rowData.Endorsements[rowData.Endorsements.length-1].PremiumIncludedTax;
@@ -3288,7 +3279,6 @@ emiyn="N";
                       vehicle['totalLcPremium'] = vehicle['totalLcPremium'] + rowData.Endorsements[rowData.Endorsements.length-1].PremiumIncludedTax;
                       vehicle['totalPremium'] =  vehicle['totalPremium']+rowData.Endorsements[rowData.Endorsements.length-1].PremiumIncludedTax;
                     }
-                    
                   }
                   else if(vehicle?.totalPremium){
                     rowData['Modifiable']='N';
@@ -3426,12 +3416,10 @@ emiyn="N";
                     }
                     else{
                       if(rowData.CoverageType!='A'){
-                      console.log('If cover changes0',rowData.PremiumIncludedTax,rowData.PremiumIncludedTax);
                         vehicle['totalLcPremium'] = vehicle['totalLcPremium'] + rowData.PremiumIncludedTax;
                         vehicle['totalPremium'] =  vehicle['totalPremium']+rowData.PremiumIncludedTax;
                       }
                     }
-                    
                   }
                   else{
                     if(this.endorseAddOnCovers || this.endorseCovers){
@@ -3550,8 +3538,10 @@ emiyn="N";
             let entry=null;
             rowData['selected'] = false;
             rowData['UserOpt'] ='N';
+            let id=null;
+            if(rowData.RiskDetails?.RiskId) id= rowData.RiskDetails?.RiskId; else id=vehicleId
             if(this.productId!='5' && this.productId!='46'){
-              entry = this.selectedCoverList.filter(ele=>ele.Id==rowData.RiskDetails.RiskId && ele.LocationId==rowData.LocationId)
+              entry = this.selectedCoverList.filter(ele=>ele.Id==id && ele.LocationId==rowData.LocationId)
             }
             else entry = this.selectedCoverList.filter(ele=>ele.Id==vehicleId)
             if(entry){
@@ -3561,11 +3551,11 @@ emiyn="N";
                 let covers:any[] = sectionEntry.Covers;
                 let CoverIndex = covers.findIndex(ele=>ele.CoverId==rowData.CoverId);
                 covers = covers.filter(ele=>ele.CoverId!=rowData.CoverId);
-                if(covers.length==0 && (this.productId=='5' || this.productId=='46')) this.selectedCoverList = this.selectedCoverList.filter(ele=>ele.Id!=rowData.RiskDetails.RiskId && ele.LocationId==rowData.LocationId)
+                if(covers.length==0 && (this.productId=='5' || this.productId=='46')) this.selectedCoverList = this.selectedCoverList.filter(ele=>ele.Id!=id && ele.LocationId==rowData.LocationId)
                 else{
                       let finalList = [],i=0;
                       for(let sec of this.selectedCoverList){
-                        if(sec.Id==rowData.RiskDetails.RiskId && sec.SectionId==rowData.SectionId && sec.LocationId==rowData.LocationId){
+                        if(sec.Id==id && sec.SectionId==rowData.SectionId && sec.LocationId==rowData.LocationId){
                           sec.Covers = sec.Covers.filter(ele=>ele.CoverId!=rowData.CoverId); 
                         }
                         if(sec.Covers.length!=0) finalList.push(sec)
@@ -3694,8 +3684,8 @@ emiyn="N";
         this.afterDiscount = rowData.PremiumAfterDiscount;
       }
       // this.discountOpen(modal);
-      // if(modal=='excess') this.showExcessSection = true;
-      // else this.showDiscountSection = true;
+      if(modal=='excess') this.showExcessSection = true;
+      else this.showDiscountSection = true;
       
     }
     SaveLoadingDetails(modal){
@@ -4964,6 +4954,7 @@ emiyn="N";
         let urlLink = `${this.CommonApiUrl}api/insertemitransactiondetails`
         this.sharedService.onPostMethodSync(urlLink, ReqObj).subscribe(
           (data: any) => {
+              this.finalproceedCheck()
               if(data.Result?.Response=='Saved Successful'){
               //    if(this.onClauses=true){
               //      let Id:any;
@@ -5457,7 +5448,6 @@ emiyn="N";
             //  }
             // }
           }
-          this.PreviousPremium = localStorage.getItem('PreviousPremium');
         }
         else{
           this.updateReferralStatus();
@@ -6480,14 +6470,5 @@ emiyn="N";
   
      onCheckEndorseSelect(rowData){
       
-  }
-  toggleRow(row: any): void {
-    this.expandedElement = this.expandedElement === row ? null : row;
-  }
-
-  ngOnDestroy(): void{
-    if (this.router.url != '/quotation/plan/premium-info') {
-      localStorage.removeItem('PreviousPremium');
     }
-  }
 }

@@ -39,7 +39,10 @@ export class ClausesListComponent implements OnInit {
       this.insuranceName = sessionStorage.getItem('insuranceConfigureName');
       // this.insuranceId = sessionStorage.getItem('insuranceConfigureId');
       this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-      this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+      if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+      else{
+        this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+      }
 
       const user = this.userDetails?.Result;
       this.UserType = this.userDetails?.Result?.UserType;

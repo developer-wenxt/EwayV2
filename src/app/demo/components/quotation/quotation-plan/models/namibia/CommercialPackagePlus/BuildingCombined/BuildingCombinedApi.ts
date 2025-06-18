@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class BuildingCombinedNamibiaApi{
+export class BuildingCombinedCommercialNamibiaApi{
   customerDetails: any;
   commonDetails: any[]=[];
   endorsementSection: boolean=false;subuserType:any=null;
@@ -115,7 +115,6 @@ extendsfields:FormlyFieldConfig
     
   }
   getSaveDetails(entry,IndustryId,industryTypeList,obj){
-
     if(entry.Escalation!=null && entry.Escalation!=''  && entry.Escalation!='null'){
       let sectionId=null;
       sectionId='1';

@@ -51,7 +51,7 @@ export class PersonalLiability{
                     key: 'EmpDescription',
                     props: {
                       label: `Description`,
-                      maxLength: 15,
+                      maxLength: 200,
                       disabled: this.checkDisable('EmpDescription'),
                       required: true,
                       options: [],

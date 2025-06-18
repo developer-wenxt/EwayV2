@@ -21,7 +21,7 @@ export class AccountsRecievableCommercialNamibiaApi{
         let accTransit = AccRecievableSection.filter(ele=>ele.CoverId==415 || ele.CoverId=='415')
         if(accTransit.length!=0){obj['TransitExtension']=accTransit[0].SumInsured;obj['IndustryType']=null;if(accTransit[0]?.IndustryType!='0')obj['IndustryType']=accTransit[0].IndustryType;}
         let accClaims = AccRecievableSection.filter(ele=>ele.CoverId==367 || ele.CoverId=='367')
-        if(accClaims.length!=0){obj['ClaimsPreparationCosts']=accClaims[0].CategoryId;obj['IndustryType']=null;if(accClaims[0]?.IndustryType!='0')obj['IndustryType']=accClaims[0].IndustryType;}
+        if(accClaims.length!=0){obj['ARClaimsPreparationCosts']=accClaims[0].CategoryId;obj['IndustryType']=null;if(accClaims[0]?.IndustryType!='0')obj['IndustryType']=accClaims[0].IndustryType;}
 
         return obj
       }
@@ -47,13 +47,13 @@ export class AccountsRecievableCommercialNamibiaApi{
           if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
           obj.SectionList.push(subEntry);
         }
-        if(entry.ClaimsPreparationCosts!='0' && entry.ClaimsPreparationCosts!=null && entry.ClaimsPreparationCosts!='' ){
+        if(entry.ARClaimsPreparationCosts!='0' && entry.ARClaimsPreparationCosts!=null && entry.ARClaimsPreparationCosts!='' ){
           let subEntry= {
             "SectionId": "219",
             "SectionName":"Accounts Receivable",
             "CoverId":"367",
-            "CategoryId":entry.ClaimsPreparationCosts,
-            "SumInsured": ClaimCostList.find(ele=>ele.Code==entry.ClaimsPreparationCosts)?.CodeDesc?.replaceAll(',','')
+            "CategoryId":entry.ARClaimsPreparationCosts,
+            "SumInsured": ClaimCostList.find(ele=>ele.Code==entry.ARClaimsPreparationCosts)?.CodeDesc?.replaceAll(',','')
           }
           if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
           obj.SectionList.push(subEntry);

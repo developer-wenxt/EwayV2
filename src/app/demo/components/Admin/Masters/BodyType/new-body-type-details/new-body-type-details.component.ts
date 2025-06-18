@@ -34,7 +34,10 @@ export class NewBodyTypeDetailsComponent implements OnInit {
 
     this.productId =  sessionStorage.getItem('companyProductId');
       let userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-      this.MenuMasterList = userDetails?.Result?.MenuMasterList;
+      if(userDetails?.Result?.MenuMasterList) this.MenuMasterList = userDetails?.Result?.MenuMasterList;
+      else{
+        this.MenuMasterList = userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+      }
       console.log("UserDetails",userDetails)
     if(userDetails){
       this.loginId = userDetails?.Result?.LoginId;

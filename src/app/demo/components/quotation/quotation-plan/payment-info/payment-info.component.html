@@ -31,7 +31,17 @@
             </div>
             <div class="mb-3">
                 <label for="username">{{'PAYMENT.Amount' | translate}}</label><br>
-                <input type="text" [(ngModel)]="payAmount" (keydown)="onAmountChange($event)" (keyup)="CommaFormatted()"  maxlength="50" pInputText class="md:w-full lg:w-25rem"/>
+                <input type="text" [(ngModel)]="payAmount" disabled (keydown)="onAmountChange($event)" (keyup)="CommaFormatted()"  maxlength="50" pInputText class="md:w-full lg:w-25rem"/>
+            </div>
+            <div class="grid" *ngIf="seven">
+                <div class="col-12 lg:col-3 xl:col-3 md:col-3 mb-3">
+                    <label for="username">Total Credit Amount</label><br>
+                    <input type="text" [(ngModel)]="totalDepositAmount" disabled  maxlength="50" pInputText class="w-full"/>
+                </div>
+                <div class="col-12 lg:col-3 xl:col-3 md:col-3 mb-3">
+                     <label for="username">Utilized Credit Amount</label><br>
+                     <input type="text" [(ngModel)]="utilisedAmount" disabled  maxlength="50" pInputText class="w-full"/>
+                </div>
             </div>
         </div>
     </ng-container>
@@ -176,7 +186,7 @@
     </div>
     <p-fileUpload class="mb-3" mode="basic" chooseLabel="Upload Cheque Document" styleClass="p-button-outlined" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
     -->
-    <div class="grid p-3 justify-content-between" style="max-width: 35rem;">
+    <div class="grid p-3 justify-content-between mt-3" style="max-width: 35rem;">
         
         <p-button [label]="'MOTORQUOTE.Back' | translate" (click)="getBack()" class="mr-6" styleClass="p-button-outlined" icon="pi pi-chevron-left"></p-button>
         <p-button [label]="'PAYMENT.ConvertToDraft' | translate" *ngIf="!mobilePaymentPending" (click)="convertDraft()" class="text-l pi-button"></p-button>

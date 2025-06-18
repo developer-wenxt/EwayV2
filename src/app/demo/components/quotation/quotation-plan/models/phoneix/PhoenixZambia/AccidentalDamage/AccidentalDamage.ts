@@ -194,6 +194,102 @@ export class AccidentalDamagePhoenix{
 
                   },
                 }
+                // {
+                // "type": "commaSeparator",
+                // "key": 'MaximumLimitperOccurrence',
+                // "id": "countryDropdown",
+                //   "validators":{
+                //       "validation": [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
+                //   },
+                //  templateOptions: {
+                //       "label": "Maximum Limit per Occurrence",
+                //       "name": "Maximum Limit per Occurrence",
+                //       "placeholder": "Enter Sum Insured",
+                //       "pattern": "",
+                //       "minLength": 0,
+                //       "maxLength": 0,
+                //       "disabled": false,
+                //       "hide": false,
+                //       "options": [], 
+                //       "rows": 0,
+                //       "cols": 0,
+                //  },
+                //   "className": "col-12 md:col-4 lg:col-4 p-2",
+                //   "defaultValue": "",
+                 
+                // },
+                // {
+                //     "type": "commaSeparator",
+                //     "key": "AccidentalPhysicalLossDamage",
+                //     "name": "AccidentalPhysicalLossDamage",
+                //     "id": "countryDropdown",
+                //     "validators":{
+                //        "validation": [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
+                //     },
+                //     templateOptions: {
+                //       "minLength": 0,
+                //       "maxLength": 0,
+                //        "hide": false,
+                //        "pattern": "",
+                //         "placeholder": "Enter Sum Insured",
+                //        "disabled": false,
+                //       "options": [],
+                //       "rows": 0,
+                //       "cols": 0,
+                //       "label": "Accidental Physical Loss Damage",
+                //     },
+                //     "className": "col-12 md:col-4 lg:col-4 p-2",
+                //     "defaultValue": "",
+                   
+                // },
+                // {
+                //     "type": "commaSeparator",
+                //     "id": "countryDropdown",
+                //     "key": 'Accidentaloilandchemical',
+                //      "validators":{
+                //        "validation": [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
+                //     },
+                //     templateOptions: {
+                //       "label": "Accidental oil and chemical",
+                //       "name": "Accidental oil and chemical",
+                //       "placeholder": "Enter Sum Insured",
+                //       "pattern": "",
+                //       "minLength": 0,
+                //       "maxLength": 0,
+                //       "disabled": false,
+                //       "hide": false,
+                //       "options": [], 
+                //       "rows": 0,
+                //       "cols": 0,
+                //   },
+                //     "className": "col-12 md:col-4 lg:col-4 p-2",
+                //     "defaultValue": "",
+                   
+                // },
+                // {
+                //     "type": "ngselect",
+                //     "key": "AdditionalclaimsPreparationCosts",
+                //     "id": "AdditionalclaimsPreparationCosts",
+                //    "validators":{
+                //        "validation": [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
+                //     },
+                //     templateOptions: {
+                //         "label": "Additional claims Preparation Costs",
+                //         "name": "Additional claims Preparation Costs",
+                //         "placeholder": "Enter Sum Insured",
+                //         "pattern": "",
+                //         "minLength": 0,
+                //         "maxLength": 0,
+                //         "disabled": false,
+                //         "hide": false,
+                //         "options": [], 
+                //         "rows": 0,
+                //         "cols": 0,
+                //     },
+                //     "className": "col-12 md:col-4 lg:col-4 p-2",
+                //     "defaultValue": "",
+                   
+                // }
               ]
             }
           ]

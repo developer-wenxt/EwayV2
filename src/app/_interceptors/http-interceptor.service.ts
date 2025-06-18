@@ -74,7 +74,6 @@ export class HttpInterceptorService implements HttpInterceptor {
             }),
             catchError((err) => {
                 if ([401, 403].includes(err.status)) {
-                    localStorage.setItem('TokenExpired', 'Expired');
                     this.authService.logout();
                     const ulList = `<li class="list-group-item">
           <div style="color: darkgreen;">Field<span class="mx-2">:</span>LogOut Happened</div>

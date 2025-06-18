@@ -73,9 +73,10 @@ export class ElectronicEquipmentNew{
                     key: 'ElectronicDescription',
                     templateOptions: {
                       label: `Description`,
+                      
                       required: true,
                       disabled: this.checkDisable('ElectronicDescription'),
-                      maxLength: 15
+                      maxLength: 200
                     },
                     
                     validators: {

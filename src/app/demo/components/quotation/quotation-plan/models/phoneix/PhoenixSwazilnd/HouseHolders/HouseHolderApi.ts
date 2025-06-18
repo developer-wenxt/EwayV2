@@ -49,20 +49,21 @@ extendsfields:FormlyFieldConfig
     // }
   }
   getSaveDetails(entry,constructionList,IndustryId,industryTypeList,obj,list){
-        if(list){
-          for(let i =0; i < list.length; i++){
-            let subEntry= {
-              "SectionId": "228",
-              "SectionName":"House Holders",
-              "CoverId":"290",
-              "CategoryId": constructionList.find(ele=>ele.Code==list[i].ContentsType)?.Code,
-              "SumInsured": list[i].ContentInsured,
-              "DescriptionOfRisk":list[i].ContentDescription,
-              "IndustryType": IndustryId
-            }
-            obj.SectionList.push(subEntry);      
-          } 
-        }
+      
+          if(list){
+            for(let i =0; i < list.length; i++){
+              let subEntry= {
+                "SectionId": "228",
+                "SectionName":"House Holders",
+                "CoverId":"290",
+                "CategoryId": constructionList.find(ele=>ele.Code==list[i].HHContentType)?.Code,
+                "SumInsured": String(list[i].HHSumInsured).replaceAll(',', ''),
+                "DescriptionOfRisk":list[i].HHDescription,
+                "IndustryType": IndustryId
+              }
+              obj.SectionList.push(subEntry);      
+            } 
+          }
         
         if (entry.AccidentalDamage != null && entry.AccidentalDamage != '' && entry.AccidentalDamage != undefined) {
           let subEntry = {

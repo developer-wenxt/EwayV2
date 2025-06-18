@@ -70,7 +70,7 @@ export class Fidelity{
                     },
                     
                     {
-                      type: 'commaSeparator',
+                      type: 'ngselect',
                       className: 'col-sm-4',
                       key: 'FidEmpSi',
                       props: {

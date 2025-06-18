@@ -1,6 +1,6 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 
-export class DeteriorationOfStockNamibia{
+export class DeteriorationOfStockCommercialNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;

@@ -108,7 +108,7 @@
                                 <button mat-menu-item (click)="onCheckCustomerInfo(pending)">
                                     <span>Customer Information</span>
                                 </button>
-                                <button mat-menu-item (click)="onCheckVehicleInfo(pending)">
+                                <button mat-menu-item (click)="onCheckVehicleInfo(pending)" *ngIf="productId=='5'">
                                     <span>Vehicle Information</span>
                                 </button>
                         </mat-menu>

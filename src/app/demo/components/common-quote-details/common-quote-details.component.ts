@@ -152,7 +152,7 @@ export class CommonQuoteDetailsComponent implements OnInit {
   applicationId: string; noOfCompPolicy: any; driverDob: any = null;
   claimRatio: any; enableFieldsSection: boolean = false; martialStatus: any = null;
   customers: any[] = []; currentIndex: number; PurchaseDate: any = null; driverName: any = null;
-  collateralValue: boolean = false; fleetYN: any = ''; fleetValue: boolean = false;
+  collateralValue: boolean = false;extendedTPPD:boolean=false; fleetYN: any = ''; fleetValue: boolean = false;
   noOfVehicles: any = null; policyStartError: boolean = false; policyEndError: boolean = false;
   currencyCodeError: boolean = false; policyPassDate: boolean = false; customerCodeError: boolean = false;
   sourceTypeList: any[] = []; premiumList: any[] = []; modifiedYN: any = 'N'; brokerBranchCodeError: boolean = false;
@@ -222,6 +222,7 @@ export class CommonQuoteDetailsComponent implements OnInit {
   dobError: boolean;
   martialError: boolean;
   claimTypeError: boolean;
+  extendedTPPDYN: any='N';
   constructor(private router: Router, private sharedService: SharedService, private datePipe: DatePipe,
     private appComp: AppComponent,
     private translate: TranslateService, private messageService: MessageService) {
@@ -2445,6 +2446,12 @@ export class CommonQuoteDetailsComponent implements OnInit {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   }
+  CommaFormattedTPPDSI(){
+    if (this.productItem.ExtendedTPPDSI) {
+      this.productItem.ExtendedTPPDSI = this.productItem.ExtendedTPPDSI.replace(/[^0-9.]|(?<=\..*)\./g, "")
+       .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }
   accessoriesCommaFormatted() {
 
     // format number
@@ -2816,6 +2823,11 @@ export class CommonQuoteDetailsComponent implements OnInit {
   onCollateralChange() {
     if (this.collateralValue) this.collateralYN = "Y";
     else this.collateralYN = "N";
+  }
+  onTPPDYNChange(){
+    
+    if (this.extendedTPPD==true) this.extendedTPPDYN = "Y";
+    else{ this.extendedTPPDYN = "N";this.productItem.ExtendedTPPDSI=null;}
   }
   onChangeEndDate(){
     
@@ -3737,6 +3749,10 @@ export class CommonQuoteDetailsComponent implements OnInit {
           if(this.insuranceId=='100028'){
             this.productItem.ClaimType = this.claimTypeValue;
           }
+          let tppdSI = null;
+          if(this.productItem.ExtendedTPPDSI!=null && this.productItem.ExtendedTPPDSI!='' && this.productItem.ExtendedTPPDSI!='0'){
+            tppdSI = Number(String(this.productItem.ExtendedTPPDSI).replaceAll(',',''));
+          }
         let ReqObj = {
           "HorsePower": this.vehicleDetails.HorsePower,
           "Zone": zone,
@@ -3810,7 +3826,7 @@ export class CommonQuoteDetailsComponent implements OnInit {
           "InflationSumInsured": this.productItem.InflationSumInsured,
           "Tareweight": this.vehicleDetails?.Tareweight,
           "TppdFreeLimit": null,
-          "TppdIncreaeLimit": this.productItem.ExtendedTPPDSI,
+          "TppdIncreaeLimit": tppdSI,
           "TrailerDetails": null,
           "Vehcilemodel": this.vehicleDetails?.VehicleModelDesc,
           "VehcilemodelId": this.vehicleDetails?.Vehcilemodel,
@@ -5247,6 +5263,10 @@ export class CommonQuoteDetailsComponent implements OnInit {
           if(this.insuranceId=='100028'){
             this.productItem.ClaimType = this.claimTypeValue;
           }
+          let tppdSI = null;
+          if(this.productItem.ExtendedTPPDSI!=null && this.productItem.ExtendedTPPDSI!='' && this.productItem.ExtendedTPPDSI!='0'){
+            tppdSI = String(this.productItem.ExtendedTPPDSI).replaceAll(',','');
+          }
           let ReqObj = {
             "ExcessLimit": null,
             "Deductibles": deductibles,
@@ -5319,7 +5339,7 @@ export class CommonQuoteDetailsComponent implements OnInit {
             "InflationSumInsured": this.productItem.InflationSumInsured,
             "Tareweight": this.vehicleDetails?.Tareweight,
             "TppdFreeLimit": null,
-            "TppdIncreaeLimit": this.productItem.ExtendedTPPDSI,
+            "TppdIncreaeLimit": tppdSI,
             "TrailerDetails": null,
             "Vehcilemodel": this.vehicleDetails?.VehicleModelDesc,
             "VehcilemodelId": this.vehicleDetails?.Vehcilemodel,
@@ -6661,7 +6681,10 @@ export class CommonQuoteDetailsComponent implements OnInit {
     console.log(this.vehicleDetails,"this.vehicleDetailsthis.vehicleDetails");
     this.productItem.VehicleSI = this.vehicleDetails?.SumInsured;
     this.productItem.WindShieldSI = this.vehicleDetails?.WindScreenSumInsured;
-    this.productItem.ExtendedTPPDSI = this.vehicleDetails?.TppdIncreaeLimit;
+    if(this.vehicleDetails?.TppdIncreaeLimit!=null && this.vehicleDetails?.TppdIncreaeLimit!='' && this.vehicleDetails?.TppdIncreaeLimit!=undefined){
+        this.productItem.ExtendedTPPDSI = this.vehicleDetails?.TppdIncreaeLimit;this.extendedTPPD=true;
+    } 
+    else{ this.extendedTPPD=false;this.productItem.ExtendedTPPDSI=null;}
     this.productItem.AccessoriesSI = this.vehicleDetails?.AcccessoriesSumInsured;
     this.productItem.VehicleClass = this.vehicleDetails?.VehicleClass;
     if ((this.insuranceId == '100027' || this.insuranceId == '100040' || this.insuranceId == '100042') && this.tabIndex != 0) { this.onChangeInsuranceClass('direct'); this.onchangevehicleValue(this.vehicleDetails); }
@@ -6773,8 +6796,9 @@ export class CommonQuoteDetailsComponent implements OnInit {
           field.hideExpression = false;
           field.hide = false;
           this.productItem.GpsYN='N';
+          
         }
-        else{ field.hideExpression = true;this.productItem.GpsYN='N';
+        else{ field.hideExpression = true;this.productItem.GpsYN='N';this.extendedTPPD=false;
           field.hide = true;this.productItem.VehicleSI = null;this.productItem.AcccessoriesSumInsured=null;this.productItem.ExtendedTPPDSI=null;this.productItem.WindScreenSumInsured=null;this.productItem.ClaimType="0";}
       }
     } 

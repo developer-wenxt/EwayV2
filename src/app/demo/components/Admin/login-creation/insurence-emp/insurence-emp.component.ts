@@ -144,7 +144,7 @@ export class InsurenceEmpComponent {
   selectedBranchCode: string;
   constructor(private router:Router,
     private sharedService:SharedService,public datePipe:DatePipe) {
-     this.selectedBranchCode = sessionStorage.getItem('selectedBranchCode');
+      this.selectedBranchCode = sessionStorage.getItem('selectedBranchCode');
      this.productId =  sessionStorage.getItem('companyProductId');
      this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
      const user = this.userDetails?.Result;

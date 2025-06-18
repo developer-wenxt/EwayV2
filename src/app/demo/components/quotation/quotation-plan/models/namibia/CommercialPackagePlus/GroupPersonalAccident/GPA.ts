@@ -2,7 +2,7 @@ import { FormGroup } from "@angular/forms";
 import { ForceLengthValidators } from "@app/demo/components/common-quote-details/common-quote-details.component";
 import { FormlyFieldConfig, FormlyFormOptions } from "@ngx-formly/core";
 
-export class GPANamibia {
+export class GPACommercialNamibia {
     form = new FormGroup({});
     model = {
         GPA: [{}],

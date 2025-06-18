@@ -43,7 +43,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         // private logincomponent:LoginComponent
     ) {
         this.lang = sessionStorage.getItem('language');
-        if (this.lang == undefined || this.lang == null) this.lang = 'fr';
+        if(!this.lang) this.lang = 'en';
+        if (this.lang == undefined || this.lang == null) this.lang = 'en';
         this.translate.setDefaultLang(sessionStorage.getItem('language'));
         setTimeout(() => {
             this.auth = this._injector.get(AuthService);
@@ -87,6 +88,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             catchError((err) => {
                 console.log('Error', err);
                 if ([401, 403, 0].includes(err.status)) {
+                     localStorage.setItem('TokenExpired', 'Expired');
                     const ulList = `<li class="list-group-item">
           <div style="color: darkgreen;">Field<span class="mx-2">:</span>LogOut Happened</div>
            <div style="color: red;">Message<span class="mx-2">:</span>From Another Device</div>
@@ -207,21 +209,21 @@ export class HttpInterceptorService implements HttpInterceptor {
                     messageDesc = null,
                     errorCode = null,
                     errorCodeDesc = null;
-                if (this.lang == 'en') {
-                    (field = 'Field'),
-                        (message = 'Message'),
-                        (errorCode = 'Error Code'),
-                        (fieldDesc = element?.Field),
-                        (messageDesc = element?.Message),
-                        (errorCodeDesc = element?.Code);
-                } else if (this.lang == 'fr') {
-                    (field = 'Champ'),
-                        (message = 'Message'),
-                        (errorCode = "Code d'erreur"),
-                        (fieldDesc = element?.FieldLocal),
-                        (messageDesc = element?.MessageLocal),
-                        (errorCodeDesc = element?.Code);
-                } else if (this.lang == 'po') {
+                    if (this.lang == 'en') {
+                        (field = 'Field'),
+                            (message = 'Message'),
+                            (errorCode = 'Error Code'),
+                            (fieldDesc = element?.Field),
+                            (messageDesc = element?.Message),
+                            (errorCodeDesc = element?.Code);
+                    } else if (this.lang == 'fr') {
+                        (field = 'Champ'),
+                            (message = 'Message'),
+                            (errorCode = "Code d'erreur"),
+                            (fieldDesc = element?.FieldLocal),
+                            (messageDesc = element?.MessageLocal),
+                            (errorCodeDesc = element?.Code);
+                    } else if (this.lang == 'po') {
                     (field = 'Campo'),
                         (message = 'Mensagem'),
                         (fieldDesc = element?.FieldLocal),
@@ -268,26 +270,34 @@ export class HttpInterceptorService implements HttpInterceptor {
         if (errorList.length > 0) {
             console.log(errorList);
             let ulList: any = '';
+            let name1 = null,name2=null;
+            if(this.lang==='en'){name1='Errors!',name2=''}
             for (let index = 0; index < errorList.length; index++) {
                 const element = errorList[index];
                 ulList += `<li class="list-group-login-field">
-         <div style="color: darkgreen;">
-         <ng-container *ngIf="this.lang=='en'">Field</ng-container> <ng-container *ngIf="this.lang=='fr'">Champ</ng-container><ng-container *ngIf="this.lang=='po'">Campo</ng-container>
+         <div style="color: darkgreen;"> 
+         <ng-container *ngIf="lang==='en'">Field</ng-container> 
+         <!-- <ng-container *ngIf="lang==='fr'">Champ</ng-container>
+         <ng-container *ngIf="lang==='po'">Campo</ng-container> -->
          <span class="mx-2">:</span>
-         <ng-container *ngIf="this.lang=='en'"> ${element?.Field}</ng-container>
-         <ng-container *ngIf="this.lang!='en'"> ${element?.FieldLocal}</ng-container>
+         <ng-container *ngIf="lang==='en'"> ${element?.Field}</ng-container>
+        <!-- <ng-container *ngIf="lang!=='en'"> ${element?.FieldLocal}</ng-container> -->
          </div>
          <div style="color: red;">
-         <ng-container *ngIf="this.lang=='en'">Message</ng-container> <ng-container *ngIf="this.lang=='fr'">Message</ng-container><ng-container *ngIf="this.lang=='po'">Mensagem</ng-container>
+         <ng-container *ngIf="lang==='en'">Message</ng-container> 
+         <!-- <ng-container *ngIf="lang==='fr'">Message</ng-container>
+         <ng-container *ngIf="lang==='po'">Mensagem</ng-container> -->
          <span class="mx-2">:</span>
-         <ng-container *ngIf="this.lang=='en'">${element?.Message}</ng-container>
-         <ng-container *ngIf="this.lang!='en'"> ${element?.MessageLocal}</ng-container>
+         <ng-container *ngIf="lang==='en'">${element?.Message}</ng-container>
+         <!-- <ng-container *ngIf="lang!=='en'"> ${element?.MessageLocal}</ng-container> -->
          </div>
        </li>`;
             }
             Swal.fire({
                 title: `<strong>
-          <ng-container *ngIf="this.lang=='en'">Errors!</ng-container> <ng-container *ngIf="this.lang=='fr'">Erreurs!</ng-container><ng-container *ngIf="this.lang=='po'">Erros!</ng-container>
+          <ng-container *ngIf="lang==='en'">Errors</ng-container> 
+          <!--<ng-container *ngIf="lang==='fr'">Erreurs!</ng-container>
+          <ng-container *ngIf="lang==='po'">Erros!</ng-container> -->
           </strong>`,
                 icon: 'info',
                 html: `<ul class="list-group errorlist">
@@ -295,7 +305,10 @@ export class HttpInterceptorService implements HttpInterceptor {
         </ul>`,
                 showCloseButton: true,
                 focusConfirm: false,
-                confirmButtonText: `<i class="fa fa-thumbs-down"></i> <ng-container *ngIf="this.lang=='en'">Errors!</ng-container> <ng-container *ngIf="this.lang=='fr'">Erreurs!</ng-container><ng-container *ngIf="this.lang=='po'">Erros!</ng-container>`,
+                confirmButtonText: `<i class="fa fa-thumbs-down"></i> 
+                <ng-container *ngIf="this.lang==='en'">Errors!</ng-container> 
+                <!--<ng-container *ngIf="this.lang==='fr'">Erreurs!</ng-container>
+                <ng-container *ngIf="this.lang==='po'">Erros!</ng-container> -->`,
                 confirmButtonAriaLabel: 'Thumbs down, Errors!',
             });
         }

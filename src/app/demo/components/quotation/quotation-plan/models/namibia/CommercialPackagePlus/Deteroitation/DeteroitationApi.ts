@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class DeteriorationOfStockApiNamibia{
+export class DeteriorationOfStockCommercialApiNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;
@@ -20,7 +20,7 @@ export class DeteriorationOfStockApiNamibia{
                             return obj
                           }
     }
-    getSaveDetails(entry,ClaimCostList,industryTypeList,obj){
+    getSaveDetails(entry,ClaimCostList,IndustryId,industryTypeList,obj){
       if (entry.DeteriorationOfStock != 0 && entry.DeteriorationOfStock != null && entry.DeteriorationOfStock != '' && entry.DeteriorationOfStockDesc != null && entry.DeteriorationOfStockDesc != '') {
         let subEntry = {
           "SectionId": "226","SectionName":"Deterioration Of Stock",
@@ -28,7 +28,7 @@ export class DeteriorationOfStockApiNamibia{
           "CoverId": "471",
           "DescriptionOfRisk": entry.DeteriorationOfStockDesc
         }
-        if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+         if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
         obj.SectionList.push(subEntry);
       }
         return obj;

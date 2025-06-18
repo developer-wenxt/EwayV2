@@ -120,31 +120,31 @@ export class MotorVehiclePhoenix{
                     expressions: {
                     },
                   },
-                  {
-                    type: 'commaSeparator',
-                    key: 'ExtendedTPPDSI',
-                    id: 'ExtendedTPPDSI',
-                    defaultValue: '',
-                    className: 'col-12 md:col-4 lg:col-4 xl:col-4 pl-2 pr-2 pt-1',
-                    hide: true,
-                    hideExpression:true,
-                    props: {
-                      label: `Extended TPPD SumInsured`,
-                      disabled: this.checkDisable('ExtendedTPPDSI'),
-                      required: false,
-                      options: [
+                  // {
+                  //   type: 'commaSeparator',
+                  //   key: 'ExtendedTPPDSI',
+                  //   id: 'ExtendedTPPDSI',
+                  //   defaultValue: '',
+                  //   className: 'col-12 md:col-4 lg:col-4 xl:col-4 pl-2 pr-2 pt-1',
+                  //   hide: true,
+                  //   hideExpression:true,
+                  //   props: {
+                  //     label: `Extended TPPD SumInsured`,
+                  //     disabled: this.checkDisable('ExtendedTPPDSI'),
+                  //     required: false,
+                  //     options: [
       
-                      ],
+                  //     ],
       
-                    },
-                    validators: {
-                      validation: [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
-                    },
-                    hooks: {
-                    },
-                    expressions: {
-                    },
-                  }
+                  //   },
+                  //   validators: {
+                  //     validation: [ForceLengthValidators.maxLength(20), ForceLengthValidators.min(1)]
+                  //   },
+                  //   hooks: {
+                  //   },
+                  //   expressions: {
+                  //   },
+                  // }
                   // {
                   //   className: 'col-12 md:col-4 lg:col-4 xl:col-4',
                   //   type: 'commaSeparator',

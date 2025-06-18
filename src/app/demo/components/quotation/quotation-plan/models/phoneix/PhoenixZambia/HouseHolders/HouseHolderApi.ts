@@ -25,6 +25,8 @@ export class HouseHoldersContentsApiPhoenix{
             let MechanicalAndElectricalBreakdownList = HouseContentsSection.filter(ele => ele.CoverId == '503');
             if (MechanicalAndElectricalBreakdownList.length != 0) { obj['HolderBreakdown'] = MechanicalAndElectricalBreakdownList[0].SumInsured; obj['HolderBreakdownDesc'] = MechanicalAndElectricalBreakdownList[0].DescriptionOfRisk; }
            let sectionList = HouseContentsSection.filter(ele => ele.CoverId == '290' || ele.CoverId == 290);
+           console.log(sectionList);
+           
             for (let ele of sectionList) {
               let houseData = {
                 ContentInsured: ele.CoverId == 290 ? ele.SumInsured : null,
@@ -49,15 +51,17 @@ export class HouseHoldersContentsApiPhoenix{
       // }
     }
     getSaveDetails(entry,constructionList,IndustryId,industryTypeList,obj,list){
+      console.log(list);
+      
           if(list){
             for(let i =0; i < list.length; i++){
               let subEntry= {
                 "SectionId": "228",
                 "SectionName":"House Holders",
                 "CoverId":"290",
-                "CategoryId": constructionList.find(ele=>ele.Code==list[i].ContentsType)?.Code,
-                "SumInsured": list[i].ContentInsured,
-                "DescriptionOfRisk":list[i].ContentDescription,
+                "CategoryId": constructionList.find(ele=>ele.Code==list[i].HHContentType)?.Code,
+                "SumInsured": String(list[i].HHSumInsured).replaceAll(',', ''),
+                "DescriptionOfRisk":list[i].HHDescription,
                 "IndustryType": IndustryId
               }
               obj.SectionList.push(subEntry);      

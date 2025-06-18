@@ -48,7 +48,7 @@ export class ProductData {
 	AllriskSumInsured: any = '0';WallType:any='';RoofType:any='';TotalOutstandingAmount:any;
 	AccountAuditentType:any;ElectronicEquipmentSI:any='0';AdditionalClaimsSumInsured:any='0';
 	StockSumInsured:any=0;GeneralLiability:any=0;LegalDefenceCost:any=0;WrongfulArrestandDefamation:any=0;ProductLiability:any=0;ProductLiabilityInput:any=0;DefectiveWorkmanship:any=0;DefectiveWorkmanshipInput:any=0;SpreadofFire:any=0;FoodandDrint:any=0;ForecourtServiceStationExtension:any=0;CarWashandValetExtension:any=0;ClaimPreparationCost:any=0;/*Product Burglary*/
-	NatureOfTradeId:any='';InternalWallType:any='';PASumInsured:any=null;ProductLiabilityRevenue:any=null;
+	NatureOfTradeId:any='';InternalWallType:any='';PASumInsured:any=null;ProductLiabilityRevenue:any=null;ProductsLiability:any=null;ProductsLiabilityRevenue:any=null;
 	CeilingType: any = '';WindowsMaterialId:any='';GroupSumInsured:any=null;
 	RegionCode: any = '';NightLeftDoor:any='';PAOccupationType:any=null;
 	DistrictCode: any = '';InsuranceForId:any=[];GroupOccupationType:any=null;
@@ -73,7 +73,7 @@ export class ProductData {
 	PlanType: any = null;AggSumInsured:any=null;
 	DateOfJoiningYear:any=null;EmployeeName:any=null;
 	LocationNameBuilding:any =null;
-	LocationAddress:any =null; BuildingSumInsureds:any;
+	LocationAddress:any =null; BuildingSumInsureds:any;EARBuildingSumInsureds:any;
 	PALocationName:any= null; PALocationAddress:any; PAName:any;
 	PASalary:any ='0'; PANationalityID:any;PADob:any;
 	ContentSI:any ='0';
@@ -92,7 +92,7 @@ export class ProductData {
 	fdName:any=null; fdOccupation:any =null;fdAddress:any=null;fdNationality:any=null;
 	fdDob:any=null;fdJoin:any=null;fdPeriod:any=null;fdLocation:any=null;fdSI:any=null;
 	ElectronicEquipmentDesc:any=null;VariousPortableEquipmentDesc:any=null;IncreasedCostofWorkingDesc:any=null;
-	IncompatibilityCoverDesc:any=null;EEclaimsPreparationCostsDesc:any=null;
+	IncompatibilityCoverDesc:any=null;EEclaimsPreparationCostsDesc:any=null;Spreadoffire:any=null;ThirdPartyLiability:any=null;TPLClaimPreparationCosts:any=null
 	AccessoriesSI:any=null;
 AccessoriesSerialNo:any=null;
 AccessoriesType:any=null;
@@ -185,16 +185,22 @@ otheroption:any='';otherFioption:any='';FidEmpCount:any='0';IndustryBussinessAll
 	LiabilityLossSumInsured: any;HouseAccidentalDamage:any=null;
   ClaimsPreparationSumInsured: any;HouseAccidentalDamageDesc:any=null;
   LiabilitySumInsured: any;GoodsLimit:any=null;JewelleryPhoenixDesc:any=null;NoOfYears:any;
-  PlateGlassType: any;ClaimType: any;DescriptionAcc: any;fireBuildingSumInsured: any;AdditonalInflation: any;ConstructionType: any;IndeminityPeriod: any;Cover: any;BISumInsured: any;GrossRentals: any;UnspecifiedSupplier: any=0;ClothingAndPersonalEffectsPhoenix: any;ElectronicEquipmentPhoenix: any;ArticlesKeptOnPremisesPhoenix: any;CellularPhonesPhoenix: any;CampingEquipmentPhoenix: any;SportingEquipmentPhoenix: any;JewelleryPhoenix: any;
+  PlateGlassType: any;ClaimType: any;DescriptionAcc: any;fireBuildingSumInsured: any;AdditonalInflation: any;ConstructionType: any;IndeminityPeriod: any;Cover: any;BISumInsured: any;GrossRentals: any = null;UnspecifiedSupplier: any=0;ClothingAndPersonalEffectsPhoenix: any;ElectronicEquipmentPhoenix: any;ArticlesKeptOnPremisesPhoenix: any;CellularPhonesPhoenix: any;CampingEquipmentPhoenix: any;SportingEquipmentPhoenix: any;JewelleryPhoenix: any;
   DeteriorationOfStockDesc: any;DeteriorationOfStock: any;  EmployersLiability: any;ElectronicEquipmentPhoenixDesc:any=null;
   NoEmployees: any; LimitOfIndemnity: any;FidelityListPhoenix: any;CellularPhonesPhoenixDesc:any=null;
   EmpSumInsured: any;EmployersLiabilityList: any[];OfficeClaimCosts:any;CampingEquipmentPhoenixDesc:any=null;
   ClothingAndPersonalEffectsPhoenixDesc:any=null;ArticlesKeptOnPremisesPhoenixDesc:any=null;SportingEquipmentPhoenixDesc:any=null;
   OfficeContents:any;TheftAspect:any;WaterLeakage:any;LiabilityForLossOfDocuments:any;OfficeContentsDesc:any;Commodity:any; UmbrellasumInsured: any
   CAREstimated:any;CARAnnualTurnover:any;CarMaximumContract:any;CARTheft:any;CARInland:any;CAROffSite:any;CAROpentrench:any;
-  CARFireBridge:any;CARDemolition:any;CARProfessional:any;CAREscalation:any;CARDevaluation:any;CARClaimPreparation:any;
+  CARFireBridge:any;CARDemolition:any;CARProfessional:any;CAREscalation:any;CARDevaluation:any;CARClaimPreparation:any;GITClaimPreparationCost:any=null;
   CARSurrounding:any; CARAnnual:any;CARPrincipal:any;CARDescription:any;CARLocationName:any;CARStartDate:any;CARPeriodOfActivity:any;CARToDate:any;TheftClaimsPreparationCosts:any;MachineryClaimsPreparationCosts:any;
-  CARuptoConstruction:any;CARuptoStoreys:any;CARuptoMonths:any;CARuptoSumInsured:any;allRiskDomestic: any;
+  CARuptoConstruction:any;CARuptoStoreys:any;CARuptoMonths:any;CARuptoSumInsured:any;allRiskDomestic: any;DistributorCode:any=null;DistributorName:any=null;ARClaimsPreparationCosts:any=null;contentRiskDomestic:any[]=[]
+  EERiskDomestic: any[]=[];BuildingCover:any=null;Continuinghirecharges:any=null;Temporaryhire:any=null;
+  EARTheft:any;EARInland:any;EAROffSite:any;EAROpentrench:any;EARSurrounding:any;EAREstimated:any;EARConstructionType: any;
+  EARFireBridge:any;EARDemolition:any;EARProfessional:any;EAREscalation:any;EARDevaluation:any;EARClaimPreparation:any;
+  EARAnnualTurnover:any;EarMaximumContract:any;PIIndustryType:any=null;PIYears:any=null;PISumInsured:any=null; 
+  IndeminityProfessional:any[]=[];directorOfficer:any[]=[];GPAList:any[]=[];HHContents:any[]=[];
+  PFIndustryType:any=null;PFYears:any=null;PFSumInsured:any=null; PFName:any=null;PensionTrustee:any[]=[];
   constructor(data?) {
 		this.id = data?.id ?? ''
 		this.CustomerName = data?.CustomerName ?? '';

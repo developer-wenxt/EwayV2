@@ -11,7 +11,7 @@ export const environment = {
     // ExcelUrl: 'http://102.69.166.162:8086/EwayAdminApi/',
     // PreExceptionUrl: 'http://102.69.166.162:8086/WhatsAppApiLive/',
     // CustomApiUrl1: 'http://102.69.166.162:8086/EwayAdminApi/',
-     "ApiUrl1": "http://192.168.1.181:8084/",
+   "ApiUrl1": "http://192.168.1.181:8084/",
       "MotorApiUrl": "http://192.168.1.181:8083/",
       "CommonApiUrl": "http://192.168.1.181:8086/",
       "CustomCommonApiUrl": "http://192.168.1.181:8086/",

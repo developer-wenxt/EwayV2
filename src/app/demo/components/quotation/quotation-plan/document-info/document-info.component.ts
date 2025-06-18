@@ -40,11 +40,15 @@ export class DocumentInfoComponent {
   viewImageUrl: any = null; companyList: any[] = [];
   viewImageFileName: any = null; coInsuranceData: any[] = [];
   viewImageSection: boolean; leaderList: any[] = []; claimExperienceList: any[] = [];
-  driverDetailsList: any[] = []; yearList: any[] = [];
+  driverDetailsList: any[] = []; yearList: any[] = [];docHeader:any[]=[];
   coverlist: any[] = []; lang: any = null;
   BackSession: string;
   checkSection: any[] = [];
   sectionDetails: any[] = [];
+  documentAnalyzeList: any;
+  showAnalyzeSection: boolean;
+  documentIndex: any;
+  customerType: any=null;
   constructor(private sharedService: SharedService, private quoteComponent: QuotationPlanComponent,
     private router: Router, private appComp: AppComponent, private translate: TranslateService,
     private datePipe: DatePipe) {
@@ -112,6 +116,7 @@ export class DocumentInfoComponent {
 
     this.leaderList = [{ "Code": "L", "CodeDesc": "Leader" }, { "Code": "P", "CodeDesc": "Participant" }]
     this.columnsHeader = ['Insurance Company Name', 'Shared (%)', 'Leader/Participant', 'Delete'];
+    this.docHeader = ['Damage Part','Material','Damage Type','Damage(%)','Recommendation']
     this.columns2 = ['Year', 'Nature Of Loss', 'Date Of Loss', 'Amount Claimed', 'Remarks', 'Delete'];
   }
   ngOnInit() {
@@ -253,6 +258,8 @@ export class DocumentInfoComponent {
     this.sharedService.onPostMethodSync(urlLink, ReqObj).subscribe(
       (data: any) => {
         if (data?.Result) {
+          this.customerType = data?.Result?.CustomerDetails?.PolicyHolderType;
+          console.log(this.customerType)
           this.quoteDetails = data?.Result?.QuoteDetails;
           this.Riskdetails = data?.Result?.RiskDetails;
           this.sectionDetails = data?.Result?.LocationDetails;
@@ -469,6 +476,21 @@ export class DocumentInfoComponent {
             this.individualDocumentList[0].SectionList = defaultObj.concat(finalSectionList);
           }
           console.log('Indivijual List', data?.Result?.InduvidualDocuments);
+
+          console.log(this.insuranceId);
+          
+          // Filter out the sections
+          // if (this.insuranceId == "100046" && this.productId == "5") {
+            // const excludedSectionIds = ["204", "2"];
+            // this.individualDocumentList = this.individualDocumentList
+            //   .map(doc => ({
+            //     ...doc,
+            //     SectionList: doc.SectionList.filter(
+            //       section => !excludedSectionIds.includes(section.SectionId)
+            //     )
+            //   }))
+            //   .filter(doc => doc.SectionList.length > 0);
+          // }
         }
       },
       (err) => { },
@@ -499,6 +521,30 @@ export class DocumentInfoComponent {
       if (this.lang == 'en') return 'No';
       else return 'Não'
     }
+  }
+  getDocTypes(types,rowData) {
+    let list = types;
+    if (this.insuranceId == '100046' && this.productId == '5' && rowData.sectionId!='99999') {
+      if (this.customerType == '1') {
+        const includedCodes = ["4", "6", "7"];
+
+        types = types.filter(
+          doc => includedCodes.includes(doc.Code)
+        );        
+      }
+      else {
+        const includedCodes = ["8"];
+        types = types.filter(
+          doc => includedCodes.includes(doc.Code)
+        );
+      }
+    }
+    const finalList = types.filter(doc =>
+      !this.uploadedDocList.some(ele => ele.DocumentDesc === doc.CodeDesc) &&
+      !this.uploadedIndividualList?.some(ele => ele.DocumentDesc === doc.CodeDesc)
+    );
+    return finalList;
+
   }
   getDeleteName() {
     if (this.lang == 'en') return 'Delete!!!';
@@ -923,7 +969,11 @@ export class DocumentInfoComponent {
           ReqObj['EndtPrevPolicyNo'] = this.quoteDetails?.Endtprevpolicyno;
           ReqObj['EndtPrevQuoteNo'] = this.quoteDetails?.Endtprevquoteno;
         }
-        let urlLink = `${this.CommonApiUrl}document/upload`;
+      let urlLink 
+      if(((this.productId=='5' || this.productId=='46') && (this.insuranceId=='100046' || this.insuranceId=='100047' 
+        || this.insuranceId=='100048' || this.insuranceId=='100049' || this.insuranceId=='100050'
+      )) && (doc?.AiValidation=='Y')){ urlLink= `${this.motorApiUrl}api/document/upload`;}
+      else urlLink= `${this.CommonApiUrl}document/upload`;
         this.sharedService.onPostDocumentMethodSync(urlLink, ReqObj, doc.url).subscribe(
           (data: any) => {
             if (data.ErrorMessage) {
@@ -932,11 +982,35 @@ export class DocumentInfoComponent {
               }
             }
             else if (data?.Result) {
-              this.uploadListDoc.splice(index, 1);
-              if (this.productId == '4' && ReqObj?.DocumentId == '17') {
-                this.getUploadedDocList(null, null, ReqObj);
+              if(((this.productId=='5' || this.productId=='46')  && (this.insuranceId=='100046' || this.insuranceId=='100047' 
+        || this.insuranceId=='100048' || this.insuranceId=='100049' || this.insuranceId=='100050')) && (doc?.AiValidation=='Y')){
+                if(data.Result!='File Upload Sucessfully' && data?.Result?.length!=0){
+                  this.documentIndex = index;
+                  this.documentAnalyzeList = data.Result;
+                  this.showAnalyzeSection = true;
+                  this.uploadListDoc.splice(index, 1);
+                  if (this.productId == '4' && ReqObj?.DocumentId == '17') {
+                    this.getUploadedDocList(null, null, ReqObj);
+                  }
+                  else this.getUploadedDocList(null, null, null);
+                }
+                else{this.documentAnalyzeList = [];this.documentIndex =null;
+                  this.showAnalyzeSection = false;
+                  this.uploadListDoc.splice(index, 1);
+                  if (this.productId == '4' && ReqObj?.DocumentId == '17') {
+                    this.getUploadedDocList(null, null, ReqObj);
+                  }
+                  else this.getUploadedDocList(null, null, null);
+                }
               }
-              else this.getUploadedDocList(null, null, null);
+              else{
+                this.uploadListDoc.splice(index, 1);
+                if (this.productId == '4' && ReqObj?.DocumentId == '17') {
+                  this.getUploadedDocList(null, null, ReqObj);
+                }
+                else this.getUploadedDocList(null, null, null);
+              }
+              
             }
           },
           (err) => { },
@@ -958,6 +1032,14 @@ export class DocumentInfoComponent {
         confirmButtonAriaLabel: 'Thumbs down, Errors!',
       })
     }
+  }
+  resetUploadedDoc(){
+    this.showAnalyzeSection = false;
+    if(this.documentIndex) this.uploadListDoc.splice(this.documentIndex, 1);
+    if (this.productId == '4') {
+      this.getUploadedDocList(null, null, null);
+    }
+    else this.getUploadedDocList(null, null, null);
   }
   onListDocumentDownload(vehicleIndex, doc) {
     let ReqObj = {

@@ -33,7 +33,10 @@ export class NewBankDetailsComponent implements OnInit {
       this.minDate = new Date();
       this.insuranceName = sessionStorage.getItem('insuranceConfigureName');
       this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-      this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+      if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+      else{
+        this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+      }
     const user = this.userDetails?.Result;
      //this.insuranceId = user.LoginBranchDetails[0].InsuranceId;
     // this.loginId = this.userDetails?.Result?.LoginId;

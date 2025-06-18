@@ -334,9 +334,9 @@
     <p-accordionTab  header="Risk Details">
         <p-tabView *ngIf="productId != '4'">
             <ng-container *ngFor="let Location of LocationName">
-            <p-tabPanel [header]="Location.LocationName">
+            <p-tabPanel [header]="getHeaderName(Location)">
                
-                 <p-table #dtEmployeeActive [value]="SectionDetails" dataKey="SectionName" 
+                 <p-table #dtEmployeeActive [value]="Location.SectionDetails" dataKey="SectionName" 
                       [globalFilterFields]="['SectionName','QuoteNo','ClientName','PolicyStartDate','PolicyEndDate','OverallPremiumLc']" [tableStyle]="{'min-width':'90rem'}" [paginator]="true" [rows]="5">
                       <ng-template pTemplate="caption">
                         <div class="flex flex wrap justify-content-end">

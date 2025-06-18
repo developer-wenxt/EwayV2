@@ -45,7 +45,10 @@ export class ApiFlowListComponent implements OnInit {
     this.userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
     this.ApiData = JSON.parse(sessionStorage.getItem('ApiIntegrationCode'));
     this.ApiData.apiType ? this.apiType = this.ApiData.apiType : this.apiType = ''
-    this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    if(this.userDetails?.Result?.MenuMasterList) this.MenuMasterList = this.userDetails?.Result?.MenuMasterList;
+    else{
+      this.MenuMasterList = this.userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+    }
     this.activeMenu = 'API Integration Master';
     this.columnHeader = [
       'Key Id',

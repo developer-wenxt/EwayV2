@@ -6,8 +6,8 @@ import { FieldType } from '@ngx-formly/core';
     <textarea pInputTextarea
               [id]="id"
               [formControl]="formControl"
-              [cols]="to.cols"
-              [rows]="to.rows"
+              cols="60"
+              rows="2"
               [placeholder]="to.placeholder"
               [formlyAttributes]="field"
     >

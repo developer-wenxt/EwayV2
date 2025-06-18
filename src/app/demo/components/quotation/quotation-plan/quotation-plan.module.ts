@@ -186,7 +186,7 @@ export function maxlengthValidationMessage(err, field) {
         { name: 'displayFire', component: DisplayLabelFire },
         { name: 'displays', component: DisplayLabels },
         {name: 'ngselect', component:NgSelect},
-          {name: 'ngselectAlt', component:NgSelectAlt},
+        {name: 'ngselectAlt', component:NgSelectAlt},
         { name: 'commaSeparator', component: CommaSeparatorInput, wrappers: ['form-field'] },
         { name: 'commaSeparators', component: CommaSeparatorInput, wrappers: ['form-field'] },
         { name: 'table', component: TableTypeComponent, wrappers: ['form-field'] },

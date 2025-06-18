@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import * as Mydatas from '../../../../../../../../app-config.json';
 import { SharedService } from "@app/_services/shared.service";
-export class StateBenefitsNamibia {
+export class StateBenefitsCommercialNamibia {
   customerDetails: any;
   commonDetails: any[] = [];userDetails:any;insuranceId:any;
   endorsementSection: boolean = false; subuserType: any = null;

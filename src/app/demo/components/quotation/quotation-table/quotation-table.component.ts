@@ -261,6 +261,7 @@ export class QuotationTableComponent implements OnInit {
     );
   }
   onInnerData(rowData){
+    this.MotorList = [];
     let ReqObj = {
         "RequestReferenceNo": rowData.RequestReferenceNo
       }

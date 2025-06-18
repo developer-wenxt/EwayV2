@@ -141,6 +141,7 @@ export class PortfolioComponent implements OnInit {
     );
   }
   onInnerData(rowData){
+    this.MotorList = [];
     this.selectedRowData = rowData;
     let ReqObj = {
         "RequestReferenceNo": rowData.RequestReferenceNo

@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit {
         products: { [key: string]: string };
         userTypes: UserType[]
     };
-    products: CustomerProduct[];loginId:any=null;
+    products: CustomerProduct[]; loginId: any = null;
     branches: any[] | undefined;
     selectedBranch: any = null;
     lang: any = null;
@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
     typeList: any[] = [];
     quoteSection: boolean = false;
     approverSection: boolean = false;
-    UserTypeList: any[] = [];insuranceId:any=null;
+    UserTypeList: any[] = []; insuranceId: any = null;
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
         // this.selectedBranch = this.userType === 'Issuer' ? this.user?.Result?.BranchCode : this.user?.Result?.BrokerBranchCode;
         // alert(this.selectedBranch)
         // console.log("selectedBranch : ", selectedBranch);
-        
+
         // if (selectedBranch) {
         //     const branch = this.branches.find(
         //         (ele) => isIssuer ? ele.BrokerBranchCode === selectedBranch : ele.BranchCode === selectedBranch,
@@ -191,10 +191,10 @@ export class ProductComponent implements OnInit {
                 userDetails.Result['InsuranceId'] = branchData?.InsuranceId;
                 userDetails.Result['ProductId'] = "11";
                 userDetails.Result['ProductName'] = "Marine Opencover Policy";
-                userDetails.Result['UserTypeAlt'] ="admin";
+                userDetails.Result['UserTypeAlt'] = "admin";
                 let encryptInfo = encodeURIComponent(CryptoJS.AES.encrypt(JSON.stringify(userDetails), 'secret key 123').toString());
                 //location.href=`http://197.254.65.234:8080/Marine/#/customer-Redirect?e=${encryptInfo}`;
-                location.href=`http://193.203.162.152:8085/Marine/#/customer-Redirect?e=${encryptInfo}`;
+                location.href = `http://193.203.162.152:8085/Marine/#/customer-Redirect?e=${encryptInfo}`;
             }
         }
     }
@@ -206,25 +206,49 @@ export class ProductComponent implements OnInit {
         userDetails.Result['PackageYn'] = product.PackageYn;
         userDetails.Result['UserTypeAlt'] = userDetails.Result.UserType;
         sessionStorage.setItem('Userdetails', JSON.stringify(userDetails));
-        if(product.ProductId=='3' || product.ProductId=='11'){
+        if (product.ProductId == '3' || product.ProductId == '11') {
             let branchList = userDetails.Result.LoginBranchDetails;
-            let branchData = branchList.find(ele=>ele.BranchCode==userDetails.Result.BranchCode || ele.BranchCode==userDetails.Result.BrokerBranchCode)
-                if(branchData){
-                    userDetails.Result['BelongingBranch']=branchData?.BelongingBranch;
-                    userDetails.Result['OriginationCountryId']=branchData?.OriginationCountryId;
-                    userDetails.Result['DestinationCountryId']=branchData?.DestinationCountryId;
-                } 
-                localStorage.setItem('Userdetails', JSON.stringify(userDetails));
-                window.addEventListener('message',function(event) {});
-                let ReqObj = {
-                    "Username": this.loginId,
-                    "InsuranceId": this.insuranceId,
-                    "BranchCode": userDetails?.Result?.BranchCode,
-                    "ProductId": userDetails?.Result?.ProductId,
-                }
-           let encryptInfo = encodeURIComponent(CryptoJS.AES.encrypt(JSON.stringify(userDetails), 'secret key 123').toString());
-           location.href=`http://193.203.162.152:8085/Marine/#/customer-Redirect?e=${encryptInfo}`;
-          }
+            let branchData = branchList.find(ele => ele.BranchCode == userDetails.Result.BranchCode || ele.BranchCode == userDetails.Result.BrokerBranchCode)
+            if (branchData) {
+                userDetails.Result['BelongingBranch'] = branchData?.BelongingBranch;
+                userDetails.Result['OriginationCountryId'] = branchData?.OriginationCountryId;
+                userDetails.Result['DestinationCountryId'] = branchData?.DestinationCountryId;
+            }
+            localStorage.setItem('Userdetails', JSON.stringify(userDetails));
+            window.addEventListener('message', function (event) { });
+            let ReqObj = {
+                "Username": this.loginId,
+                "InsuranceId": this.insuranceId,
+                "BranchCode": userDetails?.Result?.BranchCode,
+                "ProductId": userDetails?.Result?.ProductId,
+            }
+            let encryptInfo = encodeURIComponent(CryptoJS.AES.encrypt(JSON.stringify(userDetails), 'secret key 123').toString());
+            location.href = `http://193.203.162.152:8085/Marine/#/customer-Redirect?e=${encryptInfo}`;
+        }
+        else this.router.navigate(['/']);
+
+        if (product.ProductId == '95') {
+            let branchList = userDetails.Result.LoginBranchDetails;
+            let branchData = branchList.find(ele => ele.BranchCode == userDetails.Result.BranchCode || ele.BranchCode == userDetails.Result.BrokerBranchCode)
+            if (branchData) {
+                userDetails.Result['BelongingBranch'] = branchData?.BelongingBranch;
+                userDetails.Result['OriginationCountryId'] = branchData?.OriginationCountryId;
+                userDetails.Result['DestinationCountryId'] = branchData?.DestinationCountryId;
+            }
+            localStorage.setItem('Userdetails', JSON.stringify(userDetails));
+            window.addEventListener('message', function (event) { });
+            let ReqObj = {
+                "Username": this.loginId,
+                "InsuranceId": this.insuranceId,
+                "BranchCode": userDetails?.Result?.BranchCode,
+                "ProductId": userDetails?.Result?.ProductId,
+            }
+            let encryptInfo = encodeURIComponent(CryptoJS.AES.encrypt(JSON.stringify(userDetails), 'secret key 123').toString());
+            // location.href = `http://192.168.1.48:5200/#/branch-dashboard?e=${encryptInfo}`;
+            location.href = `http://193.203.162.152:8085/Renewal/#/branch-dashboard?e=${encryptInfo}`;
+
+
+        }
         else this.router.navigate(['/']);
     }
 
@@ -244,26 +268,26 @@ export class ProductComponent implements OnInit {
 
     onGetBranch(data: any) {
         console.log("Fdatataaa : ", data);
-        
+
         sessionStorage.setItem('Userdetails', JSON.stringify(data));
         this.branches = data?.Result?.LoginBranchDetails;
         this.userType = data?.Result?.UserType;
         this.products = data?.Result?.BrokerCompanyProducts;
         this.subUserType = sessionStorage.getItem('typeValue');
         this.selectedBranch = this.userType === 'Issuer' ? this.user?.Result?.BranchCode : this.user?.Result?.BrokerBranchCode;
-        if(this.selectedBranch==undefined) window.location.reload();
+        if (this.selectedBranch == undefined) window.location.reload();
     }
 
     // selectBranch(branch) {
     //     const isIssuer = this.userType === 'Issuer';
     //     this.selectedBranch = isIssuer ? branch.BranchCode : branch.BrokerBranchCode;
-    
+
     //     if (this.selectedBranch) {
     //         const userDetails = JSON.parse(sessionStorage.getItem('Userdetails') as any);
     //         const branchData: any = this.branches.find((ele) =>
     //             isIssuer ? ele.BranchCode === this.selectedBranch : ele.BrokerBranchCode === this.selectedBranch
     //         );
-    
+
     //         userDetails.Result = {
     //             ...userDetails.Result,
     //             BrokerBranchCode: isIssuer ? null : branchData?.BrokerBranchCode,
@@ -271,11 +295,11 @@ export class ProductComponent implements OnInit {
     //             CurrencyId: branchData?.CurrencyId,
     //             InsuranceId: branchData?.InsuranceId,
     //         };
-    
+
     //         sessionStorage.setItem('Userdetails', JSON.stringify(userDetails));
     //     }
     // }
-    
+
     checkBranchBg(branch): string {
         const branchCode = this.userType === 'Issuer' ? branch.BranchCode : branch.BrokerBranchCode;
         return branchCode === this.selectedBranch ? '#042181' : '';

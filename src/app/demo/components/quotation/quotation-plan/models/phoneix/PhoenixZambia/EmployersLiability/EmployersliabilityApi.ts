@@ -44,7 +44,7 @@ export class EmployersLiabilityApiPhoenix{
               "CoverId": "293",
               "SectionName": "Employers Liability",
               "Count": list[index]?.NoEmployees,
-              "SumInsured": list[index]?.EmpSumInsured,
+              "SumInsured": String(list[index]?.EmpSumInsured).replaceAll(',', '') ,
               "CategoryId":list[index]?.OccupationType,
               "Status": "Y",
             }

@@ -571,7 +571,17 @@ policyNo:any=null;productItem:any=null;quoteNo:any=null;effectiveDate:any=null;
         rowData.PolicyDetails['AcexecutiveId'] = null;
         rowData.BrokerDetails['UserType'] = this.userType;
         rowData.BrokerDetails['CustomerName'] = rowData.PolicyDetails['CustomerName'];
+        let endDate = null;
+        // if(type=='cancel') {
+        //   if(String(this.effectiveDate).split('/').length>1) endDate = this.effectiveDate;
+        //   else endDate = this.datePipe.transform(this.effectiveDate, "dd/MM/yyyy");
+        // }
+        // else if(rowData.PolicyDetails.PolicyEndDate){
+            endDate = rowData.PolicyDetails.PolicyEndDate;
+        //}
+        rowData.PolicyDetails['PolicyEndDate'] = endDate;
       }
+      
       this.sharedService.onPostMethodSync(urlLink, rowData).subscribe(
         (data: any) => {
           this.requestReferenceNo = data?.Result[0]?.RequestReferenceNo;
@@ -1582,13 +1592,13 @@ policyNo:any=null;productItem:any=null;quoteNo:any=null;effectiveDate:any=null;
                     console.log(formattedDate);
                     this.noOfDays = Math.round(Math.abs((Number(momentDate)  - Number(formattedDatecurrent) )/oneday)+1);
                 }
-                if(type=='cancel') {
-                  if(String(this.effectiveDate).split('/').length>1) endDate = this.effectiveDate;
-                  else endDate = this.datePipe.transform(this.effectiveDate, "dd/MM/yyyy");
-                }
-                else if(veh.PolicyEndDate){
+                // if(type=='cancel') {
+                //   if(String(this.effectiveDate).split('/').length>1) endDate = this.effectiveDate;
+                //   else endDate = this.datePipe.transform(this.effectiveDate, "dd/MM/yyyy");
+                // }
+                // else if(veh.PolicyEndDate){
                     endDate = veh.PolicyEndDate;
-                }
+                //}
                 let createdBy="";
                 let quoteStatus = sessionStorage.getItem('QuoteStatus');
                 if(quoteStatus=='AdminRP' || quoteStatus=='AdminRA' || quoteStatus=='AdminRR'){

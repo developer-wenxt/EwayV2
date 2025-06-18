@@ -1,6 +1,6 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 
-export class GoodsInTransitNamibia{
+export class GoodsInTransitCommercialNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;
@@ -205,7 +205,7 @@ export class GoodsInTransitNamibia{
                   },
                 },
                 {
-                  key: 'ClaimPreparationCost',
+                  key: 'GITClaimPreparationCost',
                   type: 'ngselect',
                   className: 'col-12 md:col-6 sm:col-12 lg:col-4 xl:col-4 mt-2',
     

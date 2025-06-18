@@ -396,7 +396,10 @@ export class MotorDocumentsDetailComponent {
       (err) => { },
     );
   }
-
+  getHeaderName(row){
+    if(this.productId!='5' && this.productId!='46') return row.LocationName;
+    else return row.SectionDetails[0].Registrationnumber;
+  }
   getRiskDetails(){
     let ReqObj={
       "QuoteNo":this.quoteNo,
@@ -407,8 +410,9 @@ export class MotorDocumentsDetailComponent {
         console.log(data);
         if(data?.Result){
           let Risk=[],entry,i=0;
-          for( entry of data?.Result.RiskDetails){
-            this.LocationName = [entry];
+          this.LocationName = data.Result.LocationDetails;
+          for( entry of data.Result.LocationDetails){
+            
             this.SectionDetails=entry.SectionDetails;
             console.log(entry.SectionDetails,"this.riskDetailsNonMotor");
             this.DriverInfo=entry.DriverDetails;

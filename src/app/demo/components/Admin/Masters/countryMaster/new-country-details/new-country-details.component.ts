@@ -31,7 +31,10 @@ export class NewCountryDetailsComponent implements OnInit {
       this.insuranceId = sessionStorage.getItem('countryInsurance');
     this.productId =  sessionStorage.getItem('companyProductId');
       let userDetails = JSON.parse(sessionStorage.getItem('Userdetails'));
-      this.MenuMasterList = userDetails?.Result?.MenuMasterList;
+      if(userDetails?.Result?.MenuMasterList) this.MenuMasterList = userDetails?.Result?.MenuMasterList;
+      else{
+        this.MenuMasterList = userDetails?.Result?.menuList.find(ele=>ele.title=="Masters")?.children;
+      }
     if(userDetails){
       this.loginId = userDetails?.Result?.LoginId;
     }

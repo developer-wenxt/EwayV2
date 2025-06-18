@@ -8,7 +8,6 @@ import { SharedService } from '../_services/shared.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from '../app.component';
 import { environment } from 'src/environments/environment';
-import * as CryptoJS from 'crypto-js';
 
 @Component({
     selector: 'app-topbar',
@@ -17,7 +16,7 @@ import * as CryptoJS from 'crypto-js';
 export class AppTopBarComponent implements OnInit {
     @Output() selectedBranch = new EventEmitter<any>();
     private readonly CommonApiUrl: string = environment.CommonApiUrl;
-    private readonly CRMApiUrl: string = environment.CRMApiUrl;
+     private readonly CRMApiUrl: string = environment.CRMApiUrl;
     branches!: MenuItem[];
     userOptions!: any[];
     selectedOption!: '';
@@ -349,17 +348,17 @@ export class AppTopBarComponent implements OnInit {
             },
         );
     }
-   CRM(){
+     CRM(){
         sessionStorage.removeItem('reloadDone');
         sessionStorage.removeItem('quoteReferenceNo');
         sessionStorage.removeItem('quoteNo');
         const token = sessionStorage.getItem('UserToken');
         if(token && localStorage.getItem('TokenExpired') != 'Expired'){
-        // const apiUrl = "http://192.168.1.248:3000/";
+        const apiUrl = "http://192.168.1.247:3000/";
         let userData = JSON.parse(sessionStorage.getItem('Userdetails'));
         const brokerBranchCode = userData?.Result?.BrokerBranchCode;
         const branchCode = userData?.Result?.BranchCode;
-        const url = `${this.CRMApiUrl}navigationPage?token=${token}&path=${this.router.url}&productId=${this.productId}&branchCode=${branchCode}&brokerBranchCode=${brokerBranchCode}`;
+        const url = `${apiUrl}navigationPage?token=${token}&path=${this.router.url}&productId=${this.productId}&branchCode=${branchCode}&brokerBranchCode=${brokerBranchCode}`;
         window.open(url, '_self');
         }
     }

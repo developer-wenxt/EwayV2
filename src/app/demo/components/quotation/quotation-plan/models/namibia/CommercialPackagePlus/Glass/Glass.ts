@@ -1,7 +1,7 @@
 import { ForceLengthValidators } from "@app/demo/components/common-quote-details/common-quote-details.component";
 import { FormlyFieldConfig } from "@ngx-formly/core";
 
-export class GlassNamibia{
+export class GlassCommercialNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;

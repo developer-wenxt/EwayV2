@@ -394,7 +394,11 @@
                                     <b>{{'MOTORQUOTE.EngineNo' | translate}}</b>
                                     <p>{{vehicleDetails?.EngineNumber}}</p>
                                 </div>
-                                <div class="lg:col-4 md:col-6 col-12" *ngIf="insuranceId!='100040' && insuranceId!='100042'">
+                                <div class="lg:col-4 md:col-6 col-12" *ngIf="insuranceId!='100040' && insuranceId!='100042' && vehicleDetails?.Grossweight!='0' && vehicleDetails?.Grossweight!=0">
+                                    <b>{{'MOTORQUOTE.Tonnage' | translate}}</b>
+                                    <p>{{vehicleDetails?.Grossweight}}</p>
+                                </div>
+                                <div class="lg:col-4 md:col-6 col-12" *ngIf="insuranceId!='100040' && insuranceId!='100042' && vehicleDetails?.EngineCapacity!='0' && vehicleDetails?.EngineCapacity!=0">
                                     <b>{{'MOTORQUOTE.EngineCapacity' | translate}}</b>
                                     <p>{{vehicleDetails?.EngineCapacity}}</p>
                                 </div>
@@ -467,6 +471,22 @@
                                             <formly-form [form]="form" [fields]="step.fieldGroup" [model]="productItem"></formly-form>
                                         </form>
                                     </ng-container>
+                                    <div class="grid m-0 p-0">
+                                        <div class="col-12 lg:col-4 md:col-4 xl:col-4" *ngIf="(insuranceId=='100050' || insuranceId=='100049' || insuranceId=='100048' || insuranceId=='100047' || insuranceId=='100046') && (productItem.InsuranceType=='1' || productItem.InsuranceType=='103' || productItem.InsuranceType=='213' || productItem.InsuranceType=='8')">
+                                            <div class="p-field-checkbox">
+                                                <p-checkbox [(ngModel)]="extendedTPPD"  binary="true" (onChange)="onTPPDYNChange()" [disabled]="((endorsementSection)) || checkDisableField()" inputId="extendedTPPD"></p-checkbox>
+                                                <label for="binary">&nbsp;Extended TPPD</label>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-12 lg:col-4 md:col-4 xl:col-4" *ngIf="extendedTPPD && (productItem.InsuranceType=='1' || productItem.InsuranceType=='103' || productItem.InsuranceType=='213' || productItem.InsuranceType=='8')">
+                                            <label for="borrowerType">Extended TPPD SumInsured</label>
+                                                <input pInputText styleClass=" w-full" [(ngModel)]="productItem.ExtendedTPPDSI" type="text"
+                                                    class=" w-full" maxlength="20" (input)="CommaFormattedTPPDSI()"
+                                                    placeholder="Enter Sum Insured" required="true" />
+                                        </div>
+                                    </div>
+                                   
                                     <div class="input-form-error" >
                                         <div class="error-text text-danger" *ngIf="insuranceTypeError">Please Select Insurance Type<br></div>
                                         <div class="error-text text-danger" *ngIf="paCoverIdError">Please Select Motor Passenger Injury<br></div>

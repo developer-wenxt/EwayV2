@@ -1,7 +1,7 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
 import { ForceLengthValidators } from "../../../../personal-quote-details/personal-quote-details.component";
 
-export class OfficeContentsApiNamibia{
+export class OfficeContentsCommercialApiNamibia{
     customerDetails: any;
     commonDetails: any[]=[];
     endorsementSection: boolean=false;subuserType:any=null;
@@ -30,7 +30,7 @@ export class OfficeContentsApiNamibia{
         return obj
       }
     }
-    getSaveDetails(entry,ClaimCostList,industryTypeList,obj){
+    getSaveDetails(entry,ClaimCostList,IndustryId,industryTypeList,obj){
       if (entry.OfficeContents != 0 && entry.OfficeContents != null && entry.OfficeContents != '' && entry.OfficeContentsDesc != null && entry.OfficeContentsDesc != '') {
           let subEntry = {
             "SectionId": "198","SectionName":"Office Contents",
@@ -38,7 +38,8 @@ export class OfficeContentsApiNamibia{
             "CoverId": "369",
             "DescriptionOfRisk": entry.OfficeContentsDesc
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+         if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
+            obj.SectionList.push(subEntry);
           obj.SectionList.push(subEntry);
         }
         if (entry.TheftAspect != null && entry.TheftAspect != 0 && entry.TheftAspect != '0') {
@@ -48,7 +49,8 @@ export class OfficeContentsApiNamibia{
             "SumInsured": entry.TheftAspect,
             "Status": "Y",
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
+            obj.SectionList.push(subEntry);
           obj.SectionList.push(subEntry);
         }
         if (entry.WaterLeakage != null && entry.WaterLeakage != 0 && entry.WaterLeakage != '0') {
@@ -58,7 +60,8 @@ export class OfficeContentsApiNamibia{
             "SumInsured": entry.WaterLeakage,
             "Status": "Y",
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
+            obj.SectionList.push(subEntry);
           obj.SectionList.push(subEntry);
         }
         if (entry.PowerSurge != null && entry.PowerSurge != 0 && entry.PowerSurge != '0') {
@@ -68,7 +71,8 @@ export class OfficeContentsApiNamibia{
             "SumInsured": entry.PowerSurge,
             "Status": "Y",
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
+            obj.SectionList.push(subEntry);
           obj.SectionList.push(subEntry);
         }
         if (entry.OfficeClaimCosts != null) {
@@ -78,7 +82,7 @@ export class OfficeContentsApiNamibia{
             "SumInsured": ClaimCostList.find(ele => ele.Code == entry.OfficeClaimCosts)?.CodeDesc?.replaceAll(',', ''),
             "Status": "Y",
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
         if (entry.LiabilityForLossOfDocuments != null && entry.LiabilityForLossOfDocuments != 0 && entry.LiabilityForLossOfDocuments != '0') {
@@ -88,7 +92,7 @@ export class OfficeContentsApiNamibia{
             "SumInsured": entry.LiabilityForLossOfDocuments,
             "Status": "Y",
           }
-          if(entry['IndustryType']){subEntry['IndustryType'] = entry['IndustryType'];subEntry["IndustryTypeDesc"]= industryTypeList.find(ele=>ele.Code==entry['IndustryType'])?.CodeDesc}
+          if (IndustryId) { subEntry['IndustryType'] = IndustryId; subEntry["IndustryTypeDesc"] = industryTypeList.find(ele => ele.Code == IndustryId)?.CodeDesc }
           obj.SectionList.push(subEntry);
         }
       return obj;
