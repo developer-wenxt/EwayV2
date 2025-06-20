@@ -57,7 +57,7 @@
             <div class="grid mt-1">
                 <div class="lg:col-3 md:col-3 col-12">
                     <label for="username">Start Date</label>
-                    <p-calendar class="w-full" styleClass="w-full" [minDate]="minDate" [(ngModel)]="policyStartDate"
+                    <p-calendar class="w-full" styleClass="w-full" [minDate]="minDate" [maxDate]="startMaxDate" [(ngModel)]="policyStartDate"
                         (onSelect)="onStartDateChange('change')" [disabled]="(endorsementSection && !enablePolicyStart)"
                         dateFormat="dd/mm/yy" placeholder="Select Start Date">
                     </p-calendar>

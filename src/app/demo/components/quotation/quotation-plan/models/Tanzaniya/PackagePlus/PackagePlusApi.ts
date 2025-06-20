@@ -111,11 +111,18 @@ export class PackagePlusApiPhoenix{
               // if(this.productId=='19'){ subEntry['CoveringDetails'] = this.productItem.CoveringDetails;subEntry['DescriptionOfRisk'] = this.productItem.DescriptionOfRisk;}
                 obj.SectionList.push(subEntry);
             }
+      //       if (entry.MoneyAnnualEstimate) this.productItem.Estimatedannualcashcarryings = String(entry.MoneyAnnualEstimate);
+      // if (entry.MoneyCollector) this.productItem.MoneyCollector = entry.MoneyCollector;
+      // if (entry.MoneyDirectorResidence) this.productItem.MoneyDirectorResidence = entry.MoneyDirectorResidence;
+      // if (entry.MoneySafeLimit) this.productItem.MoneySafeLimit = entry.MoneySafeLimit;
+      // if (entry.StrongroomSi) this.productItem.MoneyInSafe = entry.StrongroomSi;
+      // if (entry.MoneyOutofSafe) this.productItem.MoneyOutofSafe = entry.MoneyOutofSafe;
+      // if (entry.MoneyMajorLoss) this.productItem.MoneyinTransit = entry.MoneyMajorLoss;
             if((entry.MoneyInSafe!=null && entry.MoneyInSafe!='' && entry.MoneyInSafe!='0')){
               let subEntry = {
                 "SectionId": "42",
                 "SectionName": "Money",
-                "CoverId":"81",
+                "CoverId":"77",
                 "StrongroomSi": entry.MoneyInSafe,
                 "SumInsured": entry.MoneyInSafe
               }
@@ -135,7 +142,7 @@ export class PackagePlusApiPhoenix{
               let subEntry = {
                 "SectionId": "42",
                 "SectionName": "Money",
-                "CoverId":"77",
+                "CoverId":"81",
                 "MoneySafeLimit": entry.MoneySafeLimit,
                 "SumInsured": entry.MoneySafeLimit
               }

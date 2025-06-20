@@ -875,7 +875,7 @@
     *ngIf="productId=='66' || productId=='67' || productId=='68' || productId=='69' || productId=='70' || productId=='71' || productId=='72' || productId=='75' || productId=='73' || productId=='78' || productId=='77' || productId=='49' || productId=='14' || productId=='32' || productId=='39'
     || productId=='76' || productId=='48' || productId=='86' || productId=='93'|| productId=='92' || productId=='85'
     || this.productId=='74' || productId=='25' || productId=='16' || productId=='26' || productId=='27'
-    || productId=='80' || productId=='79' || productId=='84' || productId=='81' || productId=='82' || productId=='83' || productId=='87' || productId=='88'|| productId=='89'  || productId=='90' || productId=='91' || (productId=='57' && (insuranceId=='100046' || insuranceId=='100047' || insuranceId=='100048' || insuranceId=='100049' || insuranceId=='100050') )">
+    || productId=='80' || productId=='79' || productId=='84' || productId=='81' || productId=='82' || productId=='83' || productId=='87' || productId=='88'|| productId=='89'  || productId=='90' || productId=='91' || productId=='96'|| productId=='97'|| productId=='98' || productId=='99' || productId=='100' || productId=='101' || (productId=='57' && (insuranceId=='100046' || insuranceId=='100047' || insuranceId=='100048' || insuranceId=='100049' || insuranceId=='100050') )">
     <div class="mt-4">
         <div class="grid mb-3">
             <div class="lg:col-2">
@@ -9985,6 +9985,1080 @@
                                                   
                                                 </div>
                                         </ng-container>
+                                        <ng-container *ngIf="productId=='96' || productId=='97' || productId=='98'">
+                                            <div class="grid" >
+                                                <div class="col-12 lg:col-1 xl:col-1 md:col-1"></div>
+                                                <div class="col-12 lg:col-10 xl:col-10">
+                                                    <div class="memberDetailCard">
+                                                        <div class="grid ml-2">
+                                                            <div class="mb-2 col-12 lg:col-10 xl:col-10">
+                                                                <b *ngIf="productId=='96'">Bid And Tendor Bond</b>
+                                                                <b *ngIf="productId=='97'">Customs and Transit bond</b>
+                                                                <b *ngIf="productId=='98'">Performance guarantee</b>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+
+                                                            <div style="width: 100%;">
+                                                                <div>
+                                                                    <div>
+                                                                        <div class="col-12">
+                                                                            <div>
+                                                                                <form [formGroup]="form">
+                                                                                    <p-table [value]="BidTensionEngineerfields"
+                                                                                        class="p-datatable-gridlines">
+                                                                                        <ng-template pTemplate="header">
+                                                                                            <!-- <tr>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                            </tr> -->
+                                                                                        </ng-template>
+                                                                                        <ng-template pTemplate="body"
+                                                                                            let-row>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0] && !row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input' || row[0]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full"
+                                                                                                         
+                                                                                                        />
+                                                                                                         <input
+                                                                                                                *ngIf="row[0]?.type === 'number'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"                                                 
+                                                                                                                class="w-full"
+                                                                                                                (input)="onDigitLimit($event,3);"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[0]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        class=" w-full"
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        [options]="row[0]?.props?.options"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        [filter]="true"
+                                                                                                        styleClass="col-5 p-0 w-full">
+                                                                                                    </p-dropdown>
+                                                                                                    <!-- For Radio Button List (Horizontal Layout) -->
+                                                                                                    <div *ngIf="row[0]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[0]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[0]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[0]?.type === 'primeTextArea' || row[0]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                        </textarea>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[0]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[0]?.key]"
+                                                                                                            [formlyAttributes]="row[0]"
+                                                                                                            [maxDate]="row[0]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[0]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[0]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+
+
+                                                                                                <td>
+                                                                                                    <!-- If row[1] is a normal field, display its label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1] && !row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.props?.label
+                                                                                                        }}</label>
+
+                                                                                                    <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+
+                                                                                                <td>
+
+                                                                                                    <input
+                                                                                                        *ngIf="row[1]?.type === 'commaSeparator' || row[1]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [type]="row[1]?.type"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required" />
+
+
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[1]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [options]="row[1]?.props?.options"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        [filter]="true">
+                                                                                                    </p-dropdown>
+                                                                                                    <div *ngIf="row[1]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[1]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[1]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[1]?.type === 'primeTextArea' || row[1]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                            </textarea>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[1]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[1]?.key]"
+                                                                                                            [formlyAttributes]="row[1]"
+                                                                                                            [maxDate]="row[1]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[1]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[1]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </p-table>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                       
+                                                        <div class="row px-3">
+                                                            <div class="col-12">
+                                                                    <form [formGroup]="form">
+                                                                                            <p-table
+                                                                                                [value]="BidTensionAdditionalfields"
+                                                                                                class="p-datatable-gridlines">
+                                                                                                <ng-template
+                                                                                                    pTemplate="header">
+                                                                                                    <tr>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                                <ng-template
+                                                                                                    pTemplate="body"
+                                                                                                    let-row>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0] && !row[0]?.fieldGroup">{{row[0]?.props?.label}}</label>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0]?.fieldGroup">{{row[0]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full"
+                                                                                                                (input)="row[0]?.props?.maxLength ? onDigitLimit($event,row[0]?.props?.maxLength) : null"
+                                                                                                                />
+                                                                                                                 <input
+                                                                                                                *ngIf="row[0]?.type === 'input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                                (input)="row[0]?.props?.lettersOnly ? onLetterLimit($event) : null"
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                                
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <!-- If row[1] is a normal field, display its label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1] && !row[1]?.fieldGroup">{{row[1]?.props?.label}}</label>
+
+                                                                                                            <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1]?.fieldGroup">{{row[1]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[1]?.type === 'commaSeparator'"
+                                                                                                                pInputText
+                                                                                                                styleClass=" w-full"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [type]="row[1]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class=" w-full"
+                                                                                                                [placeholder]="row[1]?.props?.placeholder"
+                                                                                                                [required]="row[1]?.props?.required"
+                                                                                                                (input)="row[1]?.props?.maxLength ? onDigitLimit($event,row[1]?.props?.maxLength) : null"
+                                                                                                                />
+
+
+
+
+
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                            </p-table>
+                                                                                        </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-form-error"
+                                                            *ngIf="item.ContentSuminsuredError">
+                                                            <div class="error-text text-danger text-center">
+                                                                Enter Valid Amount
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="productId=='99'">
+                                            <div class="grid" >
+                                                <div class="col-12 lg:col-1 xl:col-1 md:col-1"></div>
+                                                <div class="col-12 lg:col-10 xl:col-10">
+                                                    <div class="memberDetailCard">
+                                                        <div class="grid ml-2">
+                                                            <div class="col-12 lg:col-10 xl:col-10">
+                                                                <b>Court Bond</b>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+
+                                                            <div style="width: 100%;">
+                                                                <div>
+                                                                    <div>
+                                                                        <div class="col-12">
+                                                                            <div>
+                                                                                <form [formGroup]="form">
+                                                                                    <p-table [value]="CourtBondEngineerfields"
+                                                                                        class="p-datatable-gridlines">
+                                                                                        <ng-template pTemplate="header">
+                                                                                            <!-- <tr>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                            </tr> -->
+                                                                                        </ng-template>
+                                                                                        <ng-template pTemplate="body"
+                                                                                            let-row>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0] && !row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input' || row[0]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full" />
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[0]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        class=" w-full"
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        [options]="row[0]?.props?.options"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        [filter]="true"
+                                                                                                        styleClass="col-5 p-0 w-full">
+                                                                                                    </p-dropdown>
+                                                                                                    <!-- For Radio Button List (Horizontal Layout) -->
+                                                                                                    <div *ngIf="row[0]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[0]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[0]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[0]?.type === 'primeTextArea' || row[0]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                        </textarea>
+                                                                                                         <p-dropdown
+                                                                                                        *ngIf="row[0]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        class=" w-full"
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        [options]="row[0]?.props?.options"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        [filter]="true"
+                                                                                                        styleClass="col-5 p-0 w-full">
+                                                                                                    </p-dropdown>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[0]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[0]?.key]"
+                                                                                                            [formlyAttributes]="row[0]"
+                                                                                                            [maxDate]="row[0]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[0]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[0]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+
+
+                                                                                                <td>
+                                                                                                    <!-- If row[1] is a normal field, display its label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1] && !row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.props?.label
+                                                                                                        }}</label>
+
+                                                                                                    <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+
+                                                                                                <td>
+
+                                                                                                    <input
+                                                                                                        *ngIf="row[1]?.type === 'commaSeparator' || row[1]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [type]="row[1]?.type"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required" />
+
+
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[1]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [options]="row[1]?.props?.options"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        [filter]="true">
+                                                                                                    </p-dropdown>
+                                                                                                    <div *ngIf="row[1]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[1]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[1]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[1]?.type === 'primeTextArea' || row[1]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                            </textarea>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[1]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[1]?.key]"
+                                                                                                            [formlyAttributes]="row[1]"
+                                                                                                            [maxDate]="row[1]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[1]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[1]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </p-table>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                        <div class="row px-4">
+                                                            <div class="col-12">
+                                                                    <form [formGroup]="form">
+                                                                                            <p-table
+                                                                                                [value]="CourtBondAdditionalfields"
+                                                                                                class="p-datatable-gridlines">
+                                                                                                <ng-template
+                                                                                                    pTemplate="header">
+                                                                                                    <tr>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                                <ng-template
+                                                                                                    pTemplate="body"
+                                                                                                    let-row>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0] && !row[0]?.fieldGroup">{{row[0]?.props?.label}}</label>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0]?.fieldGroup">{{row[0]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                                 <input
+                                                                                                                *ngIf="row[0]?.type === 'input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                               
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                                 <p-dropdown
+                                                                                                        *ngIf="row[0]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        class=" w-full"
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        [options]="occupationList"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        [filter]="true"
+                                                                                                        styleClass="col-5 p-0 w-full">
+                                                                                                    </p-dropdown>
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <!-- If row[1] is a normal field, display its label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1] && !row[1]?.fieldGroup">{{row[1]?.props?.label}}</label>
+
+                                                                                                            <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1]?.fieldGroup">{{row[1]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[1]?.type === 'commaSeparator'"
+                                                                                                                pInputText
+                                                                                                                styleClass=" w-full"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [type]="row[1]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class=" w-full"
+                                                                                                                [placeholder]="row[1]?.props?.placeholder"
+                                                                                                                [required]="row[1]?.props?.required" />
+
+
+
+
+
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                            </p-table>
+                                                                                        </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-form-error"
+                                                            *ngIf="item.ContentSuminsuredError">
+                                                            <div class="error-text text-danger text-center">
+                                                                Enter Valid Amount
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="productId=='100'">
+                                            <div class="grid" >
+                                                <div class="col-12 lg:col-1 xl:col-1 md:col-1"></div>
+                                                <div class="col-12 lg:col-10 xl:col-10">
+                                                    <div class="memberDetailCard">
+                                                        <div class="grid ml-2">
+                                                            <div class="mb-2 col-12 lg:col-10 xl:col-10">
+                                                                <b>Fuel guarantee</b>                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+
+                                                            <div style="width: 100%;">
+                                                                <div>
+                                                                    <div>
+                                                                        <div class="col-12">
+                                                                            <div>
+                                                                                <form [formGroup]="form">
+                                                                                    <p-table [value]="FuelGuranteeEngineerfields"
+                                                                                        class="p-datatable-gridlines">
+                                                                                        <ng-template pTemplate="header">
+                                                                                            <!-- <tr>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                                <th>Cover Type</th>
+                                                                                                <th>Sum Insured </th>
+                                                                                            </tr> -->
+                                                                                        </ng-template>
+                                                                                        <ng-template pTemplate="body"
+                                                                                            let-row>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0] && !row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                    <label
+                                                                                                        *ngIf="row[0]?.fieldGroup">{{
+                                                                                                        row[0]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input' || row[0]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full" />
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[0]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        class=" w-full"
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        [options]="row[0]?.props?.options"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        [filter]="true"
+                                                                                                        styleClass="col-5 p-0 w-full">
+                                                                                                    </p-dropdown>
+                                                                                                    <input
+                                                                                                                *ngIf="row[0]?.type === 'number'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"                                                 
+                                                                                                                class="w-full"
+                                                                                                                (input)="onDigitLimit($event,3);"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                    <!-- For Radio Button List (Horizontal Layout) -->
+                                                                                                    <div *ngIf="row[0]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[0]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[0]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[0]?.type === 'primeTextArea' || row[0]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[0]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[0]?.props?.placeholder"
+                                                                                                        [required]="row[0]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                        </textarea>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[0]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[0]?.key]"
+                                                                                                            [formlyAttributes]="row[0]"
+                                                                                                            [maxDate]="row[0]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[0]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[0]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+
+
+                                                                                                <td>
+                                                                                                    <!-- If row[1] is a normal field, display its label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1] && !row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.props?.label
+                                                                                                        }}</label>
+
+                                                                                                    <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                    <label
+                                                                                                        *ngIf="row[1]?.fieldGroup">{{
+                                                                                                        row[1]?.fieldGroup[0]?.props?.label
+                                                                                                        }}</label>
+                                                                                                </td>
+
+                                                                                                <td>
+
+                                                                                                    <input
+                                                                                                        *ngIf="row[1]?.type === 'commaSeparator' || row[1]?.type === 'input'"
+                                                                                                        pInputText
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [type]="row[1]?.type"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required" />
+
+
+                                                                                                    <p-dropdown
+                                                                                                        *ngIf="row[1]?.type === 'ngselect'"
+                                                                                                        appendTo="body"
+                                                                                                        styleClass=" w-full"
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        [options]="row[1]?.props?.options"
+                                                                                                        class=" w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        [filter]="true">
+                                                                                                    </p-dropdown>
+                                                                                                    <div *ngIf="row[1]?.type === 'radioList'"
+                                                                                                        class="flex gap-4">
+                                                                                                        <div *ngFor="let option of row[1]?.props?.options"
+                                                                                                            class="flex align-items-center">
+                                                                                                            <p-radioButton
+                                                                                                                [name]="row[1]?.key"
+                                                                                                                [value]="option.value"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [inputId]="option.value">
+                                                                                                            </p-radioButton>
+                                                                                                            <label
+                                                                                                                [for]="option.value"
+                                                                                                                class="ml-2">
+                                                                                                                {{
+                                                                                                                option.label
+                                                                                                                }}
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <textarea
+                                                                                                        *ngIf="row[1]?.type === 'primeTextArea' || row[1]?.type === 'number-input'"
+                                                                                                        pInputText
+                                                                                                        [formControl]="form.controls[row[1]?.key]"
+                                                                                                        type="text"
+                                                                                                        class="w-full"
+                                                                                                        [placeholder]="row[1]?.props?.placeholder"
+                                                                                                        [required]="row[1]?.props?.required"
+                                                                                                        styleClass="col-5 p-0  w-full">
+                                                                                                            </textarea>
+                                                                                                    <!-- Date Picker (p-calendar) -->
+                                                                                                    <div
+                                                                                                        *ngIf="row[1]?.type === 'datepicker'">
+                                                                                                        <p-calendar
+                                                                                                            class="w-full"
+                                                                                                            styleClass="w-full"
+                                                                                                            [formControl]="form.controls[row[1]?.key]"
+                                                                                                            [formlyAttributes]="row[1]"
+                                                                                                            [maxDate]="row[1]?.props?.datepickerOptions?.max"
+                                                                                                            [minDate]="row[1]?.props?.datepickerOptions?.min"
+                                                                                                            appendTo="body"
+                                                                                                            [iconDisplay]="'input'"
+                                                                                                            [showIcon]="true"
+                                                                                                            dateFormat="dd/mm/yy"
+                                                                                                            [placeholder]="row[1]?.props?.placeholder">
+                                                                                                        </p-calendar>
+                                                                                                    </div>
+
+
+                                                                                                    <div
+                                                                                                        *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                        <small
+                                                                                                            class="error-text">This
+                                                                                                            field is
+                                                                                                            required.</small>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </p-table>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                       
+                                                        <div class="row px-3">
+                                                            <div class="col-12">
+                                                                    <form [formGroup]="form">
+                                                                                            <p-table
+                                                                                                [value]="FuelGuranteeAdditionalfields"
+                                                                                                class="p-datatable-gridlines">
+                                                                                                <ng-template
+                                                                                                    pTemplate="header">
+                                                                                                    <tr>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                        <th>Cover Type
+                                                                                                        </th>
+                                                                                                        <th>Sum Insured
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                                <ng-template
+                                                                                                    pTemplate="body"
+                                                                                                    let-row>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0] && !row[0]?.fieldGroup">{{row[0]?.props?.label}}</label>
+                                                                                                            <label
+                                                                                                                *ngIf="row[0]?.fieldGroup">{{row[0]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[0]?.type === 'commaSeparator' || row[0]?.type === 'number-input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                                 <input
+                                                                                                                *ngIf="row[0]?.type === 'input'"
+                                                                                                                pInputText
+                                                                                                                [formControl]="form.controls[row[0]?.key]"
+                                                                                                                [type]="row[0]?.type"
+                                                                                                               
+                                                                                                                class="w-full"
+                                                                                                                [placeholder]="row[0]?.props?.placeholder"
+                                                                                                                [required]="row[0]?.props?.required"
+                                                                                                                styleClass="col-5 p-0  w-full" />
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[0]?.key]?.hasError('required') && form.controls[row[0]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <!-- If row[1] is a normal field, display its label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1] && !row[1]?.fieldGroup">{{row[1]?.props?.label}}</label>
+
+                                                                                                            <!-- If row[1] is a fieldGroup, display the first child field's label -->
+                                                                                                            <label
+                                                                                                                *ngIf="row[1]?.fieldGroup">{{row[1]?.fieldGroup[0]?.props?.label}}</label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <input
+                                                                                                                *ngIf="row[1]?.type === 'commaSeparator'"
+                                                                                                                pInputText
+                                                                                                                styleClass=" w-full"
+                                                                                                                [formControl]="form.controls[row[1]?.key]"
+                                                                                                                [type]="row[1]?.type"
+                                                                                                                (keyup)="CommaFormattedDynamic($event,'CARAdditional')"
+                                                                                                                class=" w-full"
+                                                                                                                [placeholder]="row[1]?.props?.placeholder"
+                                                                                                                [required]="row[1]?.props?.required" />
+
+
+
+
+
+                                                                                                            <div
+                                                                                                                *ngIf="form.controls[row[1]?.key]?.hasError('required') && form.controls[row[1]?.key]?.touched">
+                                                                                                                <small
+                                                                                                                    class="error-text">This
+                                                                                                                    field
+                                                                                                                    is
+                                                                                                                    required.</small>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </ng-template>
+                                                                                            </p-table>
+                                                                                        </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-form-error"
+                                                            *ngIf="item.ContentSuminsuredError">
+                                                            <div class="error-text text-danger text-center">
+                                                                Enter Valid Amount
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="productId=='101'">
+
+                                        </ng-container>
                                             <div class="col-12 pl-3 pr-2 pb-0 mt-2" *ngIf="uwQuestionList.length!=0">
                                                 <div class="grid justify-content-start">
                                                     <div class="mb-1 ">
@@ -9992,98 +11066,99 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <ng-container *ngFor="let obj of uwQuestionList;">
-                                                <div class="grid justify-content-start pl-3 pr-2 pb-0 mt-2">
-                                                    <div class="mb-1 ">
-                                                        <h5>{{obj.SectionName}}</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="grid">
-                                                    <ng-container *ngFor="let ques Of obj.UWQuestionsList">
-                                                        <div class="lg:col-4 md:col-4 col-12"
-                                                            [hidden]="checkHideQUestion(ques)">
-                                                            <label
-                                                                for="uwQuesDesc">{{ques.UwQuestionDesc}}</label><ng-container
-                                                                *ngIf="ques.MandatoryYn=='Y'"> &nbsp;<span
-                                                                    class="text-danger">*</span></ng-container>
-                                                            <ng-container *ngIf="ques?.QuestionType=='01'">
-                                                                <p-selectButton [options]="ques.Options"
-                                                                    [(ngModel)]="ques.Value" id="driverType2"
-                                                                    optionLabel="UwQuesOptionDesc"
-                                                                    [disabled]="endorsementSection"
-                                                                    optionValue="UwQuesOptionDesc"></p-selectButton>
-                                                            </ng-container>
-                                                            <ng-container
-                                                                *ngIf="ques?.QuestionType=='02' && ques?.DataType!='02'">
-                                                                <input pInputText [id]="ques.UwQuestionId" maxlength="50"
-                                                                    [disabled]="endorsementSection"
-                                                                    [disabled]="(endorsementSection) || checkDisableField()"
-                                                                    [(ngModel)]="ques.Value" />
-                                                            </ng-container>
-                                                            <ng-container
-                                                                *ngIf="ques?.QuestionType=='02' && ques?.DataType=='02'">
-                                                                <input pInputText [id]="ques.UwQuestionId" maxlength="50"
-                                                                    [disabled]="endorsementSection"
-                                                                    [disabled]="(endorsementSection) || checkDisableField()"
-                                                                    [(ngModel)]="ques.Value" />
-                                                            </ng-container>
-                                                        </div>
-                                                    </ng-container>
-                                                </div>
-                                            </ng-container>
-                                            <div class="grid mt-3">
-                                                <div [ngClass]="productId == '59' ? 'col-12 lg:col-2 xl:col-2 md:col-2' : 'col-12 lg:col-1 xl:col-1 md:col-1'"></div>
-                                                <div class="col-12 lg:col-3 xl:col-3" *ngIf="productItem">
-                                                    <label class="input-form-label">First Loss Payee Available?</label><span
-                                                        class="text-danger">*</span>
-                                                    <p-selectButton [options]="firstLossOptions"
-                                                        (click)="onFirstLossPayeeYNChange()"
-                                                        [(ngModel)]="productItem.FirstLossPayeeYN" optionLabel="CodeDesc"
-                                                        optionValue="Code"></p-selectButton>
+                                     
+                                        <ng-container *ngFor="let obj of uwQuestionList;">
+                                            <div class="grid justify-content-start pl-3 pr-2 pb-0 mt-2">
+                                                <div class="mb-1 ">
+                                                    <h5>{{obj.SectionName}}</h5>
                                                 </div>
                                             </div>
-                                            <div class="grid " *ngIf="firstLossSection">
-                                                <div class="col-12 lg:col-2 xl:col-2 md:col-2"></div>
-                                                <div class="col-12 lg:col-8 xl:col-8 md:col-8 mb-2">
-                                                    <div class="flex flex-warp justify-content-end">
-                                                        <p-button label="Add New" size="small"
-                                                            (click)="addFirstLossPayee()"></p-button>
+                                            <div class="grid">
+                                                <ng-container *ngFor="let ques Of obj.UWQuestionsList">
+                                                    <div class="lg:col-4 md:col-4 col-12"
+                                                        [hidden]="checkHideQUestion(ques)">
+                                                        <label
+                                                            for="uwQuesDesc">{{ques.UwQuestionDesc}}</label><ng-container
+                                                            *ngIf="ques.MandatoryYn=='Y'"> &nbsp;<span
+                                                                class="text-danger">*</span></ng-container>
+                                                        <ng-container *ngIf="ques?.QuestionType=='01'">
+                                                            <p-selectButton [options]="ques.Options"
+                                                                [(ngModel)]="ques.Value" id="driverType2"
+                                                                optionLabel="UwQuesOptionDesc"
+                                                                [disabled]="endorsementSection"
+                                                                optionValue="UwQuesOptionDesc"></p-selectButton>
+                                                        </ng-container>
+                                                        <ng-container
+                                                            *ngIf="ques?.QuestionType=='02' && ques?.DataType!='02'">
+                                                            <input pInputText [id]="ques.UwQuestionId" maxlength="50"
+                                                                [disabled]="endorsementSection"
+                                                                [disabled]="(endorsementSection) || checkDisableField()"
+                                                                [(ngModel)]="ques.Value" />
+                                                        </ng-container>
+                                                        <ng-container
+                                                            *ngIf="ques?.QuestionType=='02' && ques?.DataType=='02'">
+                                                            <input pInputText [id]="ques.UwQuestionId" maxlength="50"
+                                                                [disabled]="endorsementSection"
+                                                                [disabled]="(endorsementSection) || checkDisableField()"
+                                                                [(ngModel)]="ques.Value" />
+                                                        </ng-container>
                                                     </div>
-                                                    <p-table [value]="firstLossPayeeList" dataKey="LocationListAlt"
-                                                        editMode="row" [rows]="10" [paginator]="false"
-                                                        [tableStyle]="{'min-width': '40rem'}">
-                                                        <ng-template pTemplate="header">
-                                                            <tr>
-                                                                <th [pSortableColumn]="column"
-                                                                    *ngFor="let column of firstLossColumns">
-                                                                    {{column}}
-                                                                </th>
-                                                            </tr>
-                                                        </ng-template>
-                                                        <ng-template pTemplate="body" let-payee let-ri="rowIndex">
-                                                            <tr>
-                                                                <td>
-                                                                    <input class="w-full p-button-outlined"
-                                                                        placeholder="Enter Payee Name"
-                                                                        [(ngModel)]="payee.FirstLossPayeeDesc"
-                                                                        styleClass="w-full" pInputText type="text" />
-                                                                </td>
-                                                                <td>
-                                                                    <ng-container *ngIf="ri!=0">
-                                                                        <div
-                                                                            class="flex align-items-center justify-content-center gap-2">
-                                                                            <button pButton type="button" icon="pi pi-trash"
-                                                                                (click)="onDeleteFistLoss(ri)"
-                                                                                styleClass="p-button-outlined">
-                                                                            </button>
-                                                                        </div>
-                                                                    </ng-container>
-                                                                </td>
-                                                            </tr>
-                                                        </ng-template>
-                                                    </p-table>
-                                                </div>
+                                                </ng-container>
                                             </div>
+                                        </ng-container>
+                                        <div class="grid mt-3">
+                                            <div [ngClass]="productId == '59' ? 'col-12 lg:col-2 xl:col-2 md:col-2' : 'col-12 lg:col-1 xl:col-1 md:col-1'"></div>
+                                            <div class="col-12 lg:col-3 xl:col-3" *ngIf="productItem">
+                                                <label class="input-form-label">First Loss Payee Available?</label><span
+                                                    class="text-danger">*</span>
+                                                <p-selectButton [options]="firstLossOptions"
+                                                    (click)="onFirstLossPayeeYNChange()"
+                                                    [(ngModel)]="productItem.FirstLossPayeeYN" optionLabel="CodeDesc"
+                                                    optionValue="Code"></p-selectButton>
+                                            </div>
+                                        </div>
+                                        <div class="grid " *ngIf="firstLossSection">
+                                            <div class="col-12 lg:col-2 xl:col-2 md:col-2"></div>
+                                            <div class="col-12 lg:col-8 xl:col-8 md:col-8 mb-2">
+                                                <div class="flex flex-warp justify-content-end">
+                                                    <p-button label="Add New" size="small"
+                                                        (click)="addFirstLossPayee()"></p-button>
+                                                </div>
+                                                <p-table [value]="firstLossPayeeList" dataKey="LocationListAlt"
+                                                    editMode="row" [rows]="10" [paginator]="false"
+                                                    [tableStyle]="{'min-width': '40rem'}">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                            <th [pSortableColumn]="column"
+                                                                *ngFor="let column of firstLossColumns">
+                                                                {{column}}
+                                                            </th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-payee let-ri="rowIndex">
+                                                        <tr>
+                                                            <td>
+                                                                <input class="w-full p-button-outlined"
+                                                                    placeholder="Enter Payee Name"
+                                                                    [(ngModel)]="payee.FirstLossPayeeDesc"
+                                                                    styleClass="w-full" pInputText type="text" />
+                                                            </td>
+                                                            <td>
+                                                                <ng-container *ngIf="ri!=0">
+                                                                    <div
+                                                                        class="flex align-items-center justify-content-center gap-2">
+                                                                        <button pButton type="button" icon="pi pi-trash"
+                                                                            (click)="onDeleteFistLoss(ri)"
+                                                                            styleClass="p-button-outlined">
+                                                                        </button>
+                                                                    </div>
+                                                                </ng-container>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                        </div>
                                     </p-tabPanel>
                                 </ng-container>
                             </p-tabView>
@@ -13697,8 +14772,7 @@
             <!-- <button pButton pRipple label="Submit" class="p-button-success" (click)="onfinalsave()"></button> -->
         </div>
     </div>
-    <ng-container
-        *ngIf="productId=='57' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050'">
+    <ng-container *ngIf="productId=='57' && insuranceId!='100046' && insuranceId!='100047' && insuranceId!='100048' && insuranceId!='100049' && insuranceId!='100050'">
         <div class="mt-4">
             <div class="grid mb-3">
                 <div class="col-12 lg:col-4 xl:col-4"></div>

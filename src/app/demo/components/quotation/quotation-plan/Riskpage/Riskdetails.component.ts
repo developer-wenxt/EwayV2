@@ -368,6 +368,16 @@ import { ProfessionalIdeminityApiNamibia } from '../models/namibia/ProfessionalI
 import { PensionFundTrusteeNamibia } from '../models/namibia/PensionFundTrustee/pensiontrustee';
 import { PensionTrusteeAPINamibia } from '../models/namibia/PensionFundTrustee/pensiontrusteeApi';
 import { EngineeringAllRiskApiTanzaniya } from '../models/Tanzaniya/EngineeringAllRisk/engineeringAllRiskApi';
+import { BidTensionBondNamibia } from '../models/namibia/BidTension/BidTension';
+import { CourtBondBondNamibia } from '../models/namibia/CourtBond/CourtBond';
+import { BidTensionBondApiNamibia } from '../models/namibia/BidTension/BidTensionApi';
+import { CustomTransitNamibia } from '../models/namibia/CustomAndTransit/CustomTransit';
+import { PerformanceGuranteeNamibia } from '../models/namibia/PerformanceGurantee/PerformanceGurantee';
+import { CustomTransitApiNamibia } from '../models/namibia/CustomAndTransit/CustomTransitApi';
+import { PerformanceGuranteeApiNamibia } from '../models/namibia/PerformanceGurantee/PerformanceGuranteeApi';
+import { FuelGuaranteeApiNamibia } from '../models/namibia/FuelGuarantee/FuelGuaranteeApi';
+import { FuelGuaranteeNamibia } from '../models/namibia/FuelGuarantee/FuelGuarantee';
+import { CourtBondApiNamibia } from '../models/namibia/CourtBond/CourtBondApi';
 @Component({
   selector: 'app-Riskdetails',
   templateUrl: './Riskdetails.component.html',
@@ -405,12 +415,12 @@ export class RiskDetailsComponent {
   actualFidelitySI: any = null; actualMachinerySI: any = null; actualEmployeeSI: any = null; actualElectronicIntSI: any = null; actualPersonalIntSI: any = null; actualPersonalAccSI: any = null; EquipmentSi: any = null; actualAllRiskSI: any = null; actualContentSI: any = null; actualBuildingSI: any = null; liabilityOccupationId: any;
   liabilityOccupation: any = null; accidentOccupationId: any = null; accidentOccupation: any = null; currencyValue: any = null; showCARExtensions: boolean = false; showEARExtensions: boolean = false;showprofessionalExtensions: boolean = false;
   six: boolean = false; ElectronicList: any[] = []; allriskList: any[] = []; fieldsMachinery: any[] = []; CyperList: any[] = []; fieldsCARPrimary: any[] = []; fieldsCARAdditional: any[] = []; fieldsCARExtensions: any[] = [];showIndeminityProfessionals: boolean = false;
-  formSection: boolean = false; viewSection: boolean = false; form: any; field: any[] = []; PersonalAllRiskPhoenix: boolean;
+  formSection: boolean = false; viewSection: boolean = false; form: any; field: any[] = []; PersonalAllRiskPhoenix: boolean;BidTensionEngineerfields:any[] = [];CourtBondEngineerfields:any[]= [];
   cyberSectionId: any = null; ten: boolean = false; sumInsured: boolean = false; editContentSection: boolean; fieldsCAR: any[] = []; fieldsEAR: any[] = [];fieldsCARupto: any[] = [];fieldsCARPrimaryupto: any[] = [];
   fieldss: any[] = []; first: boolean = false; fieldsContent: any[] = []; eight: boolean = false; questionSection: boolean = false; ConstructionAllRiskPhoenix: boolean;
   EngineeringAllRiskPhoenix: boolean;ConstructionAllRiskUptoTanzaniya:boolean;ConstructionAllRiskAboveTanzaniya:boolean;fieldsEngineer: any[] = [];
-  fieldsPersonalAccident: any; second: boolean = false; third: boolean = false; fieldFEFields: any[] = [];
-  contentRiskDesc: any = ''; dropList: any[] = []; endorsementDetails: any = null; countryList: any[] = [];
+  fieldsPersonalAccident: any; second: boolean = false; third: boolean = false; fieldFEFields: any[] = [];BidTensionAdditionalfields:any[]=[];CourtBondAdditionalfields:any[]=[];
+  contentRiskDesc: any = ''; dropList: any[] = []; endorsementDetails: any = null; countryList: any[] = [];FuelGuranteeEngineerfields:any[]=[];FuelGuranteeAdditionalfields:any[]=[];
   fifth: boolean = false; seven: boolean = false; fieldsEmpFields: any[] = []; selectedTab: any = 0;
   promocode: any = null; customerCode: any = null; relationList: any[] = []; ElectronicEquipmentPhoenix: boolean = false;
   fieldsPersonalInd: any[] = []; monthList: any[] = []; employeeList: any[] = []; Cotentrisk: any[] = [];
@@ -719,13 +729,13 @@ export class RiskDetailsComponent {
     this.sumInsured = false;
 
     this.productItem = new ProductData();
-    if(this.productId=='79' || this.productId=='84' || this.productId=='82' || this.productId=='83' || this.productId=='85'){
+    if(this.productId=='79' || this.productId=='84' || this.productId=='82' || this.productId=='83' || this.productId=='85' || this.productId=='96' || this.productId=='97' || this.productId=='98' || this.productId=='99' || this.productId=='100' || this.productId=='101'){
       if(!this.requestReferenceNo){
         sessionStorage.removeItem('EngineerInfo');
       }
     }
     if (this.requestReferenceNo != null && (this.productId == '59' || this.productId == '19' || this.productId == '66' || this.productId == '67' || this.productId == '68' || this.productId == '69' || this.productId == '70' || this.productId == '71' || this.productId == '72' || this.productId == '75' || this.productId == '49' || this.productId == '14' || this.productId == '32' || this.productId == '39' || this.productId == '73' || this.productId == '74' || this.productId == '76' || this.productId == '25' || this.productId == '16' || this.productId == '26' || this.productId == '27' || this.productId == '57' || this.productId == '48' || this.productId == '78' || this.productId == '77' || this.productId == '80' 
-      || this.productId == '81' || this.productId=='79' || this.productId=='84' || this.productId=='82' 
+      || this.productId == '81' || this.productId=='79' || this.productId=='84' || this.productId=='82' || this.productId=='96'|| this.productId=='97'|| this.productId=='98'|| this.productId=='99'|| this.productId=='100' || this.productId=='101'
       || this.productId=='83' || this.productId=='86' || this.productId=='93' || this.productId=='92' || this.productId=='85' || this.productId=='87'|| this.productId=='88'|| this.productId=='89' || this.productId=='90' || this.productId=='91')) {
       if (this.productId == '19') this.getAddOnCoverList();
       if (this.productId == '19') this.getStockAddOnCoverList();
@@ -977,7 +987,7 @@ export class RiskDetailsComponent {
       this.getProfessional();
 
     }
-    else if (((this.productId == '66' || this.productId == '67' || this.productId == '68' || this.productId == '69' || this.productId == '70') || this.productId == '71' || this.productId == '72' || this.productId == '75' || this.productId == '49' || this.productId == '14' || this.productId == '32' || this.productId == '39' || this.productId == '73' || this.productId == '74' || this.productId == '76' || this.productId == '25' || this.productId == '16' || this.productId == '26' || this.productId == '57' || this.productId == '48' || this.productId == '78' || this.productId == '93' || this.productId == '27' || this.productId == '77' || this.productId == '80' || this.productId == '79' || this.productId == '84' || this.productId == '81' || this.productId =='82' || this.productId=='83'  || this.productId == '93' || this.productId=='86' || this.productId=='59' || this.productId=='87'|| this.productId=='88'|| this.productId=='89' || this.productId=='90' || this.productId=='91' || (this.productId=='19' && this.insuranceId=='100050')) && !this.quoteRefNo) {
+    else if (((this.productId == '66' || this.productId == '67' || this.productId == '68' || this.productId == '69' || this.productId == '70') || this.productId == '71' || this.productId == '72' || this.productId == '75' || this.productId == '49' || this.productId == '14' || this.productId == '32' || this.productId == '39' || this.productId == '73' || this.productId == '74' || this.productId == '76' || this.productId == '25' || this.productId == '16' || this.productId == '26' || this.productId == '57' || this.productId == '48' || this.productId == '78' || this.productId == '93' || this.productId == '27' || this.productId == '77' || this.productId == '80' || this.productId == '79' || this.productId=='96'|| this.productId=='97'|| this.productId=='98'|| this.productId=='99'|| this.productId=='100' || this.productId=='101' || this.productId == '84' || this.productId == '81' || this.productId =='82' || this.productId=='83'  || this.productId == '93' || this.productId=='86' || this.productId=='59' || this.productId=='87'|| this.productId=='88'|| this.productId=='89' || this.productId=='90' || this.productId=='91' || this.productId=='99' || (this.productId=='19' && this.insuranceId=='100050')) && !this.quoteRefNo) {
       this.getSectionList(null);
       // this.editsections('Content');this.editsections('Building');this.editsections('Inflation');
       // this.editsections('Plant');this.editsections('Trade'); this.editsections('Miscellaneous');
@@ -2204,6 +2214,7 @@ export class RiskDetailsComponent {
             startDate = common[0].PolicyStartDate;
             endDate = common[0].PolicyEndDate;
           }
+          
           this.commonDetails = [
             {
               "PolicyStartDate": startDate,
@@ -2234,7 +2245,7 @@ export class RiskDetailsComponent {
           }
           if (details.LocationList) locationList = details.LocationList;
           if (locationList.length != 0) {
-            if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='85'){
+            if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='85' || this.productId=='96' || this.productId=='97'|| this.productId=='98'|| this.productId=='99'|| this.productId=='100' || this.productId=='101'){
               let urlGetLink = `${this.motorApiUrl}api/getEngineerInfo?RequestReferenceno=${this.requestReferenceNo}`;
               let ReqGetObj = {
                 "RequestReferenceNo": this.requestReferenceNo
@@ -2242,7 +2253,7 @@ export class RiskDetailsComponent {
               this.sharedService.onPostMethodSync(urlGetLink,ReqGetObj).subscribe(
                 (engineerdata: any) => {
                   sessionStorage.setItem('EngineerInfo',JSON.stringify(engineerdata.Result));
-                  engineerData = engineerdata.Result;
+                  engineerData = engineerdata.Result; 
                   if (this.productId == '85') {
                   let details = JSON.parse(sessionStorage.getItem('homeCommonDetails'));
                   if (details) {
@@ -2295,6 +2306,7 @@ export class RiskDetailsComponent {
             }
                 })
             }
+            if(this.productId=='96' ||this.productId=='97' || this.productId=='98'|| this.productId=='99'|| this.productId=='100' || this.productId=='101') this.getSectionList(locationList);
             if (this.productId == '63') {
               this.LocationName = [];
               let i = 0;
@@ -2424,8 +2436,17 @@ export class RiskDetailsComponent {
                 if (WorkmenList.length != 0) { obj['WorkmenList'] = WorkmenList; if (WorkmenList[0].CoveringDetails) { obj['CoveringDetails'] = WorkmenList[0].CoveringDetails; obj['DescriptionOfRisk'] = WorkmenList[0].DescriptionOfRisk; } }
                 let MoneyDetails = subDetails.filter(ele => ele['SectionId'] == '42');
                 if (MoneyDetails.length != 0) {
-                  obj['MoneyAnnualEstimate'] = MoneyDetails[3].MoneyAnnualEstimate; obj['MoneyCollector'] = MoneyDetails[1].MoneyCollector; obj['MoneyDirectorResidence'] = MoneyDetails[6].MoneyDirectorResidence; obj['MoneySafeLimit'] = MoneyDetails[2].MoneySafeLimit; obj['StrongroomSi'] = MoneyDetails[4].StrongroomSi; obj['MoneyMajorLoss'] = MoneyDetails[0].MoneyMajorLoss; obj['MoneyOutofSafe'] = MoneyDetails[5].MoneyOutofSafe
-                  if (MoneyDetails[0].CoveringDetails) { obj['CoveringDetails'] = MoneyDetails[0].CoveringDetails; obj['DescriptionOfRisk'] = MoneyDetails[0].DescriptionOfRisk; }
+                  for(let money of MoneyDetails){
+                    if(money?.MoneyAnnualEstimate!=null && money?.MoneyAnnualEstimate!='' && money?.MoneyAnnualEstimate!=0){obj['MoneyAnnualEstimate'] = money?.MoneyAnnualEstimate;}
+                    if(money?.MoneyCollector!=null && money?.MoneyCollector!='' && money?.MoneyCollector!=0){obj['MoneyCollector'] = money?.MoneyCollector;}
+                    if(money?.StrongroomSi!=null && money?.StrongroomSi!='' && money?.StrongroomSi!=0){obj['StrongroomSi'] = money?.StrongroomSi;}
+                    if(money?.MoneyDirectorResidence!=null && money?.MoneyDirectorResidence!='' && money?.MoneyDirectorResidence!=0){obj['MoneyDirectorResidence'] = money?.MoneyDirectorResidence;}
+                    if(money?.MoneySafeLimit!=null && money?.MoneySafeLimit!='' && money?.MoneySafeLimit!=0){obj['MoneySafeLimit'] = money?.MoneySafeLimit;}
+                    if(money?.MoneyMajorLoss!=null && money?.MoneyMajorLoss!='' && money?.MoneyMajorLoss!=0){obj['MoneyMajorLoss'] = money?.MoneyMajorLoss;}
+                    if(money?.MoneyOutofSafe!=null && money?.MoneyOutofSafe!='' && money?.MoneyOutofSafe!=0){obj['MoneyOutofSafe'] = money?.MoneyOutofSafe;}
+                  }
+                  // obj['MoneyAnnualEstimate'] = MoneyDetails[3].MoneyAnnualEstimate; obj['MoneyCollector'] = MoneyDetails[1].MoneyCollector; obj['MoneyDirectorResidence'] = MoneyDetails[6].MoneyDirectorResidence; obj['MoneySafeLimit'] = MoneyDetails[2].MoneySafeLimit; obj['StrongroomSi'] = MoneyDetails[4].StrongroomSi; obj['MoneyMajorLoss'] = MoneyDetails[0].MoneyMajorLoss; obj['MoneyOutofSafe'] = MoneyDetails[5].MoneyOutofSafe
+                  // if (MoneyDetails[0].CoveringDetails) {alert(42); obj['CoveringDetails'] = MoneyDetails[0].CoveringDetails; obj['DescriptionOfRisk'] = MoneyDetails[0].DescriptionOfRisk; }
                 }
                 let FidelityDetails = subDetails.filter(ele => ele['SectionId'] == '43');
                 if (FidelityDetails.length != 0) { obj['FidelityList'] = FidelityDetails; if (FidelityDetails[0].CoveringDetails) { obj['CoveringDetails'] = FidelityDetails[0].CoveringDetails; obj['DescriptionOfRisk'] = FidelityDetails[0].DescriptionOfRisk; } }
@@ -2992,7 +3013,7 @@ export class RiskDetailsComponent {
       if (entry.AdditionalclaimsPreparationCosts) this.form.controls['AdditionalclaimsPreparationCosts']?.setValue(entry.AdditionalclaimsPreparationCosts);
     }
     // Construction All Risk
-    if (this.productId == '79' || this.productId=='84' || this.productId=='82' || this.productId=='83' || this.productId=='85') { 
+    if (this.productId == '79' || this.productId=='84' || this.productId=='82' || this.productId=='83' || this.productId=='85' || this.productId=='96'|| this.productId=='97' || this.productId=='98'|| this.productId=='99'|| this.productId=='100') { 
       if (entry.CARTheft) this.form.controls['CARTheft'].setValue(this.CommaFormattedValue(entry.CARTheft));
       if (entry.CARInland) this.form.controls['CARInland'].setValue(this.CommaFormattedValue(entry.CARInland));
       if (entry.CAROffSite) this.form.controls['CAROffSite'].setValue(this.CommaFormattedValue(entry.CAROffSite));
@@ -3014,6 +3035,7 @@ export class RiskDetailsComponent {
       if (entry.CARPrincipal) this.form.controls['CARPrincipal'].setValue(entry.CARPrincipal);
       if (entry.CARLocationName) this.form.controls['CARLocationName'].setValue(entry.CARLocationName);
       if (entry.CARStartDate) this.form.controls['CARStartDate'].setValue(entry.CARStartDate);
+      if (entry.FuelGuranteeSumInsured) this.form.controls['FuelGuranteeSumInsured'].setValue(this.CommaFormattedValue(entry.FuelGuranteeSumInsured));
       if (entry.CARPeriodOfActivity) this.form.controls['CARPeriodOfActivity'].setValue(entry.CARPeriodOfActivity);
       if(entry.CARDescription || entry.CARAnnual || entry.CARPrincipal || entry.CARLocationName || entry.CARStartDate){
         this.EValue= 'Y';
@@ -3024,6 +3046,13 @@ export class RiskDetailsComponent {
       if (entry.CARuptoStoreys) this.form.controls['CARuptoStoreys'].setValue(entry.CARuptoStoreys);
       if (entry.CARuptoMonths) this.form.controls['CARuptoMonths'].setValue(entry.CARuptoMonths);
       if (entry.CARuptoSumInsured) this.form.controls['CARuptoSumInsured'].setValue(entry.CARuptoSumInsured);
+      if (entry.BidTensionSumInsured) this.form.controls['BidTensionSumInsured']?.setValue(this.CommaFormattedValue(entry.BidTensionSumInsured));
+      if (entry.CollateralName) this.form.controls['CollateralName'].setValue(this.CommaFormattedValue(entry.CollateralName));
+      if (entry.FirstLossPercentId) this.form.controls['FirstLossPercentId'].setValue(this.CommaFormattedValue(entry.FirstLossPercentId));
+      if (entry.DescriptionOfRisk) this.form.controls['ProjectSite'].setValue(entry.DescriptionOfRisk);
+      if (entry.GrossProfitLc) this.form.controls['GrossProfitLc'].setValue(this.CommaFormattedValue(entry.GrossProfitLc));
+      if (entry.EngineNumber) this.form.controls['EngineNumber'].setValue(entry.EngineNumber);
+      if (entry.CourtBondOccupation) this.form.controls['CourtBondOccupation'].setValue(entry.CourtBondOccupation);
     }
      if (this.productId=='85') { 
        if (entry.CARTheft) this.form.controls['CARTheft'].setValue(this.CommaFormattedValue(entry.CARTheft));
@@ -11648,7 +11677,7 @@ export class RiskDetailsComponent {
             console.log("SubEntry", subEntry)
           }
           // Construction All risk
-          if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83'){
+          if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='96'|| this.productId=='97'|| this.productId=='98'|| this.productId=='99'|| this.productId=='100'){
             this.loopProductItem[j]['CARTheft'] = subEntry['CARTheft'] = this.form.controls['CARTheft']?.value;
             this.loopProductItem[j]['CAROffSite'] = subEntry['CAROffSite'] = this.form.controls['CAROffSite']?.value;
             this.loopProductItem[j]['CAROpentrench'] = subEntry['CAROpentrench'] = this.form.controls['CAROpentrench']?.value;
@@ -11667,6 +11696,7 @@ export class RiskDetailsComponent {
             this.loopProductItem[j]['CARDescription'] = subEntry['CARDescription'] = this.form.controls['CARDescription']?.value;
             this.loopProductItem[j]['CARLocationName'] = subEntry['CARLocationName'] = this.form.controls['CARLocationName']?.value;
             this.loopProductItem[j]['CARStartDate'] = subEntry['CARStartDate'] = this.form.controls['CARStartDate']?.value;
+            this.loopProductItem[j]['CAREndDate'] = subEntry['CAREndDate'] = this.form.controls['CAREndDate']?.value;
             this.loopProductItem[j]['CARPeriodOfActivity'] = subEntry['CARPeriodOfActivity'] = this.form.controls['CARPeriodOfActivity']?.value;
             this.loopProductItem[j]['ConstructionType'] = subEntry['ConstructionType'] = this.form.controls['ConstructionType']?.value;
             this.loopProductItem[j]['BuildingSumInsureds'] = subEntry['BuildingSumInsureds'] = this.form.controls['BuildingSumInsureds']?.value;
@@ -11674,7 +11704,16 @@ export class RiskDetailsComponent {
             this.loopProductItem[j]['CARuptoStoreys'] = subEntry['CARuptoStoreys'] = this.form.controls['CARuptoStoreys']?.value;
             this.loopProductItem[j]['CARuptoMonths'] = subEntry['CARuptoMonths'] = this.form.controls['CARuptoMonths']?.value;
             this.loopProductItem[j]['CARuptoSumInsured'] = subEntry['CARuptoSumInsured'] = this.form.controls['CARuptoSumInsured']?.value;
-            
+            this.loopProductItem[j]['ProjectSite'] = subEntry['ProjectSite'] = this.form.controls['ProjectSite']?.value;
+            this.loopProductItem[j]['gross_profit_lc'] = subEntry['gross_profit_lc'] = this.form.controls['gross_profit_lc']?.value;
+            this.loopProductItem[j]['FirstLossPercentId'] = subEntry['FirstLossPercentId'] = this.form.controls['FirstLossPercentId']?.value;
+            this.loopProductItem[j]['BidTensionSumInsured'] = subEntry['BidTensionSumInsured'] = this.form.controls['BidTensionSumInsured']?.value;
+            this.loopProductItem[j]['CollateralName'] = subEntry['CollateralName'] = this.form.controls['CollateralName']?.value;
+            this.loopProductItem[j]['FuelGuranteeSumInsured'] = subEntry['FuelGuranteeSumInsured'] = this.form.controls['FuelGuranteeSumInsured']?.value;
+            this.loopProductItem[j]['Courtgross_profit_lc'] = subEntry['Courtgross_profit_lc'] = this.form.controls['Courtgross_profit_lc']?.value;
+            this.loopProductItem[j]['CourtBondOccupation'] = subEntry['CourtBondOccupation'] = this.form.controls['CourtBondOccupation']?.value;
+            this.loopProductItem[j]['GrossProfitLc'] = subEntry['GrossProfitLc'] = this.form.controls['GrossProfitLc']?.value;
+            this.loopProductItem[j]['EngineNumber'] = subEntry['EngineNumber'] = this.form.controls['EngineNumber']?.value;
           }
           if(this.productId=='85'){
             this.loopProductItem[j]['EARTheft'] = subEntry['EARTheft'] = this.form.controls['EARTheft']?.value;
@@ -11929,7 +11968,7 @@ export class RiskDetailsComponent {
             entry['EmployersLiabilityList'] = subEntry['EmployersLiabilityList']
           }
           // Construction All Risk
-          if (this.productId == '79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='85') {
+          if (this.productId == '79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='85' || this.productId=='96'|| this.productId=='97'|| this.productId=='98'|| this.productId=='99'|| this.productId=='100') {
             entry['CARTheft'] = String(subEntry.CARTheft).replaceAll(',', '');
             entry['CAROffSite'] = String(subEntry.CAROffSite).replaceAll(',', '');
             entry['CAROpentrench'] = String(subEntry.CAROpentrench).replaceAll(',', '');
@@ -11948,6 +11987,7 @@ export class RiskDetailsComponent {
             entry['CARDescription'] = subEntry.CARDescription;
             entry['CARLocationName'] = subEntry.CARLocationName;
             entry['CARStartDate'] = subEntry.CARStartDate;
+            entry['CAREndDate'] = subEntry.CAREndDate;
             entry['CARPeriodOfActivity'] = subEntry.CARPeriodOfActivity;
             entry['ConstructionType'] = subEntry.ConstructionType;
             entry['BuildingSumInsureds'] = String(subEntry.BuildingSumInsureds).replaceAll(',', '');
@@ -11955,6 +11995,17 @@ export class RiskDetailsComponent {
             entry['CARuptoStoreys'] = subEntry.CARuptoStoreys;
             entry['CARuptoMonths'] = subEntry.CARuptoMonths;
             entry['CARuptoSumInsured'] = String(subEntry.CARuptoSumInsured).replaceAll(',', '');
+            entry['ProjectSite'] = String(subEntry.ProjectSite).replaceAll(',', '');
+            entry['gross_profit_lc'] = String(subEntry.gross_profit_lc).replaceAll(',', '');
+            entry['FirstLossPercentId'] = String(subEntry.FirstLossPercentId).replaceAll(',', '');
+            entry['BidTensionSumInsured'] = String(subEntry.BidTensionSumInsured).replaceAll(',', '');
+            entry['CollateralName'] = String(subEntry.CollateralName).replaceAll(',', '');
+            entry['FuelGuranteeSumInsured'] = String(subEntry.FuelGuranteeSumInsured).replaceAll(',', '');
+            entry['Courtgross_profit_lc'] = String(subEntry.Courtgross_profit_lc).replaceAll(',', '');
+            entry['CourtBondOccupation'] = subEntry.CourtBondOccupation;
+            entry['GrossProfitLc'] = subEntry.GrossProfitLc;
+            entry['EngineNumber'] = subEntry.EngineNumber;
+
           }
           if (this.productId=='85') {
             entry['EARTheft'] = String(subEntry.EARTheft).replaceAll(',', '');
@@ -12377,6 +12428,41 @@ export class RiskDetailsComponent {
           if (this.productId == '79') {
             let constructionAllRisk = null;
             if (this.insuranceId == '100046') constructionAllRisk = new ConstructionAllRiskApiPhoenix()
+            let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
+            if (constructionAllRiskList) {
+              obj = constructionAllRiskList;
+            }
+          }
+            if (this.productId == '96') {
+            let constructionAllRisk = new BidTensionBondApiNamibia()
+            let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
+            if (constructionAllRiskList) {
+              obj = constructionAllRiskList;
+            }
+          }
+           if (this.productId == '97') {
+            let constructionAllRisk = new CustomTransitApiNamibia()
+            let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
+            if (constructionAllRiskList) {
+              obj = constructionAllRiskList;
+            }
+          }
+          if (this.productId == '98') {
+            let constructionAllRisk = new PerformanceGuranteeApiNamibia()
+            let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
+            if (constructionAllRiskList) {
+              obj = constructionAllRiskList;
+            }
+          }
+          if (this.productId == '99') {
+            let constructionAllRisk = new CourtBondApiNamibia()
+            let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
+            if (constructionAllRiskList) {
+              obj = constructionAllRiskList;
+            }
+          }
+          if (this.productId == '100') {
+            let constructionAllRisk = new FuelGuaranteeApiNamibia()
             let constructionAllRiskList = constructionAllRisk.getSaveDetails(entry, this.IndustryId, this.industryTypeList, obj)
             if (constructionAllRiskList) {
               obj = constructionAllRiskList;
@@ -13458,7 +13544,7 @@ export class RiskDetailsComponent {
       "RequestReferenceNo": this.requestReferenceNo,
       "QuoteNo": this.quoteNo,
       "PeriodOfActivity": this.locationList[i].CARPeriodOfActivity == '' ? 0 : this.locationList[i].CARPeriodOfActivity  ,
-      "StartDate": this.datePipe.transform(this.locationList[i].CARStartDate || new Date(),'dd/MM/yyyy'),
+      "StartDate": this.datePipe.transform(this.parseDateIfNeeded(this.locationList[i].CARStartDate || new Date()),'dd/MM/yyyy'),
       "YearOfManufacture": new Date(this.locationList[i].manufactureYear).getFullYear(),
       "Manufacture": this.locationList[i].manufacturer,
       "EngineNumber":this.locationList[i].EngineNumber,
@@ -15500,7 +15586,7 @@ export class RiskDetailsComponent {
     // else{ 
     if (this.endorsementSection) this.router.navigate(['/quotation/plan/premium-info']);
     else {
-      if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83') {
+      if(this.productId=='79' || this.productId=='84' || this.productId=='82'|| this.productId=='83' || this.productId=='96' || this.productId=='97' || this.productId=='98'|| this.productId=='99'|| this.productId=='100') {
         this.InsertEnginnerInfo();
       }
       else if(this.productId=='85'){
@@ -15838,7 +15924,7 @@ export class RiskDetailsComponent {
             let defaultObj = [{ 'CodeDesc': '-Select-', 'Code': '' }];
             this.sectionDropdownList = defaultObj.concat(data.Result);
             if (this.productId == '67' || this.productId == '68' || this.productId == '69' || this.productId == '70' || this.productId == '71' || this.productId == '72' || this.productId == '75' || this.productId == '49' || this.productId == '14' || this.productId == '32' || this.productId == '39' || this.productId == '73' || this.productId == '74' || this.productId == '76' || this.productId == '86' || this.productId == '93'
-              || this.productId == '48' || this.productId == '78' || this.productId == '77' || this.productId == '25' || this.productId == '16' || this.productId == '26' || this.productId == '27' || this.productId == '57' || this.productId == '80' || this.productId == '79' || this.productId == '84' || this.productId == '81' || this.productId =='82' || this.productId=='83' || this.productId=='59' || this.productId=='87' || this.productId=='88' || this.productId=='89'|| this.productId=='90'|| this.productId=='91') {
+              || this.productId == '48' || this.productId == '78' || this.productId == '77' || this.productId == '25' || this.productId == '16' || this.productId == '26' || this.productId == '27' || this.productId == '57' || this.productId == '80' || this.productId == '79' || this.productId == '84' || this.productId == '81' || this.productId =='82' || this.productId=='83' || this.productId=='59' || this.productId=='87' || this.productId=='88' || this.productId=='89'|| this.productId=='90'|| this.productId=='91'|| this.productId=='96' || this.productId=='97'|| this.productId=='98' || this.productId=='99' || this.productId=='100') {
               this.getSectionCoverList(data.Result, locationList);
             }
             else {
@@ -16121,6 +16207,47 @@ export class RiskDetailsComponent {
             this.fieldsEARAdditional = this.groupFields(fireData.additionalEARfields.fieldGroup);
             this.fieldsEARExtensions = this.groupFields(fireData.extendsEARfields.fieldGroup);
             this.getConstructionTypeList();
+          }
+          else if(n.Code == '251'){
+            let fireData = null;
+            fireData = new BidTensionBondNamibia();
+            this.addControlsToForm(fireData.BidTensionEngineerfields.fieldGroup);
+            this.addControlsToForm(fireData.BidTensionAdditionalfields.fieldGroup);
+            this.BidTensionEngineerfields = this.groupFields(fireData.BidTensionEngineerfields.fieldGroup);
+            this.BidTensionAdditionalfields = this.groupFields(fireData.BidTensionAdditionalfields.fieldGroup);
+          }
+          else if(n.Code == '250'){
+            let fireData = null;
+            fireData = new CustomTransitNamibia();
+            this.addControlsToForm(fireData.BidTensionEngineerfields.fieldGroup);
+            this.addControlsToForm(fireData.BidTensionAdditionalfields.fieldGroup);
+            this.BidTensionEngineerfields = this.groupFields(fireData.BidTensionEngineerfields.fieldGroup);
+            this.BidTensionAdditionalfields = this.groupFields(fireData.BidTensionAdditionalfields.fieldGroup);
+          }
+           else if(n.Code == '249'){
+            let fireData = null;
+            fireData = new PerformanceGuranteeNamibia();
+            this.addControlsToForm(fireData.BidTensionEngineerfields.fieldGroup);
+            this.addControlsToForm(fireData.BidTensionAdditionalfields.fieldGroup);
+            this.BidTensionEngineerfields = this.groupFields(fireData.BidTensionEngineerfields.fieldGroup);
+            this.BidTensionAdditionalfields = this.groupFields(fireData.BidTensionAdditionalfields.fieldGroup);
+          }
+          else if(n.Code == '248'){
+            let fireData = null;
+            fireData = new CourtBondBondNamibia();
+            this.addControlsToForm(fireData.CourtBondEngineerfields.fieldGroup);
+            this.addControlsToForm(fireData.CourtBondAdditionalfields.fieldGroup);
+            this.CourtBondEngineerfields = this.groupFields(fireData.CourtBondEngineerfields.fieldGroup);
+            this.CourtBondAdditionalfields = this.groupFields(fireData.CourtBondAdditionalfields.fieldGroup);
+            this.getOccupationEmployers();
+          }
+          else if(n.Code == '247'){
+            let fireData = null;
+            fireData = new FuelGuaranteeNamibia();
+            this.addControlsToForm(fireData.FuelGuranteeEngineerfields.fieldGroup);
+            this.addControlsToForm(fireData.FuelGuranteeAdditionalfields.fieldGroup);
+            this.FuelGuranteeEngineerfields = this.groupFields(fireData.FuelGuranteeEngineerfields.fieldGroup);
+            this.FuelGuranteeAdditionalfields =  this.groupFields(fireData.FuelGuranteeAdditionalfields.fieldGroup);
           }
           else if (n.Code == '230') { this.PersonalAllRiskPhoenix = true; this.editsections('PersonalAllRisk') }
           else if (n.Code == '56') { this.AccidentalDamagePhoenix = true; this.getClaimPreparationList(); this.editsections('AccidentalDamage'); }
@@ -16758,6 +16885,31 @@ export class RiskDetailsComponent {
                   let farmCareApi = null;
                   farmCareApi = new FarmCareApiTanzaniya();
                   obj = farmCareApi.getEditDetails(subDetails, obj); 
+                }
+                if(this.productId=='96'){
+                  let BidTensionApi = new BidTensionBondApiNamibia();
+                  let engineerInfo = JSON.parse(sessionStorage.getItem('EngineerInfo'));
+                  obj = BidTensionApi.getEditDetails(subDetails, obj,engineerInfo); 
+                }
+                if(this.productId=='97'){
+                  let CustomTransitApi = new CustomTransitApiNamibia();
+                  let engineerInfo = JSON.parse(sessionStorage.getItem('EngineerInfo'));
+                  obj = CustomTransitApi.getEditDetails(subDetails, obj,engineerInfo); 
+                }
+                if(this.productId=='98'){
+                  let PerformanceGuranteeApi = new PerformanceGuranteeApiNamibia();
+                  let engineerInfo = JSON.parse(sessionStorage.getItem('EngineerInfo'));
+                  obj = PerformanceGuranteeApi.getEditDetails(subDetails, obj,engineerInfo); 
+                }
+                if(this.productId=='99'){
+                  let CourtBondApi = new CourtBondApiNamibia();
+                  let engineerInfo = JSON.parse(sessionStorage.getItem('EngineerInfo'));
+                  obj = CourtBondApi.getEditDetails(subDetails, obj,engineerInfo); 
+                }
+                if(this.productId=='100'){
+                  let FuelGuranteeApi = new FuelGuaranteeApiNamibia();
+                  let engineerInfo = JSON.parse(sessionStorage.getItem('EngineerInfo'));
+                  obj = FuelGuranteeApi.getEditDetails(subDetails, obj,engineerInfo); 
                 }
                 // Deteroitation of stock
                 if (this.productId == '75') {
@@ -18153,7 +18305,7 @@ export class RiskDetailsComponent {
                 }
                 if (this.requestReferenceNo) {
                   //let fieldList=this.fieldEE[0].fieldGroup[0].fieldGroup[0].fieldGroup;
-                  let fieldArray = this.fieldEE[0].fieldGroup;
+                  let fieldArray = this.fieldEE[0]?.fieldGroup;
                   for (let fieldList of fieldArray) {
                     for (let field of fieldList.fieldGroup[0].fieldGroup) {
                       if (field.key == 'OccupationType') {
@@ -18260,4 +18412,19 @@ checkLimitValue(event: Event,key,type): void {
       this.fields2.splice(index, 1);
     }
   }
+  onDigitLimit(event: Event,num): void {
+  const input = event.target as HTMLInputElement;
+  input.value = input.value.replace(/\D/g, '').slice(0, num);
+  }
+  onLetterLimit(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  input.value = input.value.replace(/[^a-zA-Z]/g, '');
+  }
+parseDateIfNeeded(date: any): Date {
+  if (typeof date === 'string' && date.includes('/')) {
+    const [day, month, year] = date.split('/').map(Number);
+    return new Date(year, month - 1, day); 
+  }
+  return new Date(date); 
+}
 }

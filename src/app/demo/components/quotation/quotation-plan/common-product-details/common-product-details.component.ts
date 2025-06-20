@@ -4586,7 +4586,7 @@ backPlan()
          || this.productId=='42'  || this.productId=='24' || this.productId=='43') 
          urlLink = `${this.motorApiUrl}api/slide/getcommondetails`;
       else if(this.productId=='63' || this.productId=='61' || this.productId=='25' || this.productId=='6' || this.productId=='57' ||
-         this.productId=='16' || this.productId=='13' || this.productId=='19'  || this.productId=='59' || this.productId=='66' || this.productId=='67'
+         this.productId=='16' || this.productId=='13' || this.productId=='19'  || this.productId=='59' || this.productId=='66' || this.productId=='67' || this.productId=='82' || this.productId=='83'
           || this.productId=='68'  || this.productId=='69' || this.productId=='70' || this.productId=='71' || this.productId=='26' || this.productId=='27' || this.productId=='79' || this.productId=='84' || this.productId=='86' || this.productId=='93' 
           || this.productId=='72' || this.productId=='75' || this.productId=='78' || this.productId=='77'  || this.productId=='76' || this.productId=='73' || this.productId=='48' || this.productId=='49'|| this.productId=='74' || this.productId=='39'  || this.productId=='1' || this.productId=='14' || this.productId=='15' || this.productId=='32') { delete ReqObj['RiskId']; urlLink = `${this.motorApiUrl}api/slide/GetNonMotor`;}
       else urlLink =  `${this.motorApiUrl}api/geteservicebyriskid`;
@@ -11998,7 +11998,7 @@ let requestNO=null;
                   let referenceNo = sessionStorage.getItem('quoteReferenceNo');
                   if (referenceNo) {
                     this.requestReferenceNo = referenceNo;
-                    if (this.productId != '19' && this.productId!='24' && this.productId!='46' && this.productId!='4' && this.productId!='63' && this.productId!='61' && this.productId!='67'  && this.productId!='79' && this.productId!='84' && this.productId!='86' && this.productId!='93') this.setFormValues();
+                    if (this.productId != '19' && this.productId!='24' && this.productId!='46' && this.productId!='4' && this.productId!='63' && this.productId!='61' && this.productId!='67'  && this.productId!='79' && this.productId!='84' && this.productId!='86' && this.productId!='93') {if(this.productId!='82' && this.productId!='83') this.setFormValues()}
                     else if(this.productId!='63') this.setSMEFormValues('edit')
                       this.formSection = true; this.viewSection = false;
                   }

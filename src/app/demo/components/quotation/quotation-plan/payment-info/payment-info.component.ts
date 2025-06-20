@@ -914,28 +914,28 @@ export class PaymentInfoComponent {
               "InsuranceId": this.insuranceId
             }
 
-            let urlLink = `${this.CommonApiUrl}crm/updateEnquiryQuotestatus`;
-            this.sharedService.onPostMethodSync(urlLink, EnqData).subscribe(
-              (data: any) => {
-                console.log(data);
+            // let urlLink = `${this.CommonApiUrl}crm/updateEnquiryQuotestatus`;
+            // this.sharedService.onPostMethodSync(urlLink, EnqData).subscribe(
+            //   (data: any) => {
+            //     console.log(data);
 
-              },
-              (err) => {
+            //   },
+            //   (err) => {
 
-              });
+            //   });
 
-            const url = `${this.CommonApiUrl}crm/updateCRMEnquiryQuotestatus`;
-            const UpdateEnqData = {
-              "enqStatus": 'accEnq',
-              "enqSeqNo": parseInt(sessionStorage.getItem('EnqId')),
-              "leadSeqNo": parseInt(sessionStorage.getItem('LeadId'))
-            }
-            this.sharedService.onPostMethodSync(url, UpdateEnqData).subscribe(
-              (data: any) => {
-                console.log(data);
-              },
-              (err) => { },
-            )
+            // const url = `${this.CommonApiUrl}crm/updateCRMEnquiryQuotestatus`;
+            // const UpdateEnqData = {
+            //   "enqStatus": 'accEnq',
+            //   "enqSeqNo": parseInt(sessionStorage.getItem('EnqId')),
+            //   "leadSeqNo": parseInt(sessionStorage.getItem('LeadId'))
+            // }
+            // this.sharedService.onPostMethodSync(url, UpdateEnqData).subscribe(
+            //   (data: any) => {
+            //     console.log(data);
+            //   },
+            //   (err) => { },
+            // )
           }
         } 
       },

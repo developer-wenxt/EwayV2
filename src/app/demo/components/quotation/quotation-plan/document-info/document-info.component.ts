@@ -480,17 +480,17 @@ export class DocumentInfoComponent {
           console.log(this.insuranceId);
           
           // Filter out the sections
-          // if (this.insuranceId == "100046" && this.productId == "5") {
-            // const excludedSectionIds = ["204", "2"];
-            // this.individualDocumentList = this.individualDocumentList
-            //   .map(doc => ({
-            //     ...doc,
-            //     SectionList: doc.SectionList.filter(
-            //       section => !excludedSectionIds.includes(section.SectionId)
-            //     )
-            //   }))
-            //   .filter(doc => doc.SectionList.length > 0);
-          // }
+          if (this.insuranceId == "100046" && this.productId == "5") {
+            const excludedSectionIds = ["204", "2"];
+            this.individualDocumentList = this.individualDocumentList
+              .map(doc => ({
+                ...doc,
+                SectionList: doc.SectionList.filter(
+                  section => !excludedSectionIds.includes(section.SectionId)
+                )
+              }))
+              .filter(doc => doc.SectionList.length > 0);
+          }
         }
       },
       (err) => { },
@@ -524,7 +524,7 @@ export class DocumentInfoComponent {
   }
   getDocTypes(types,rowData) {
     let list = types;
-    if (this.insuranceId == '100046' && this.productId == '5' && rowData.sectionId!='99999') {
+    if (this.insuranceId == '100046' && this.productId == '5' && rowData.sectionId=='99999') {
       if (this.customerType == '1') {
         const includedCodes = ["4", "6", "7"];
 

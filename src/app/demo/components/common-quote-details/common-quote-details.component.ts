@@ -105,7 +105,7 @@ export class CommonQuoteDetailsComponent implements OnInit {
   years: MenuItem[] = []; currencyCode: any = null;
   vehicles: MenuItem[] = []; agencyCode: any = null;
   customerFilterSuggestions: any[] = []; cityList: any[] = [];
-  exchangeRate: any = null; minDate: any = null; countryId: any = null;
+  exchangeRate: any = null; minDate: any = null;startMaxDate:any=null; countryId: any = null;
   sidebarVisible: boolean = false; userType: any = null;
   userDetails: any = null; loginId: any = null; branchCode: any = null;
   brokerbranchCode: any = null; productId: any = null; PackageYn: any = null;
@@ -285,7 +285,13 @@ export class CommonQuoteDetailsComponent implements OnInit {
       { "Code": "4", "CodeDesc": "All Occupant" }
     ];
     this.productItem = new ProductData();
-    if(this.insuranceId!='100040') this.minDate = new Date();
+    if(this.insuranceId!='100040'){ this.minDate = new Date();
+      var d=  new Date(String(this.minDate));
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var day = d.getDate();
+        this.startMaxDate= new Date(year, month+1, day-1);
+    }
     // if(this.insuranceId=='100027' || this.insuranceId=='100040' || this.insuranceId=='100042'){
     //   let fireData = null;
     //   if(this.insuranceId=='100027') fireData = new MotorVehicleSanlam();

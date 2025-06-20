@@ -245,7 +245,7 @@ export class LoginComponent {
         else if (this.lang == 'fr') return entry.CodeDescFr;
     }
     ZMBRedirection(){
-        window.location.href = 'http://193.203.162.152:8085/EwayB2C';
+        window.location.href = 'http://147.93.108.104:8085/EwayZMB';
     }
     onB2CRedirection(insuranceId){
         localStorage.setItem('InsuranceId',insuranceId);
